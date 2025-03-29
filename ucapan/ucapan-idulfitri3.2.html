@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Hari Raya Idul Fitri 1446 H</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Harmattan&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Harmattan', sans-serif;
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
+        .arabic-font { font-family: 'Amiri', serif; }
+        .stars, .firework-line {
+            position: absolute;
+            background: #FFD700;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px rgba(255, 215, 0, 0.7);
+        }
+        .stars { width: 3px; height: 3px; }
+        .firework-line { width: 2px; height: 15px; }
+        
+        /* Pulse Animation for the Main Card */
+        @keyframes pulse-border {
+            0% { border-color: rgba(255, 255, 255, 0.2); }
+            50% { border-color: rgba(255, 255, 255, 0.8); }
+            100% { border-color: rgba(255, 255, 255, 0.2); }
+        }
+        
+        .pulse-border {
+            animation: pulse-border 3s infinite;
+        }
+        
+        /* Glow Animation for Headings */
+        @keyframes text-glow {
+            0% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.1); }
+            50% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.5); }
+            100% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.1); }
+        }
+        
+        .text-glow {
+            animation: text-glow 4s infinite;
+        }
+        
+        /* Gentle Pulse for Stars */
+        @keyframes star-pulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.5); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+        
+        .star-pulse {
+            animation: star-pulse 3s infinite;
+            animation-delay: calc(var(--delay) * 1s);
+        }
+        
+        /* Heartbeat effect for the button */
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.1); }
+            70% { transform: scale(1); }
+        }
+        
+        .heartbeat:hover {
+            animation: heartbeat 2s infinite;
+        }
+        
+        /* Icon pulse animation */
+        @keyframes icon-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        .icon-pulse {
+            animation: icon-pulse 1.5s infinite;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        
+        /* Gallery styles */
+        .gallery-container {
+            margin-top: 2rem;
+            overflow: hidden;
+            border-radius: 0.5rem;
+        }
+        
+        .gallery {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item {
+            min-width: 100%;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 0.5rem;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 0.5rem;
+            text-align: center;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        .gallery-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        
+        .gallery-nav button {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin: 0 0.5rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .gallery-nav button:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+        
+        .gallery-thumbnails {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+            gap: 0.5rem;
+        }
+        
+        .thumbnail {
+            width: 60px;
+            height: 40px;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .thumbnail.active {
+            border-color: #4CAF50;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-blue-900 via-purple-800 to-emerald-900">
+    <div id="stars-container"></div>
+    <div id="fireworks-container" class="absolute inset-0 pointer-events-none"></div>
+    <div class="relative z-10 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-2xl p-8 md:p-12 shadow-2xl max-w-3xl w-full mx-4 transition-transform duration-700 hover:scale-105 border border-white border-opacity-20 pulse-border">
+        <div class="text-center mx-auto max-w-xl">
+            <h1 id="mainTitle" class="text-2xl md:text-4xl font-bold mb-4 text-white arabic-font text-glow">Selamat Hari Raya</h1>
+            <h2 id="idulFitri" class="text-3xl md:text-5xl font-bold mb-6 text-green-300 text-glow">Idul Fitri 1446 H</h2>
+            <p id="message" class="text-lg md:text-xl text-white opacity-90 mb-8 arabic-font">Taqabbalallahu minna wa minkum, shiyamana wa shiyamakum. Mohon maaf lahir dan batin.</p>
+            <p id="translation" class="text-white text-opacity-80 italic">May Allah accept (good deeds) from us and from you. Please forgive all my mistakes.</p>
+            
+            <!-- Family Photo Gallery -->
+            <div class="mt-8">
+                <h3 class="text-xl font-bold text-white mb-4">Kenangan Bersama Keluarga</h3>
+                <div class="gallery-container">
+                    <div class="gallery" id="gallery">
+                        <div class="gallery-item">
+                            <img src="https://static.cdntap.com/tap-assets-prod/wp-content/uploads/sites/24/2020/05/lebaran-ustad-4.jpg" alt="Family gathering during Eid" />
+                            <div class="gallery-caption">Keluarga Besar - Idul Fitri 2024</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://static.promediateknologi.id/crop/40x311:1006x884/0x0/webp/photo/p2/86/2025/01/30/WhatsApp-Image-2025-01-30-at-074203-1408213520.jpeg" alt="Family dinner" />
+                            <div class="gallery-caption">Makan Bersama Keluarga</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://c.inilah.com/reborn/2024/04/Foto_Keluarga_besar_036be91355.jpg" alt="Children playing" />
+                            <div class="gallery-caption">Keceriaan Anak-anak</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://hypeabis.id/assets/content/20220502141335000000muktasimazlanPbPr10jT1xsunsplash.jpg" alt="Eid prayer" />
+                            <div class="gallery-caption">Sholat Eid</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://asset-2.tstatic.net/jabar/foto/bank/images/Busana-Muslim-Myzta.jpg" alt="Traditional food" />
+                            <div class="gallery-caption">Hidangan Lebaran</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-thumbnails" id="gallery-thumbnails">
+                    <div class="thumbnail active" data-index="0">
+                        <img src="https://fredimalabali.com/asset/foto_berita/idul_fitri1.png" alt="Thumbnail 1" />
+                    </div>
+                    <div class="thumbnail" data-index="1">
+                        <img src="https://fredimalabali.com/asset/foto_berita/idul_fitri1.png" alt="Thumbnail 2" />
+                    </div>
+                    <div class="thumbnail" data-index="2">
+                        <img src="https://fredimalabali.com/asset/foto_berita/idul_fitri1.png" alt="Thumbnail 3" />
+                    </div>
+                    <div class="thumbnail" data-index="3">
+                        <img src="https://fredimalabali.com/asset/foto_berita/idul_fitri1.png" alt="Thumbnail 4" />
+                    </div>
+                    <div class="thumbnail" data-index="4">
+                        <img src="https://fredimalabali.com/asset/foto_berita/idul_fitri1.png" alt="Thumbnail 5" />
+                    </div>
+                </div>
+                
+                <div class="gallery-nav">
+                    <button id="prev-btn" class="heartbeat"><i class="fas fa-chevron-left"></i></button>
+                    <button id="next-btn" class="heartbeat"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+            
+            <div id="youtube-player" class="hidden"></div>
+            <!-- Tambahkan tombol kontrol audio dengan efek heartbeat dan icon -->
+            <button id="audio-control" class="mt-6 px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded-full transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50 heartbeat">
+                <i id="audio-icon" class="fas fa-play icon-pulse"></i>
+                <span id="audio-text">Putar Musik</span>
+            </button>
+        </div>
+    </div>
+    <script>
+        function createStars() {
+            const starsContainer = document.getElementById('stars-container');
+            const numStars = window.innerWidth < 768 ? 50 : 100;
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('stars', 'star-pulse');
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.setProperty('--delay', Math.random() * 5);
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        function createFirework() {
+            const fireworksContainer = document.getElementById('fireworks-container');
+            const firework = document.createElement('div');
+            firework.style.position = 'absolute';
+            firework.style.left = `${Math.random() * window.innerWidth}px`;
+            firework.style.top = `${Math.random() * (window.innerHeight / 2)}px`;
+            for (let i = 0; i < 12; i++) {
+                const line = document.createElement('div');
+                line.classList.add('firework-line');
+                line.style.transformOrigin = 'bottom center';
+                line.style.transform = `rotate(${i * 30}deg)`;
+                firework.appendChild(line);
+            }
+            fireworksContainer.appendChild(firework);
+            gsap.to(firework.children, {
+                height: '+=30',
+                opacity: 0,
+                duration: 1,
+                stagger: 0.05,
+                ease: "power3.out",
+                onComplete: () => firework.remove()
+            });
+        }
+        
+        // Add pulse animation to the Arabic message
+        function pulseArabicMessage() {
+            const message = document.getElementById('message');
+            gsap.to(message, {
+                opacity: 0.7,
+                duration: 2,
+                repeat: -1,
+                yoyo: true,
+                ease: "sine.inOut"
+            });
+        }
+        
+        // Function to cycle through music icons
+        function cycleIcons() {
+            const iconElement = document.getElementById('audio-icon');
+            const icons = ['fa-music', 'fa-headphones', 'fa-volume-high', 'fa-compact-disc', 'fa-radio'];
+            let currentIndex = 0;
+            
+            // If player is paused, keep showing play icon
+            function updateIcon() {
+                if (player && player.getPlayerState() === YT.PlayerState.PAUSED) {
+                    iconElement.className = 'fas fa-play icon-pulse';
+                    return;
+                }
+                
+                iconElement.className = `fas ${icons[currentIndex]} icon-pulse`;
+                currentIndex = (currentIndex + 1) % icons.length;
+                setTimeout(updateIcon, 2000);
+            }
+            
+            updateIcon();
+        }
+        
+        // Gallery functionality
+        function setupGallery() {
+            const gallery = document.getElementById('gallery');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            
+            let currentIndex = 0;
+            const totalItems = document.querySelectorAll('.gallery-item').length;
+            
+            // Function to update gallery position
+            function updateGallery() {
+                gallery.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                // Update thumbnails
+                thumbnails.forEach(thumb => {
+                    thumb.classList.remove('active');
+                });
+                thumbnails[currentIndex].classList.add('active');
+            }
+            
+            // Previous button click
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+                updateGallery();
+            });
+            
+            // Next button click
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % totalItems;
+                updateGallery();
+            });
+            
+            // Thumbnail clicks
+            thumbnails.forEach(thumb => {
+                thumb.addEventListener('click', () => {
+                    currentIndex = parseInt(thumb.dataset.index);
+                    updateGallery();
+                });
+            });
+            
+            // Auto slide every 5 seconds
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % totalItems;
+                updateGallery();
+            }, 5000);
+            
+            // Initial gallery setup
+            updateGallery();
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            gsap.from('#mainTitle', { opacity: 0, y: 50, duration: 1.5, ease: "elastic.out(1, 0.5)" });
+            gsap.from('#idulFitri', { opacity: 0, scale: 0.5, duration: 1.2, delay: 0.3, ease: "back.out(1.7)" });
+            gsap.from('#message', { opacity: 0, y: 30, duration: 1, delay: 0.7 });
+            gsap.from('#translation', { opacity: 0, y: 20, duration: 1, delay: 1 });
+            
+            // Setup gallery with animation
+            gsap.from('.gallery-container', { opacity: 0, y: 30, duration: 1, delay: 1.2 });
+            setupGallery();
+            
+            // Start pulsing the Arabic message
+            pulseArabicMessage();
+            
+            // Create fireworks at intervals
+            setInterval(createFirework, window.innerWidth < 768 ? 1500 : 1000);
+            
+            // Continuous subtle movement of the main card
+            gsap.to('.pulse-border', {
+                y: -5,
+                duration: 2,
+                repeat: -1,
+                yoyo: true,
+                ease: "sine.inOut"
+            });
+            
+            // Start the icon cycle after a short delay
+            setTimeout(cycleIcons, 2000);
+        });
+        
+        // YouTube API integration
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        let player;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '0',
+                width: '0',
+                videoId: '1npdjb3YgP0',
+                playerVars: {
+                    'autoplay': 1,
+                    'controls': 0,
+                    'disablekb': 1,
+                    'enablejsapi': 1,
+                    'fs': 0,
+                    'loop': 1,
+                    'modestbranding': 1,
+                    'playsinline': 1
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            event.target.playVideo();
+            
+            document.getElementById('audio-control').addEventListener('click', function() {
+                if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+                    player.pauseVideo();
+                    document.getElementById('audio-text').textContent = 'Putar Musik';
+                    document.getElementById('audio-icon').className = 'fas fa-play icon-pulse';
+                } else {
+                    player.playVideo();
+                    document.getElementById('audio-text').textContent = 'Jeda Musik';
+                    document.getElementById('audio-icon').className = 'fas fa-pause icon-pulse';
+                    
+                    // Restart icon cycling when music plays
+                    setTimeout(cycleIcons, 2000);
+                }
+            });
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.PLAYING) {
+                document.getElementById('audio-text').textContent = 'Jeda Musik';
+                document.getElementById('audio-icon').className = 'fas fa-pause icon-pulse';
+            } else if (event.data === YT.PlayerState.PAUSED) {
+                document.getElementById('audio-text').textContent = 'Putar Musik';
+                document.getElementById('audio-icon').className = 'fas fa-play icon-pulse';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                if (player && typeof player.playVideo === 'function') {
+                    player.playVideo().catch(e => {
+                        console.log("Autoplay blocked by browser");
+                    });
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
