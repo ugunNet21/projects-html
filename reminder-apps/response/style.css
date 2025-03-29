@@ -1,0 +1,132 @@
+/* style.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background-color: #e0f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    max-width: 400px;
+    width: 90%;
+    transition: transform 0.3s ease;
+}
+
+.container:hover {
+    transform: scale(1.02);
+}
+
+h1 {
+    margin-bottom: 15px;
+    color: #00796b;
+}
+
+button {
+    padding: 12px 24px;
+    margin-top: 20px;
+    border: none;
+    background-color: #00796b;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #004d40;
+}
+
+.settings {
+    margin-top: 20px;
+}
+
+select {
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-left: 10px;
+}
+
+#message {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #ffd600;
+    border-radius: 8px;
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+#timer {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+}
+
+/* Animasi */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* Tambahkan gaya untuk bagian custom interval */
+.custom-interval {
+    margin-top: 20px;
+    display: none;
+}
+
+.custom-interval input {
+    padding: 8px;
+    font-size: 14px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.custom-interval button {
+    padding: 8px 16px;
+    background-color: #ff5722;
+    color: white;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.custom-interval button:hover {
+    background-color: #e64a19;
+}
