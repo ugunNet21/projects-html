@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Al-Quran Digital</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .highlight {
+      background-color: #ffeb3b;
+    }
+    #search-input {
+      color: black; /* Change text color to black */
+    }
+    /* Modal styling */
+    .modal-content {
+      display: flex;
+      justify-content: space-between;
+    }
+    .modal-sidebar {
+      width: 20%;
+      padding: 1rem;
+      background: #f9fafb; /* Light gray background */
+      border-right: 1px solid #e5e7eb; /* Gray border */
+    }
+    .modal-main {
+      width: 60%;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+  <!-- Header -->
+  <header class="bg-green-600 p-4 text-white">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-semibold">Al-Quran Digital</h1>
+      <input type="text" id="search-input" placeholder="Cari surat..." class="p-2 rounded w-full max-w-xs" oninput="filterSurah()">
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container mx-auto my-8 p-4">
+    <div class="flex flex-col lg:flex-row">
+      <aside class="w-full lg:w-1/4 bg-white shadow-lg p-4 rounded mb-4 lg:mb-0 lg:mr-4">
+        <h2 class="text-lg font-semibold mb-4">Daftar Surat</h2>
+        <ul id="surah-list" class="space-y-2">
+          <!-- Surat list items will be populated here by JS -->
+        </ul>
+      </aside>
+      <section id="surah-content" class="w-full lg:w-3/4 bg-white shadow-lg p-4 rounded">
+        <h2 class="text-lg font-semibold">Pilih Surat untuk melihat isinya</h2>
+      </section>
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div id="modal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 hidden">
+    <div class="bg-white w-11/12 max-w-2xl rounded-lg shadow-lg overflow-y-auto max-h-full p-6">
+      <div class="flex justify-between items-center border-b pb-2">
+        <h2 id="modal-title" class="text-lg font-semibold">Ayat Al-Quran</h2>
+        <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700">&times;</button>
+      </div>
+      <div class="modal-content mt-4">
+        <div class="modal-sidebar">
+          <!-- Left Sidebar Content -->
+          <h3 class="font-semibold">Informasi Tambahan</h3>
+          <p class="text-sm">Beberapa informasi bisa ditampilkan di sini.</p>
+        </div>
+        <div class="modal-main">
+          <div id="modal-content" class="space-y-4">
+            <!-- Ayat content will be injected here by JS -->
+          </div>
+        </div>
+        <div class="modal-sidebar">
+          <!-- Right Sidebar Content -->
+          <h3 class="font-semibold">Catatan</h3>
+          <p class="text-sm">Catatan atau referensi tambahan bisa ditampilkan di sini.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-200 p-4 text-center">
+    <p class="text-sm">Sumber API dari <a href="https://github.com/gadingnst/quran-api" class="text-blue-600" target="_blank">Gading Dev</a></p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    const API_BASE_URL = 'https://api.quran.gading.dev';
+    let allSurah = [];
+
+    function openModal() {
+      document.getElementById('modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.add('hidden');
+    }
+
+    async function fetchSurahList() {
+      try {
+        const response = await fetch(`${API_BASE_URL}/surah`);
+        const result = await response.json();
+
+        if (result.code === 200 && result.status === "OK.") {
+          allSurah = result.data; // Store all surah data
+          displaySurahList(allSurah);
+        } else {
+          console.error('Error fetching Surah list:', result.message);
+        }
+      } catch (error) {
+        console.error('Error fetching Surah list:', error);
+      }
+    }
+
+    function displaySurahList(surahList) {
+      const surahListElement = document.getElementById('surah-list');
+      surahListElement.innerHTML = ''; // Clear current list
+      surahList.forEach(surah => {
+        const listItem = document.createElement('li');
+        listItem.className = 'p-2 bg-green-100 rounded cursor-pointer';
+        listItem.textContent = `${surah.number}. ${surah.name.transliteration.id} (${surah.numberOfVerses} ayat)`;
+        listItem.onclick = () => fetchSurah(surah.number);
+        surahListElement.appendChild(listItem);
+      });
+    }
+
+    function filterSurah() {
+      const searchValue = document.getElementById('search-input').value.toLowerCase();
+      const filteredSurah = allSurah.filter(surah => 
+        surah.name.transliteration.id.toLowerCase().includes(searchValue)
+      );
+      displaySurahList(filteredSurah);
+    }
+
+    async function fetchSurah(surahNumber) {
+      try {
+        const response = await fetch(`${API_BASE_URL}/surah/${surahNumber}`);
+        const result = await response.json();
+
+        if (result.code === 200 && result.status === "OK.") {
+          const modalTitle = document.getElementById('modal-title');
+          const modalContent = document.getElementById('modal-content');
+
+          modalTitle.textContent = `${result.data.name.transliteration.id} - ${result.data.name.translation.id}`;
+          modalContent.innerHTML = `<p class="text-sm text-gray-600 mb-4">${result.data.tafsir.id}</p>`;
+
+          result.data.verses.forEach(ayah => {
+            const ayatItem = document.createElement('div');
+            ayatItem.className = 'p-4 bg-gray-100 rounded shadow-sm mb-2';
+            ayatItem.innerHTML = `
+              <p class="text-right font-semibold text-xl mb-2">${ayah.text.arab}</p>
+              <p class="text-sm text-gray-600">${ayah.translation.id}</p>
+            `;
+            modalContent.appendChild(ayatItem);
+          });
+
+          openModal(); // Open the modal after data is loaded
+        } else {
+          console.error('Error fetching Surah:', result.message);
+        }
+      } catch (error) {
+        console.error('Error fetching Surah:', error);
+      }
+    }
+
+    // Load Surah list on page load
+    fetchSurahList();
+  </script>
+</body>
+</html>

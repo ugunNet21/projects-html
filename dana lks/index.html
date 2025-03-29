@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Dana LKS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .input-rp {
+            width: 150px;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+        .checkbox-group {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Form Penerimaan dan Pemanfaatan Dana LKS</h2>
+
+        <!-- Accordion untuk Sumber Dana -->
+        <div class="accordion" id="accordionSumberDana">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingSumberDana">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSumberDana" aria-expanded="true" aria-controls="collapseSumberDana">
+                        SUMBER DANA
+                    </button>
+                </h2>
+                <div id="collapseSumberDana" class="accordion-collapse collapse show" aria-labelledby="headingSumberDana" data-bs-parent="#accordionSumberDana">
+                    <div class="accordion-body">
+                        <!-- Table untuk Sumber Dana -->
+                        <table class="table table-bordered">
+                            <tr>
+                                <th colspan="2">1. Total Penerimaan LKS Selama 1 tahun</th>
+                                <td><input type="number" id="totalPenerimaan" class="input-rp" /></td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">2. Penerimaan dana LKS yang berasal dari modal kerja dan hasil usaha:</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>a. Modal awal</td>
+                                <td>
+                                    <input type="checkbox" id="modalAwalTidakAda"> Tidak Ada
+                                    <input type="checkbox" id="modalAwalAda"> Ada
+                                </td>
+                                <td><input type="number" id="rpModalAwal" class="input-rp" disabled /></td>
+                            </tr>
+                            <tr>
+                                <td>b. Iuran anggota</td>
+                                <td>
+                                    <input type="checkbox" id="iuranAnggotaTidakAda"> Tidak Ada
+                                    <input type="checkbox" id="iuranAnggotaAda"> Ada
+                                </td>
+                                <td><input type="number" id="rpIuranAnggota" class="input-rp" disabled /></td>
+                            </tr>
+                            <tr>
+                                <td>c. Hasil usaha LKS</td>
+                                <td>
+                                    <input type="checkbox" id="hasilUsahaTidakAda"> Tidak Ada
+                                    <input type="checkbox" id="hasilUsahaAda"> Ada
+                                </td>
+                                <td><input type="number" id="rpHasilUsaha" class="input-rp" disabled /></td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">3. Penerimaan dana LKS yang berasal dari masyarakat:</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>a. Masyarakat dari dalam negeri</td>
+                                <td>
+                                    <input type="checkbox" id="masyarakatDalamNegeriTidakAda"> Tidak Ada
+                                    <input type="checkbox" id="masyarakatDalamNegeriAda"> Ada
+                                </td>
+                                <td><input type="number" id="rpMasyarakatDalamNegeri" class="input-rp" disabled /></td>
+                            </tr>
+                            <tr>
+                                <td>b. Masyarakat dari luar negeri</td>
+                                <td>
+                                    <input type="checkbox" id="masyarakatLuarNegeriTidakAda"> Tidak Ada
+                                    <input type="checkbox" id="masyarakatLuarNegeriAda"> Ada
+                                </td>
+                                <td><input type="number" id="rpMasyarakatLuarNegeri" class="input-rp" disabled /></td>
+                            </tr>
+                            <tr>
+                                <td>c. Zakat masyarakat</td>
+                                <td>
+                                    <input type="checkbox" id="zakatMasyarakatTidakAda"> Tidak Ada
+                                    <input type="checkbox" id="zakatMasyarakatAda"> Ada
+                                </td>
+                                <td><input type="number" id="rpZakatMasyarakat" class="input-rp" disabled /></td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">4. Penerimaan dana LKS yang berasal dari badan / lembaga sosial:</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>a. Lembaga sosial dalam negeri</td>
+                                <td>
+                                    <input type="checkbox" id="lembagaSosialDalamNegeriTidakAda"> Tidak Ada
+                                    <input type="checkbox" id="lembagaSosialDalamNegeriAda"> Ada
+                                </td>
+                                <td><input type="number" id="rpLembagaSosialDalamNegeri" class="input-rp" disabled /></td>
+                            </tr>
+                            <tr>
+                                <td>b. Lembaga sosial luar negeri</td>
+                                <td>
+                                    <input type="checkbox" id="lembagaSosialLuarNegeriTidakAda"> Tidak Ada
+                                    <input type="checkbox" id="lembagaSosialLuarNegeriAda"> Ada
+                                </td>
+                                <td><input type="number" id="rpLembagaSosialLuarNegeri" class="input-rp" disabled /></td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">5. Penerimaan dana LKS yang berasal dari dunia usaha:</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>a. Dunia usaha dalam negeri</td>
+                                <td>
+                                    <input type="checkbox" id="duniaUsahaDalamNegeriTidakAda"> Tidak Ada
+                                    <input type="checkbox" id="duniaUsahaDalamNegeriAda"> Ada
+                                </td>
+                                <td><input type="number" id="rpDuniaUsahaDalamNegeri" class="input-rp" disabled /></td>
+                            </tr>
+                            <tr>
+                                <td>b. Dunia usaha dari luar negeri</td>
+                                <td>
+                                    <input type="checkbox" id="duniaUsahaLuarNegeriTidakAda"> Tidak Ada
+                                    <input type="checkbox" id="duniaUsahaLuarNegeriAda"> Ada
+                                </td>
+                                <td><input type="number" id="rpDuniaUsahaLuarNegeri" class="input-rp" disabled /></td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">6. Penerimaan dana LKS yang berasal dari pemerintah / pemerintah daerah:</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>a. Pemerintah</td>
+                                <td>
+                                    <input type="checkbox" id="pemerintahTidakAda"> Tidak Ada
+                                    <input type="checkbox" id="pemerintahAda"> Ada
+                                </td>
+                                <td><input type="number" id="rpPemerintah" class="input-rp" disabled /></td>
+                            </tr>
+                            <tr>
+                                <td>b. Pemerintah daerah</td>
+                                <td>
+                                    <input type="checkbox" id="pemerintahDaerahTidakAda"> Tidak Ada
+                                    <input type="checkbox" id="pemerintahDaerahAda"> Ada
+                                </td>
+                                <td><input type="number" id="rpPemerintahDaerah" class="input-rp" disabled /></td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">7. Penerimaan dana LKS yang berasal dari sumber lain-lain:</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>a. Sumber lain dari dalam negeri</td>
+                                <td>
+                                    <input type="checkbox" id="sumberLainDalamNegeriTidakAda"> Tidak Ada
+                                    <input type="checkbox" id="sumberLainDalamNegeriAda"> Ada
+                                </td>
+                                <td><input type="number" id="rpSumberLainDalamNegeri" class="input-rp" disabled /></td>
+                            </tr>
+                            <tr>
+                                <td>b. Sumber lain dari luar negeri</td>
+                                <td>
+                                    <input type="checkbox" id="sumberLainLuarNegeriTidakAda"> Tidak Ada
+                                    <input type="checkbox" id="sumberLainLuarNegeriAda"> Ada
+                                </td>
+                                <td><input type="number" id="rpSumberLainLuarNegeri" class="input-rp" disabled /></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accordion untuk Pemanfaatan Dana -->
+        <div class="accordion" id="accordionPemanfaatanDana">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingPemanfaatanDana">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePemanfaatanDana" aria-expanded="true" aria-controls="collapsePemanfaatanDana">
+                        PEMANFAATAN DANA
+                    </button>
+                </h2>
+                <div id="collapsePemanfaatanDana" class="accordion-collapse collapse show" aria-labelledby="headingPemanfaatanDana" data-bs-parent="#accordionPemanfaatanDana">
+                    <div class="accordion-body">
+                        <!-- Table untuk Pemanfaatan Dana -->
+                        <table class="table table-bordered">
+                            <tr>
+                                <th colspan="2">1. Total Pengeluaran LKS Selama 1 tahun</th>
+                                <td><input type="number" id="totalPengeluaran" class="input-rp" /></td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">2. Peruntukan pengeluaran:</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>a. Biaya program / pelayanan</td>
+                                <td>
+                                    <input type="checkbox" id="biayaProgramTidakAda"> Tidak Ada
+                                    <input type="checkbox" id="biayaProgramAda"> Ada
+                                </td>
+                                <td><input type="number" id="rpBiayaProgram" class="input-rp" disabled /></td>
+                            </tr>
+                            <tr>
+                                <td>b. Biaya Operasional LKS</td>
+                                <td>
+                                    <input type="checkbox" id="biayaOperasionalTidakAda"> Tidak Ada
+                                    <input type="checkbox" id="biayaOperasionalAda"> Ada
+                                </td>
+                                <td><input type="number" id="rpBiayaOperasional" class="input-rp" disabled /></td>
+                            </tr>
+                            <tr>
+                                <td>c. Biaya prasarana dan sarana</td>
+                                <td>
+                                    <input type="checkbox" id="biayaPrasaranaTidakAda"> Tidak Ada
+                                    <input type="checkbox" id="biayaPrasaranaAda"> Ada
+                                </td>
+                                <td><input type="number" id="rpBiayaPrasarana" class="input-rp" disabled /></td>
+                            </tr>
+                            <tr>
+                                <td>d. Biaya investasi</td>
+                                <td>
+                                    <input type="checkbox" id="biayaInvestasiTidakAda"> Tidak Ada
+                                    <input type="checkbox" id="biayaInvestasiAda"> Ada
+                                </td>
+                                <td><input type="number" id="rpBiayaInvestasi" class="input-rp" disabled /></td>
+                            </tr>
+                            <tr>
+                                <td>e. Biaya lain-lain</td>
+                                <td>
+                                    <input type="checkbox" id="biayaLainTidakAda"> Tidak Ada
+                                    <input type="checkbox" id="biayaLainAda"> Ada
+                                </td>
+                                <td><input type="number" id="rpBiayaLain" class="input-rp" disabled /></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Function to toggle input fields based on checkbox selection
+        function toggleInput(checkboxId, inputId) {
+            const checkboxTidakAda = document.getElementById(checkboxId + 'TidakAda');
+            const checkboxAda = document.getElementById(checkboxId + 'Ada');
+            const input = document.getElementById(inputId);
+
+            checkboxAda.addEventListener('change', function() {
+                if (checkboxAda.checked) {
+                    input.disabled = false;
+                } else {
+                    input.disabled = true;
+                }
+            });
+
+            checkboxTidakAda.addEventListener('change', function() {
+                if (checkboxTidakAda.checked) {
+                    input.disabled = true;
+                }
+            });
+        }
+
+        // Enable/disable input fields for each item
+        toggleInput('modalAwal', 'rpModalAwal');
+        toggleInput('iuranAnggota', 'rpIuranAnggota');
+        toggleInput('hasilUsaha', 'rpHasilUsaha');
+        toggleInput('masyarakatDalamNegeri', 'rpMasyarakatDalamNegeri');
+        toggleInput('masyarakatLuarNegeri', 'rpMasyarakatLuarNegeri');
+        toggleInput('zakatMasyarakat', 'rpZakatMasyarakat');
+        toggleInput('lembagaSosialDalamNegeri', 'rpLembagaSosialDalamNegeri');
+        toggleInput('lembagaSosialLuarNegeri', 'rpLembagaSosialLuarNegeri');
+        toggleInput('duniaUsahaDalamNegeri', 'rpDuniaUsahaDalamNegeri');
+        toggleInput('duniaUsahaLuarNegeri', 'rpDuniaUsahaLuarNegeri');
+        toggleInput('pemerintah', 'rpPemerintah');
+        toggleInput('pemerintahDaerah', 'rpPemerintahDaerah');
+        toggleInput('sumberLainDalamNegeri', 'rpSumberLainDalamNegeri');
+        toggleInput('sumberLainLuarNegeri', 'rpSumberLainLuarNegeri');
+        toggleInput('biayaProgram', 'rpBiayaProgram');
+        toggleInput('biayaOperasional', 'rpBiayaOperasional');
+        toggleInput('biayaPrasarana', 'rpBiayaPrasarana');
+        toggleInput('biayaInvestasi', 'rpBiayaInvestasi');
+        toggleInput('biayaLain', 'rpBiayaLain');
+    </script>
+
+</body>
+</html>

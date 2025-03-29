@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracking Proses Surat</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .node {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: gray;
+            display: inline-block;
+            text-align: center;
+            line-height: 50px;
+            margin: 0 15px;
+            transition: background-color 0.3s ease;
+        }
+        .node.active {
+            background-color: green;
+            color: white;
+        }
+        .node.rejected {
+            background-color: red;
+            color: white;
+        }
+        .node.returned {
+            background-color: yellow;
+            color: black;
+        }
+        .node.completed {
+            background-color: blue;
+            color: white;
+        }
+        .node-label {
+            margin-top: 5px;
+        }
+        .node-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .node-line {
+            height: 5px;
+            width: 50px;
+            background-color: #ccc;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center my-4">Tracking Proses Surat</h2>
+    <div class="node-container">
+        <!-- Node-Node dengan status yang bisa berubah -->
+        <div class="node active" id="ppks">
+            <span class="node-label">PPKS</span>
+        </div>
+        <div class="node-line"></div>
+
+        <div class="node active" id="fo_kota">
+            <span class="node-label">FO Kota</span>
+        </div>
+        <div class="node-line"></div>
+
+        <div class="node active" id="bo_kota">
+            <span class="node-label">BO Kota</span>
+        </div>
+        <div class="node-line"></div>
+
+        <div class="node" id="kabid">
+            <span class="node-label">Kabid</span>
+        </div>
+        <div class="node-line"></div>
+
+        <div class="node" id="pembuat">
+            <span class="node-label">Pembuat</span>
+        </div>
+    </div>
+
+    <div class="text-center mt-5">
+        <button class="btn btn-primary" onclick="moveToNextStage()">Teruskan</button>
+        <button class="btn btn-warning" onclick="returnToPreviousStage()">Kembalikan</button>
+        <button class="btn btn-danger" onclick="rejectStage()">Tolak</button>
+        <button class="btn btn-success" onclick="markAsCompleted()">Selesai</button>
+    </div>
+</div>
+
+<script>
+    let currentStage = 'ppks';
+
+    function updateNodeStatus() {
+        const stages = ['ppks', 'fo_kota', 'bo_kota', 'kabid', 'pembuat'];
+
+        // Reset all nodes
+        stages.forEach(stage => {
+            const node = document.getElementById(stage);
+            node.classList.remove('active', 'rejected', 'returned', 'completed');
+        });
+
+        // Mark active node based on currentStage
+        const activeNode = document.getElementById(currentStage);
+        activeNode.classList.add('active');
+    }
+
+    function moveToNextStage() {
+        const stages = ['ppks', 'fo_kota', 'bo_kota', 'kabid', 'pembuat'];
+        const currentIndex = stages.indexOf(currentStage);
+        
+        if (currentIndex < stages.length - 1) {
+            currentStage = stages[currentIndex + 1];
+            updateNodeStatus();
+        }
+    }
+
+    function returnToPreviousStage() {
+        const stages = ['ppks', 'fo_kota', 'bo_kota', 'kabid', 'pembuat'];
+        const currentIndex = stages.indexOf(currentStage);
+        
+        if (currentIndex > 0) {
+            currentStage = stages[currentIndex - 1];
+            updateNodeStatus();
+        }
+    }
+
+    function rejectStage() {
+        const stages = ['ppks', 'fo_kota', 'bo_kota', 'kabid', 'pembuat'];
+        const currentIndex = stages.indexOf(currentStage);
+        
+        if (currentIndex === 3) {
+            // If rejected from Kabid, send back to Pembuat (PPKS)
+            currentStage = 'ppks';
+            updateNodeStatus();
+            document.getElementById('bo_kota').classList.remove('active');
+            document.getElementById('fo_kota').classList.remove('active');
+        }
+    }
+
+    function markAsCompleted() {
+        const stages = ['ppks', 'fo_kota', 'bo_kota', 'kabid', 'pembuat'];
+        const currentIndex = stages.indexOf(currentStage);
+
+        if (currentIndex === stages.length - 1) {
+            const activeNode = document.getElementById(currentStage);
+            activeNode.classList.add('completed');
+        }
+    }
+
+    // Initial setup
+    updateNodeStatus();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+

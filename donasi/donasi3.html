@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donasi Peduli</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#ec4899">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <style>
+    /* Progress Bar */
+    #progressBar {
+      height: 5px;
+      background: linear-gradient(to right, #ec4899, #facc15);
+      width: 0%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 50;
+    }
+  </style>
+</head>
+
+<body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 transition duration-500">
+
+  <!-- Scroll Progress Bar -->
+  <div id="progressBar"></div>
+
+  <!-- Dark Mode Toggle -->
+  <button onclick="toggleDarkMode()" class="fixed top-5 right-5 bg-pink-600 text-white px-4 py-2 rounded-full shadow-lg z-50">
+    🌙
+  </button>
+
+  <!-- Hero Section -->
+  <section class="min-h-screen bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 flex flex-col justify-center items-center text-center text-white p-6">
+    <h1 class="text-4xl md:text-6xl font-bold mb-4 animate-bounce">Donasi Peduli Sesama</h1>
+    <p class="text-lg md:text-2xl mb-8">Bersama kita bantu mereka yang membutuhkan</p>
+    <a href="#donasi" class="bg-white text-pink-600 px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:scale-105 transition">Donasi Sekarang</a>
+  </section>
+
+  <!-- About -->
+  <section id="tentang" class="py-16 px-6 text-center max-w-4xl mx-auto" data-aos="fade-up">
+    <h2 class="text-3xl font-bold mb-6">Kenapa Harus Berdonasi?</h2>
+    <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">Setiap rupiah yang Anda donasikan akan membantu mereka yang membutuhkan, mulai dari pendidikan, kesehatan, hingga bencana alam. Mari kita ringankan beban mereka dan wujudkan dunia yang lebih baik bersama-sama.</p>
+  </section>
+
+  <!-- Campaign Section -->
+  <section id="campaign" class="py-16 bg-gray-50 dark:bg-gray-800 px-6" data-aos="fade-up">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-10">Campaign Terbaru</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg hover:scale-105 transition duration-300">
+          <img src="https://source.unsplash.com/400x250/?child,education" alt="Pendidikan" class="rounded-lg mb-4">
+          <h3 class="text-xl font-semibold mb-2">Bantu Anak Sekolah</h3>
+          <p class="text-gray-700 dark:text-gray-200">Mari dukung pendidikan anak bangsa di daerah terpencil.</p>
+        </div>
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg hover:scale-105 transition duration-300">
+          <img src="https://source.unsplash.com/400x250/?hospital,care" alt="Kesehatan" class="rounded-lg mb-4">
+          <h3 class="text-xl font-semibold mb-2">Bantu Biaya Pengobatan</h3>
+          <p class="text-gray-700 dark:text-gray-200">Ringankan biaya pengobatan pasien tidak mampu.</p>
+        </div>
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg hover:scale-105 transition duration-300">
+          <img src="https://source.unsplash.com/400x250/?disaster,relief" alt="Bencana" class="rounded-lg mb-4">
+          <h3 class="text-xl font-semibold mb-2">Peduli Bencana Alam</h3>
+          <p class="text-gray-700 dark:text-gray-200">Salurkan bantuan untuk korban bencana alam di Indonesia.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Donasi Section -->
+  <section id="donasi" class="py-16 px-6 text-center bg-white dark:bg-gray-900" data-aos="fade-up">
+    <h2 class="text-3xl font-bold mb-8">Ayo Donasi Sekarang!</h2>
+    <p class="text-lg text-gray-700 dark:text-gray-300 mb-6">Setiap kebaikanmu sangat berarti bagi mereka.</p>
+    <form class="max-w-xl mx-auto space-y-6">
+      <input type="text" placeholder="Nama Lengkap" class="w-full p-4 rounded-lg border focus:ring-2 focus:ring-pink-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      <input type="number" placeholder="Nominal Donasi (Rp)" class="w-full p-4 rounded-lg border focus:ring-2 focus:ring-pink-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      <textarea placeholder="Pesan / Doa" class="w-full p-4 rounded-lg border focus:ring-2 focus:ring-pink-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"></textarea>
+      <button type="submit" class="bg-pink-600 text-white px-8 py-4 rounded-full text-lg hover:bg-pink-700 transition">Donasi Sekarang</button>
+    </form>
+  </section>
+
+  <section id="target" class="py-16 px-6 bg-white dark:bg-gray-900 text-center" data-aos="fade-up">
+    <h2 class="text-3xl font-bold mb-8">Progress Donasi</h2>
+    
+    <!-- Progress Bar -->
+    <div class="max-w-xl mx-auto mb-8">
+      <div class="flex justify-between text-sm mb-2">
+        <span>Terkumpul: <span id="collected" class="font-semibold">0</span></span>
+        <span>Target: <span class="font-semibold">Rp 50.000.000</span></span>
+      </div>
+      <div class="w-full bg-gray-200 rounded-full h-5 overflow-hidden">
+        <div id="progressBar" class="h-5 bg-pink-600 text-xs text-white flex items-center justify-center transition-all duration-700 ease-out" style="width: 0%;">0%</div>
+      </div>
+    </div>
+  
+    <!-- Countdown Timer -->
+    <h3 class="text-xl font-semibold mb-4">Batas Donasi:</h3>
+    <div id="countdown" class="text-2xl font-bold text-pink-600">00 Hari 00:00:00</div>
+  </section>
+
+  <!-- Testimoni Section -->
+  <section id="testimoni" class="py-16 px-6 bg-gray-50 dark:bg-gray-800 text-center" data-aos="fade-up">
+    <h2 class="text-3xl font-bold mb-10">Apa Kata Mereka</h2>
+    <div id="slider" class="relative max-w-2xl mx-auto">
+      <div class="testimonial p-8 bg-white dark:bg-gray-700 rounded-xl shadow-lg text-gray-800 dark:text-gray-200">
+        <p class="text-lg italic">"Saya merasa sangat terbantu dengan platform donasi ini. Prosesnya mudah dan transparan. Terima kasih!"</p>
+        <h4 class="mt-4 font-semibold">- Andi, Jakarta</h4>
+      </div>
+      <div class="testimonial hidden p-8 bg-white dark:bg-gray-700 rounded-xl shadow-lg text-gray-800 dark:text-gray-200">
+        <p class="text-lg italic">"Setiap donasi yang saya salurkan terasa sampai ke yang membutuhkan. Salut untuk tim!"</p>
+        <h4 class="mt-4 font-semibold">- Rina, Bandung</h4>
+      </div>
+      <div class="testimonial hidden p-8 bg-white dark:bg-gray-700 rounded-xl shadow-lg text-gray-800 dark:text-gray-200">
+        <p class="text-lg italic">"Fitur-fitur yang disediakan memudahkan saya untuk berdonasi secara rutin. Mantap!"</p>
+        <h4 class="mt-4 font-semibold">- Budi, Surabaya</h4>
+      </div>
+      
+      <!-- Slider Controls -->
+      <div class="flex justify-center mt-6 space-x-4">
+        <button onclick="prevSlide()" class="bg-pink-600 text-white px-4 py-2 rounded-full">Prev</button>
+        <button onclick="nextSlide()" class="bg-pink-600 text-white px-4 py-2 rounded-full">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/6281234567890" target="_blank" class="fixed bottom-24 right-5 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 z-50">
+    💬 Chat Admin
+  </a>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-200 text-center py-8">
+    <p>© 2025 Donasi Peduli | All Rights Reserved</p>
+  </footer>
+
+  <!-- Bottom Navigation (Mobile Only) -->
+  <nav class="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 shadow-inner border-t z-50 md:hidden">
+    <div class="flex justify-around py-3 text-gray-600 dark:text-gray-200">
+      <a href="#" class="flex flex-col items-center hover:text-pink-600 transition">
+        <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7m-9 2v8m0-8H5a2 2 0 00-2 2v6h6v-8z" />
+        </svg>
+        <span class="text-sm">Home</span>
+      </a>
+      <a href="#tentang" class="flex flex-col items-center hover:text-pink-600 transition">
+        <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A5.002 5.002 0 0015 13V7a5 5 0 10-10 0v6a5.002 5.002 0 001.879 3.804z" />
+        </svg>
+        <span class="text-sm">Tentang</span>
+      </a>
+      <a href="#donasi" class="flex flex-col items-center hover:text-pink-600 transition">
+        <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c.628-2.258 2.36-4 4.5-4s3.872 1.742 4.5 4c.628 2.258-.224 4.77-2 6.5-1.776 1.73-4.5 3-7 3s-5.224-1.27-7-3c-1.776-1.73-2.628-4.242-2-6.5C3.628 4.742 5.36 3 7.5 3s3.872 1.742 4.5 4z" />
+        </svg>
+        <span class="text-sm">Donasi</span>
+      </a>
+    </div>
+  </nav>
+
+  <script>
+    AOS.init();
+
+    // Dark Mode Toggle
+    function toggleDarkMode() {
+      document.documentElement.classList.toggle('dark');
+    }
+
+    // Progress Scroll Bar
+    window.onscroll = function () {
+      let winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      let scrolled = (winScroll / height) * 100;
+      document.getElementById("progressBar").style.width = scrolled + "%";
+    };
+  </script>
+  <script>
+    // Auto Slider Testimoni
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.testimonial');
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('hidden', i !== index);
+      });
+    }
+    function nextSlide() {
+      slideIndex = (slideIndex + 1) % slides.length;
+      showSlide(slideIndex);
+    }
+    function prevSlide() {
+      slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+      showSlide(slideIndex);
+    }
+    // Auto Slide every 5s
+    setInterval(nextSlide, 5000);
+    showSlide(slideIndex);
+  </script>
+
+  <script>
+    // Simulasi progress (bisa dari API)
+    let target = 50000000;
+    let collected = 17500000; // contoh nominal terkumpul
+    const progressBar = document.getElementById('progressBar');
+    const collectedText = document.getElementById('collected');
+    let progress = Math.floor((collected / target) * 100);
+    progressBar.style.width = progress + '%';
+    progressBar.textContent = progress + '%';
+    collectedText.textContent = 'Rp ' + collected.toLocaleString('id-ID');
+
+    // Countdown Timer
+    const countdownEl = document.getElementById('countdown');
+    const targetDate = new Date("2025-05-01 23:59:59").getTime(); // set deadline donasi
+
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownEl.textContent = `${days} Hari ${hours}:${minutes}:${seconds}`;
+
+      if (distance < 0) {
+        clearInterval(timer);
+        countdownEl.textContent = "Waktu Habis!";
+      }
+    }, 1000);
+  </script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').then(() => {
+        console.log('Service Worker Registered');
+      });
+    }
+  </script>
+  
+</body>
+
+</html>

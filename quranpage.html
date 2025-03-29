@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al-Quran Digital</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .highlight {
+            background-color: #ffeb3b;
+        }
+        #search-input {
+            color: black;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <header class="bg-green-600 p-4 text-white">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-semibold">Al-Quran Digital</h1>
+            <input type="text" id="search-input" placeholder="Cari surat..." class="p-2 rounded w-full max-w-xs" oninput="filterSurah()">
+        </div>
+    </header>
+
+    <main class="container mx-auto my-8 p-4">
+        <div class="flex flex-col lg:flex-row">
+            <aside class="w-full lg:w-1/4 bg-white shadow-lg p-4 rounded mb-4 lg:mb-0 lg:mr-4">
+                <h2 class="text-lg font-semibold mb-4">Daftar Surat</h2>
+                <ul id="surah-list" class="space-y-2"></ul>
+            </aside>
+            <section id="surah-content" class="w-full lg:w-3/4 bg-white shadow-lg p-4 rounded">
+                <h2 class="text-lg font-semibold">Pilih Surat untuk melihat isinya</h2>
+            </section>
+        </div>
+    </main>
+
+    <div id="modal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 hidden">
+        <div class="bg-white w-11/12 max-w-2xl rounded-lg shadow-lg overflow-y-auto p-6">
+            <div class="flex justify-between items-center border-b pb-2">
+                <h2 id="modal-title" class="text-lg font-semibold">Ayat Al-Quran</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700">&times;</button>
+            </div>
+            <div id="modal-content" class="mt-4 space-y-4"></div>
+        </div>
+    </div>
+
+    <footer class="bg-gray-200 p-4 text-center">
+        <p class="text-sm">Sumber API dari <a href="https://github.com/gadingnst/quran-api" class="text-blue-600" target="_blank">Gading Dev</a></p>
+    </footer>
+
+    <script>
+        const API_BASE_URL = 'https://api.quran.gading.dev';
+        let allSurah = [];
+        let currentSurah = null;
+
+        function openModal() {
+            document.getElementById('modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+        }
+
+        async function fetchSurah(surahNumber) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/surah/${surahNumber}`);
+                const result = await response.json();
+
+                if (result.code === 200 && result.status === "OK.") {
+                    currentSurah = result.data;
+                    const isSmallScreen = window.innerWidth <= 768;
+
+                    if (isSmallScreen) {
+                        document.getElementById('modal-title').textContent = `${currentSurah.name.transliteration.id} - ${currentSurah.name.translation.id}`;
+                        displayVersesInModal(currentSurah.verses);
+                        openModal();
+                    } else {
+                        document.getElementById('surah-content').innerHTML = `<h2 class="text-xl font-semibold mb-4">${currentSurah.name.transliteration.id} - ${currentSurah.name.translation.id}</h2>`;
+                        displayVerses(currentSurah.verses);
+                    }
+                } else {
+                    console.error('Error fetching Surah:', result.message);
+                    alert('Failed to fetch Surah details. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error fetching Surah:', error);
+                alert('An error occurred while fetching Surah details. Please check your connection and try again.');
+            }
+        }
+
+        function displayVersesInModal(verses) {
+            const modalContent = document.getElementById('modal-content');
+            modalContent.innerHTML = '';
+            verses.forEach(ayah => {
+                modalContent.innerHTML += `<div class="p-4 bg-gray-100 rounded shadow-sm mb-2">
+                                                <p class="text-right font-semibold text-xl mb-2">${ayah.number.inSurah}. ${ayah.text.arab}</p>
+                                                <p class="text-sm text-gray-600">${ayah.translation.id}</p>
+                                            </div>`;
+            });
+        }
+
+        function displayVerses(verses) {
+            const surahContent = document.getElementById('surah-content');
+            surahContent.innerHTML = `<div class="space-y-4"></div>`;
+            verses.forEach(ayah => {
+                surahContent.innerHTML += `<div class="p-4 bg-gray-100 rounded shadow-sm mb-2">
+                                                <p class="text-right font-semibold text-xl mb-2">${ayah.number.inSurah}. ${ayah.text.arab}</p>
+                                                <p class="text-sm text-gray-600">${ayah.translation.id}</p>
+                                            </div>`;
+            });
+        }
+
+        async function fetchSurahList() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/surah`);
+                const result = await response.json();
+
+                if (result.code === 200 && result.status === "OK.") {
+                    allSurah = result.data;
+                    displaySurahList(allSurah);
+                } else {
+                    console.error('Error fetching Surah list:', result.message);
+                }
+            } catch (error) {
+                console.error('Error fetching Surah list:', error);
+            }
+        }
+
+        function displaySurahList(surahList) {
+            const surahListContainer = document.getElementById('surah-list');
+            surahListContainer.innerHTML = '';
+
+            surahList.forEach(surah => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${surah.number}. ${surah.name.transliteration.id}`;
+                listItem.className = 'cursor-pointer hover:bg-gray-100 p-2 rounded';
+                listItem.onclick = () => fetchSurah(surah.number);
+                surahListContainer.appendChild(listItem);
+            });
+        }
+
+        function filterSurah() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const filteredSurah = allSurah.filter(surah =>
+                surah.name.transliteration.id.toLowerCase().includes(query) ||
+                surah.name.translation.id.toLowerCase().includes(query)
+            );
+            displaySurahList(filteredSurah);
+        }
+
+        fetchSurahList();
+    </script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Step Form with Step Indicators</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+        .form-step {
+            display: none;
+        }
+        .form-step.active {
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .progress-step {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            background-color: #ddd;
+            margin: 0 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            color: #555;
+        }
+        .progress-step.active {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+        }
+        .form-navigation button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-navigation button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <div class="progress-bar">
+        <div class="progress-step active" data-step="1">Informasi Umum</div>
+        <div class="progress-step" data-step="2">Dokumen Pendukung</div>
+        <div class="progress-step" data-step="3">Informasi Keuangan</div>
+        <div class="progress-step" data-step="4">Validasi & Status</div>
+    </div>
+
+    <form id="multiStepForm">
+        <div class="form-step active" data-step="1">
+            <div class="form-group">
+                <label for="no_pendaftaran_ubar">No Pendaftaran</label>
+                <input type="text" id="no_pendaftaran_ubar" name="no_pendaftaran_ubar">
+            </div>
+            <div class="form-group">
+                <label for="nama_ubar">Nama</label>
+                <input type="text" id="nama_ubar" name="nama_ubar">
+            </div>
+            <!-- Tambahkan field lainnya untuk section 1 -->
+        </div>
+
+        <div class="form-step" data-step="2">
+            <div class="form-group">
+                <label for="surat_permohonan_pub">Surat Permohonan</label>
+                <input type="file" id="surat_permohonan_pub" name="surat_permohonan_pub">
+            </div>
+            <div class="form-group">
+                <label for="ktp_direktur">KTP Direktur</label>
+                <input type="file" id="ktp_direktur" name="ktp_direktur">
+            </div>
+            <!-- Tambahkan field lainnya untuk section 2 -->
+        </div>
+
+        <div class="form-step" data-step="3">
+            <div class="form-group">
+                <label for="no_pokok_wajib_pajak">NPWP</label>
+                <input type="text" id="no_pokok_wajib_pajak" name="no_pokok_wajib_pajak">
+            </div>
+            <div class="form-group">
+                <label for="bukti_setor_pajak">Bukti Setor Pajak</label>
+                <input type="file" id="bukti_setor_pajak" name="bukti_setor_pajak">
+            </div>
+            <!-- Tambahkan field lainnya untuk section 3 -->
+        </div>
+
+        <div class="form-step" data-step="4">
+            <div class="form-group">
+                <label for="status_aksi_ubar">Status Aksi</label>
+                <select id="status_aksi_ubar" name="status_aksi_ubar">
+                    <option value="pending">Pending</option>
+                    <option value="approved">Approved</option>
+                    <option value="rejected">Rejected</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="catatan_ubar">Catatan</label>
+                <textarea id="catatan_ubar" name="catatan_ubar"></textarea>
+            </div>
+            <!-- Tambahkan field lainnya untuk section 4 -->
+        </div>
+
+        <div class="form-navigation">
+            <button type="button" id="prevBtn" disabled>Previous</button>
+            <button type="button" id="nextBtn">Next</button>
+            <button type="submit" id="submitBtn" style="display: none;">Submit</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    let currentStep = 1;
+    const totalSteps = 4;
+
+    function updateProgressBar() {
+        document.querySelectorAll('.progress-step').forEach((step, index) => {
+            if (index + 1 === currentStep) {
+                step.classList.add('active');
+            } else {
+                step.classList.remove('active');
+            }
+        });
+    }
+
+    function updateButtons() {
+        document.getElementById('prevBtn').disabled = currentStep === 1;
+        document.getElementById('nextBtn').style.display = currentStep === totalSteps ? 'none' : 'inline-block';
+        document.getElementById('submitBtn').style.display = currentStep === totalSteps ? 'inline-block' : 'none';
+    }
+
+    function showStep(step) {
+        document.querySelectorAll('.form-step').forEach(formStep => {
+            formStep.classList.remove('active');
+        });
+        document.querySelector(`.form-step[data-step="${step}"]`).classList.add('active');
+    }
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+        if (currentStep < totalSteps) {
+            currentStep++;
+            showStep(currentStep);
+            updateProgressBar();
+            updateButtons();
+        }
+    });
+
+    document.getElementById('prevBtn').addEventListener('click', () => {
+        if (currentStep > 1) {
+            currentStep--;
+            showStep(currentStep);
+            updateProgressBar();
+            updateButtons();
+        }
+    });
+
+    document.getElementById('multiStepForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Form submitted successfully!');
+        // Handle form submission logic here
+    });
+
+    updateProgressBar();
+    updateButtons();
+</script>
+
+</body>
+</html>

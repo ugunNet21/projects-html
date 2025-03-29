@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Step Form</title>
+    <style>
+    /* General Styles */
+h1 {
+    text-align: center;
+}
+
+h2 {
+    margin: 0;
+}
+
+#multi-step-form-container {
+    margin-top: 5rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pl-0 {
+    padding-left: 0;
+}
+
+.button {
+    padding: 0.7rem 1.5rem;
+    border: 1px solid #4361ee;
+    background-color: #4361ee;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-btn {
+    border: 1px solid #0e9594;
+    background-color: #0e9594;
+}
+
+.mt-3 {
+    margin-top: 2rem;
+}
+
+.d-none {
+    display: none;
+}
+
+.form-step {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 3rem;
+}
+
+.font-normal {
+    font-weight: normal;
+}
+
+/* Form Stepper Styles */
+ul.form-stepper {
+    counter-reset: section;
+    margin-bottom: 3rem;
+}
+
+ul.form-stepper .form-stepper-circle {
+    position: relative;
+}
+
+ul.form-stepper .form-stepper-circle span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.form-stepper-horizontal {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+ul.form-stepper > li:not(:last-of-type) {
+    margin-bottom: 0.625rem;
+    transition: margin-bottom 0.4s;
+}
+
+.form-stepper-horizontal > li:not(:last-of-type) {
+    margin-bottom: 0 !important;
+}
+
+.form-stepper-horizontal li {
+    position: relative;
+    display: flex;
+    flex: 1;
+    align-items: start;
+    transition: 0.5s;
+}
+
+.form-stepper-horizontal li:not(:last-child):after {
+    position: relative;
+    flex: 1;
+    height: 1px;
+    content: "";
+    top: 32%;
+}
+
+.form-stepper-horizontal li:after {
+    background-color: #dee2e6;
+}
+
+.form-stepper-horizontal li.form-stepper-completed:after {
+    background-color: #4da3ff;
+}
+
+.form-stepper-horizontal li:last-child {
+    flex: unset;
+}
+
+ul.form-stepper li a .form-stepper-circle {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin-right: 0;
+    line-height: 1.7rem;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.38);
+    border-radius: 50%;
+}
+
+.form-stepper .form-stepper-active .form-stepper-circle {
+    background-color: #4361ee !important;
+    color: #fff;
+}
+
+.form-stepper .form-stepper-active .label {
+    color: #4361ee !important;
+}
+
+.form-stepper .form-stepper-unfinished .form-stepper-circle {
+    background-color: #f8f7ff;
+}
+
+.form-stepper .form-stepper-completed .form-stepper-circle {
+    background-color: #0e9594 !important;
+    color: #fff;
+}
+
+.form-stepper .form-stepper-completed .label {
+    color: #0e9594 !important;
+}
+
+.form-stepper .label {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+.form-stepper a {
+    cursor: default;
+}
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Create a Multi-Step Form</h1>
+        <div id="multi-step-form-container">
+            <!-- Form Steps / Progress Bar -->
+            <ul class="form-stepper form-stepper-horizontal text-center mx-auto pl-0">
+                <li class="form-stepper-active text-center form-stepper-list" step="1">
+                    <a class="mx-2">
+                        <span class="form-stepper-circle"><span>1</span></span>
+                        <div class="label">Account Basic Details</div>
+                    </a>
+                </li>
+                <li class="form-stepper-unfinished text-center form-stepper-list" step="2">
+                    <a class="mx-2">
+                        <span class="form-stepper-circle text-muted"><span>2</span></span>
+                        <div class="label text-muted">Social Profiles</div>
+                    </a>
+                </li>
+                <li class="form-stepper-unfinished text-center form-stepper-list" step="3">
+                    <a class="mx-2">
+                        <span class="form-stepper-circle text-muted"><span>3</span></span>
+                        <div class="label text-muted">Personal Details</div>
+                    </a>
+                </li>
+            </ul>
+            <!-- Step Wise Form Content -->
+            <form id="userAccountSetupForm" name="userAccountSetupForm" enctype="multipart/form-data" method="POST">
+                <!-- Step 1 Content -->
+                <section id="step-1" class="form-step">
+                    <h2 class="font-normal">Account Basic Details</h2>
+                    <div class="mt-3">
+                        Step 1 input fields go here...
+                    </div>
+                    <div class="mt-3">
+                        <button class="button btn-navigate-form-step" type="button" step_number="2">Next</button>
+                    </div>
+                </section>
+                <!-- Step 2 Content -->
+                <section id="step-2" class="form-step d-none">
+                    <h2 class="font-normal">Social Profiles</h2>
+                    <div class="mt-3">
+                        Step 2 input fields go here...
+                    </div>
+                    <div class="mt-3">
+                        <button class="button btn-navigate-form-step" type="button" step_number="1">Prev</button>
+                        <button class="button btn-navigate-form-step" type="button" step_number="3">Next</button>
+                    </div>
+                </section>
+                <!-- Step 3 Content -->
+                <section id="step-3" class="form-step d-none">
+                    <h2 class="font-normal">Personal Details</h2>
+                    <div class="mt-3">
+                        Step 3 input fields go here...
+                    </div>
+                    <div class="mt-3">
+                        <button class="button btn-navigate-form-step" type="button" step_number="2">Prev</button>
+                        <button class="button submit-btn" type="submit">Save</button>
+                    </div>
+                </section>
+            </form>
+        </div>
+    </div>
+    <script>
+    // Function to navigate between form steps
+const navigateToFormStep = (stepNumber) => {
+    // Hide all form steps
+    document.querySelectorAll(".form-step").forEach((formStepElement) => {
+        formStepElement.classList.add("d-none");
+    });
+
+    // Mark all form steps as unfinished
+    document.querySelectorAll(".form-stepper-list").forEach((formStepHeader) => {
+        formStepHeader.classList.add("form-stepper-unfinished");
+        formStepHeader.classList.remove("form-stepper-active", "form-stepper-completed");
+    });
+
+    // Show the current form step
+    document.querySelector(`#step-${stepNumber}`).classList.remove("d-none");
+
+    // Mark the current form step as active
+    const formStepCircle = document.querySelector(`li[step="${stepNumber}"]`);
+    formStepCircle.classList.remove("form-stepper-unfinished", "form-stepper-completed");
+    formStepCircle.classList.add("form-stepper-active");
+
+    // Mark previous steps as completed
+    for (let index = 1; index < stepNumber; index++) {
+        const formStepCircle = document.querySelector(`li[step="${index}"]`);
+        if (formStepCircle) {
+            formStepCircle.classList.remove("form-stepper-unfinished", "form-stepper-active");
+            formStepCircle.classList.add("form-stepper-completed");
+        }
+    }
+};
+
+// Add event listeners to navigation buttons
+document.querySelectorAll(".btn-navigate-form-step").forEach((formNavigationBtn) => {
+    formNavigationBtn.addEventListener("click", () => {
+        const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number"));
+        navigateToFormStep(stepNumber);
+    });
+});
+    </script>
+</body>
+</html>

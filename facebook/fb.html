@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clone Facebook</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+  <!-- Navbar -->
+  <header class="bg-blue-600 text-white shadow-md py-3">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-4">
+      <div class="flex items-center space-x-4">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1024px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook Logo" class="h-8">
+        <input type="text" placeholder="Cari di Facebook" class="px-4 py-2 rounded-full w-80" />
+      </div>
+      <div class="flex space-x-4">
+        <button class="bg-blue-800 text-white px-4 py-2 rounded-full">Masuk</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="flex max-w-7xl mx-auto pt-6">
+    <!-- Sidebar -->
+    <div class="w-1/4">
+      <div class="bg-white shadow-md rounded-lg p-4">
+        <ul>
+          <li class="py-2"><a href="#" class="text-blue-600">Beranda</a></li>
+          <li class="py-2"><a href="#" class="text-blue-600">Teman</a></li>
+          <li class="py-2"><a href="#" class="text-blue-600">Pesan</a></li>
+          <li class="py-2"><a href="#" class="text-blue-600">Notifikasi</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Feed -->
+    <div class="flex-1">
+      <div class="bg-white shadow-md rounded-lg p-4 mb-4">
+        <div class="flex items-center space-x-4">
+          <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Profile" class="h-10 w-10 rounded-full">
+          <input type="text" placeholder="Apa yang kamu pikirkan?" class="flex-1 p-2 rounded-full border border-gray-300" />
+        </div>
+      </div>
+
+      <!-- Post Feed -->
+      <div class="bg-white shadow-md rounded-lg p-4 mb-4">
+        <div class="flex space-x-4">
+          <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Profile" class="h-10 w-10 rounded-full">
+          <div class="flex-1">
+            <p class="font-bold">John Doe</p>
+            <p class="text-gray-500 text-sm">3 jam yang lalu</p>
+            <p class="mt-2">Ini adalah sebuah postingan di feed yang bisa kamu lihat!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Another Post -->
+      <div class="bg-white shadow-md rounded-lg p-4">
+        <div class="flex space-x-4">
+          <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Profile" class="h-10 w-10 rounded-full">
+          <div class="flex-1">
+            <p class="font-bold">Jane Smith</p>
+            <p class="text-gray-500 text-sm">5 jam yang lalu</p>
+            <p class="mt-2">Ini adalah contoh lainnya dari sebuah postingan.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Sidebar -->
+    <div class="w-1/4">
+      <div class="bg-white shadow-md rounded-lg p-4">
+        <p class="font-bold mb-2">Teman yang Online</p>
+        <div class="space-y-2">
+          <div class="flex items-center space-x-2">
+            <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Profile" class="h-8 w-8 rounded-full">
+            <p class="text-sm">Samuel</p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <img src="https://randomuser.me/api/portraits/women/4.jpg" alt="Profile" class="h-8 w-8 rounded-full">
+            <p class="text-sm">Anna</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // JS untuk menambahkan interaktivitas bisa ditambahkan di sini
+  </script>
+</body>
+</html>

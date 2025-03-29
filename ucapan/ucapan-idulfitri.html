@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Hari Raya Idul Fitri 1446 H</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Pacifico&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
+        
+        .fancy-font {
+            font-family: 'Pacifico', cursive;
+        }
+        
+        .lantern {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .stars {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #FFD700;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px rgba(255, 215, 0, 0.7);
+        }
+        
+        .mosque {
+            transition: all 0.5s ease;
+        }
+        
+        .mosque:hover {
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.7));
+        }
+        
+        .firework {
+            position: absolute;
+            opacity: 0;
+        }
+        
+        .rainbow-text {
+            background-image: linear-gradient(to right, #ff8a00, #e52e71, #b36efd, #6ed7f7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: rainbow 3s ease-in-out infinite;
+            background-size: 400% 100%;
+        }
+        
+        @keyframes rainbow {
+            0% { background-position: 0 0; }
+            50% { background-position: 100% 0; }
+            100% { background-position: 0 0; }
+        }
+        
+        .cloud {
+            animation: drift 20s linear infinite;
+        }
+        
+        @keyframes drift {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100vw); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-blue-900 via-purple-800 to-emerald-900">
+    <!-- Stars -->
+    <div id="stars-container"></div>
+    
+    <!-- Clouds -->
+    <div class="cloud absolute top-20 opacity-30">
+        <svg width="180" height="60" viewBox="0 0 180 60" fill="white">
+            <path d="M30,30 Q45,15 60,30 T90,30 T120,30 T150,30 Q165,45 150,60 H60 Q45,45 30,30z" />
+        </svg>
+    </div>
+    
+    <div class="cloud absolute top-40 right-20 opacity-20" style="animation-delay: 5s;">
+        <svg width="140" height="50" viewBox="0 0 140 50" fill="white">
+            <path d="M20,20 Q35,5 50,20 T80,20 T110,20 Q125,35 110,50 H50 Q35,35 20,20z" />
+        </svg>
+    </div>
+    
+    <!-- Fireworks container -->
+    <div id="fireworks-container" class="absolute inset-0 pointer-events-none"></div>
+    
+    <!-- Main Card -->
+    <div class="relative z-10 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-2xl p-8 md:p-12 shadow-2xl max-w-3xl w-full mx-4 transform transition-all duration-700 hover:scale-105 border border-white border-opacity-20">
+        
+        <!-- Lanterns -->
+        <div class="absolute -top-16 -left-8 lantern" style="animation-delay: 0.2s;">
+            <svg width="60" height="80" viewBox="0 0 60 80" fill="none">
+                <path d="M30 10 L40 25 L40 65 L20 65 L20 25 L30 10z" fill="#e52e71" />
+                <path d="M20 25 Q30 35 40 25" stroke="#ffcc00" stroke-width="2" />
+                <path d="M20 35 Q30 45 40 35" stroke="#ffcc00" stroke-width="2" />
+                <path d="M20 45 Q30 55 40 45" stroke="#ffcc00" stroke-width="2" />
+                <path d="M20 55 Q30 65 40 55" stroke="#ffcc00" stroke-width="2" />
+                <rect x="28" y="0" width="4" height="10" fill="#ffcc00" />
+                <rect x="25" y="65" width="10" height="3" fill="#ffcc00" />
+                <rect x="28" y="68" width="4" height="12" fill="#ffcc00" />
+            </svg>
+        </div>
+        
+        <div class="absolute -top-20 right-10 lantern" style="animation-delay: 0.5s;">
+            <svg width="60" height="80" viewBox="0 0 60 80" fill="none">
+                <path d="M30 10 L40 25 L40 65 L20 65 L20 25 L30 10z" fill="#6ed7f7" />
+                <path d="M20 25 Q30 35 40 25" stroke="#ffcc00" stroke-width="2" />
+                <path d="M20 35 Q30 45 40 35" stroke="#ffcc00" stroke-width="2" />
+                <path d="M20 45 Q30 55 40 45" stroke="#ffcc00" stroke-width="2" />
+                <path d="M20 55 Q30 65 40 55" stroke="#ffcc00" stroke-width="2" />
+                <rect x="28" y="0" width="4" height="10" fill="#ffcc00" />
+                <rect x="25" y="65" width="10" height="3" fill="#ffcc00" />
+                <rect x="28" y="68" width="4" height="12" fill="#ffcc00" />
+            </svg>
+        </div>
+        
+        <!-- Mosque Silhouette -->
+        <div class="mosque w-full flex justify-center mb-8">
+            <svg width="200" height="120" viewBox="0 0 200 120" fill="none">
+                <path d="M100 0 L120 20 L120 50 L130 50 L130 70 L120 70 L120 80 L140 80 L140 90 L60 90 L60 80 L80 80 L80 70 L70 70 L70 50 L80 50 L80 20 L100 0z" fill="#FFD700" />
+                <path d="M85 50 L95 50 L95 80 L85 80 L85 50z" fill="rgba(0,0,0,0.2)" />
+                <path d="M105 50 L115 50 L115 80 L105 80 L105 50z" fill="rgba(0,0,0,0.2)" />
+                <path d="M40 90 L160 90 L160 100 L170 100 L170 120 L30 120 L30 100 L40 100 L40 90z" fill="#FFD700" />
+                <circle cx="60" cy="20" r="10" fill="#FFD700" />
+                <circle cx="140" cy="20" r="10" fill="#FFD700" />
+                <circle cx="100" cy="30" r="15" fill="#FFD700" />
+                <path d="M95 0 L105 0 L105 10 L95 10 L95 0z" fill="#FFD700" />
+            </svg>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="text-center">
+            <h1 class="text-2xl md:text-4xl font-bold mb-4 text-white fancy-font rainbow-text" id="mainTitle">Selamat Hari Raya</h1>
+            <h2 class="text-3xl md:text-5xl font-bold mb-6 text-yellow-300" id="idulFitri">Idul Fitri 1446 H</h2>
+            
+            <p class="text-lg md:text-xl text-white opacity-90 mb-8" id="message">
+                Taqabbalallahu minna wa minkum, shiyamana wa shiyamakum.<br>
+                Mohon maaf lahir dan batin.
+            </p>
+            
+            <div class="w-full max-w-md mx-auto h-1 bg-gradient-to-r from-transparent via-yellow-400 to-transparent mb-8"></div>
+            
+            <p class="text-white text-opacity-80 italic" id="translation">
+                May Allah accept (good deeds) from us and from you,<br> 
+                our fasting and your fasting.<br>
+                Please forgive all my mistakes.
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // Create stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars-container');
+            const numberOfStars = 100;
+            
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('stars');
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                star.style.opacity = Math.random();
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // Create fireworks
+        function createFirework() {
+            const fireworksContainer = document.getElementById('fireworks-container');
+            const firework = document.createElement('div');
+            firework.classList.add('firework');
+            
+            // Random position
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * (window.innerHeight / 2);
+            
+            firework.style.left = `${x}px`;
+            firework.style.top = `${y}px`;
+            
+            // Random color
+            const colors = ['#FF5252', '#FFD740', '#64FFDA', '#536DFE', '#FF4081'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Create the firework shape
+            for (let i = 0; i < 12; i++) {
+                const line = document.createElement('div');
+                line.style.position = 'absolute';
+                line.style.width = '2px';
+                line.style.height = `${20 + Math.random() * 30}px`;
+                line.style.background = color;
+                line.style.transformOrigin = 'bottom center';
+                line.style.transform = `rotate(${i * 30}deg)`;
+                firework.appendChild(line);
+            }
+            
+            fireworksContainer.appendChild(firework);
+            
+            // Animate with GSAP
+            gsap.to(firework, {
+                opacity: 1,
+                duration: 0.2,
+                onComplete: () => {
+                    gsap.to(firework.children, {
+                        height: '+=30',
+                        opacity: 0,
+                        duration: 1,
+                        stagger: 0.05,
+                        ease: "power3.out",
+                        onComplete: () => {
+                            firework.remove();
+                        }
+                    });
+                }
+            });
+        }
+        
+        // Initialize animations
+        window.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            
+            // Animate main elements
+            gsap.from('#mainTitle', {opacity: 0, y: 50, duration: 1.5, ease: "elastic.out(1, 0.5)"});
+            gsap.from('#idulFitri', {opacity: 0, scale: 0.5, duration: 1.2, delay: 0.3, ease: "back.out(1.7)"});
+            gsap.from('#message', {opacity: 0, y: 30, duration: 1, delay: 0.7});
+            gsap.from('#translation', {opacity: 0, y: 20, duration: 1, delay: 1});
+            
+            // Launch fireworks periodically
+            setInterval(createFirework, 1000);
+        });
+    </script>
+</body>
+</html>

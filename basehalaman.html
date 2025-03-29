@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Layout Buku Al-Quran</title>
+    <style>
+        .page {
+            transition: opacity 0.5s;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <div class="book w-full max-w-4xl p-6 bg-white shadow-lg rounded-lg">
+        <div class="flex justify-between">
+            <div class="page bg-gray-200 p-6 w-1/2 h-96 rounded-l-lg" id="leftPage">
+                <h1 class="text-xl font-bold">Halaman 1</h1>
+                <p>Ini adalah contoh teks untuk halaman 1.</p>
+            </div>
+            <div class="page bg-gray-300 p-6 w-1/2 h-96 rounded-r-lg" id="rightPage">
+                <h1 class="text-xl font-bold">Halaman 2</h1>
+                <p>Ini adalah contoh teks untuk halaman 2.</p>
+            </div>
+        </div>
+        <div class="flex justify-between mt-4">
+            <button id="prev" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Sebelumnya</button>
+            <button id="next" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Selanjutnya</button>
+        </div>
+    </div>
+
+    <script>
+        const pages = [
+            { left: "Ini adalah contoh teks untuk halaman 1.", right: "Ini adalah contoh teks untuk halaman 2." },
+            { left: "Ini adalah contoh teks untuk halaman 3.", right: "Ini adalah contoh teks untuk halaman 4." },
+            { left: "Ini adalah contoh teks untuk halaman 5.", right: "Ini adalah contoh teks untuk halaman 6." },
+            { left: "Ini adalah contoh teks untuk halaman 7.", right: "Ini adalah contoh teks untuk halaman 8." },
+            { left: "Ini adalah contoh teks untuk halaman 9.", right: "Ini adalah contoh teks untuk halaman 10." },
+        ];
+
+        let currentPage = 0;
+
+        function updatePages() {
+            const leftPage = document.getElementById("leftPage");
+            const rightPage = document.getElementById("rightPage");
+            leftPage.querySelector("p").innerText = pages[currentPage].left;
+            rightPage.querySelector("p").innerText = pages[currentPage].right;
+        }
+
+        document.getElementById('prev').addEventListener('click', () => {
+            if (currentPage > 0) {
+                currentPage--;
+                updatePages();
+            }
+        });
+
+        document.getElementById('next').addEventListener('click', () => {
+            if (currentPage < pages.length - 1) {
+                currentPage++;
+                updatePages();
+            }
+        });
+
+        // Initialize
+        updatePages();
+
+    </script>
+
+</body>
+</html>

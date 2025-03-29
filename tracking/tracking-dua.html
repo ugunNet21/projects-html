@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Tracking Surat Rekomendasi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .tracker {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .node {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .node-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .node-circle.active {
+            background-color: #4caf50;
+            border-color: #4caf50;
+            color: #fff;
+        }
+        .node-label {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+        .line {
+            flex: 1;
+            height: 4px;
+            background-color: #ccc;
+            transition: background-color 0.3s;
+        }
+        .line.active {
+            background-color: #4caf50;
+        }
+        .status {
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .log-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+        .log-table th, .log-table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        .log-table th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <div class="tracker">
+        <div class="node">
+            <div class="node-circle" id="ppks">PPKS</div>
+            <div class="node-label">PPKS</div>
+        </div>
+        <div class="line" id="line-ppks-fo"></div>
+        <div class="node">
+            <div class="node-circle" id="fo">FO Kota</div>
+            <div class="node-label">FO Kota</div>
+        </div>
+        <div class="line" id="line-fo-bo"></div>
+        <div class="node">
+            <div class="node-circle" id="bo">BO Kota</div>
+            <div class="node-label">BO Kota</div>
+        </div>
+        <div class="line" id="line-bo-kabid"></div>
+        <div class="node">
+            <div class="node-circle" id="kabid">Kabid</div>
+            <div class="node-label">Kabid</div>
+        </div>
+    </div>
+    <div class="status" id="status"></div>
+
+    <table class="log-table">
+        <thead>
+            <tr>
+                <th>Pemohon</th>
+                <th>Tujuan (Role)</th>
+                <th>Petugas</th>
+                <th>Catatan</th>
+                <th>Status</th>
+                <th>Updated At</th>
+                <th>Response Time</th>
+            </tr>
+        </thead>
+        <tbody id="log-body">
+            <!-- Log entries will be dynamically added here -->
+        </tbody>
+    </table>
+
+    <script>
+        // Simulate tracking data
+        const trackingData = {
+            current: 'fo', // Example of current role (can be 'ppks', 'fo', 'bo', 'kabid')
+            action: 'kembalikan', // Action: 'teruskan', 'kembalikan', 'tolak', 'selesai'
+            logs: [
+                { pemohon: 'John Doe', tujuan: 'FO Kota', petugas: 'Petugas FO', catatan: 'Proses verifikasi', status: 'Teruskan', updatedAt: '2024-12-17 10:00:00', responseTime: '2h' },
+                { pemohon: 'John Doe', tujuan: 'BO Kota', petugas: 'Petugas BO', catatan: 'Kembalikan untuk revisi', status: 'Kembalikan', updatedAt: '2024-12-17 12:00:00', responseTime: '4h' }
+            ]
+        };
+
+        function updateTracker(data) {
+            const nodes = ['ppks', 'fo', 'bo', 'kabid'];
+            let statusText = '';
+
+            // Reset all nodes and lines
+            nodes.forEach((node, index) => {
+                const nodeElement = document.getElementById(node);
+                const lineElement = document.getElementById(`line-${nodes[index]}-${nodes[index + 1]}`);
+                if (nodeElement) nodeElement.classList.remove('active');
+                if (lineElement) lineElement.classList.remove('active');
+            });
+
+            // Update nodes and lines based on action
+            if (data.action === 'teruskan') {
+                const currentIndex = nodes.indexOf(data.current);
+                for (let i = 0; i <= currentIndex; i++) {
+                    document.getElementById(nodes[i]).classList.add('active');
+                    if (i < currentIndex) {
+                        const line = document.getElementById(`line-${nodes[i]}-${nodes[i + 1]}`);
+                        if (line) line.classList.add('active');
+                    }
+                }
+                statusText = `Case sedang diteruskan dari ${data.current.toUpperCase()}`;
+            } else if (data.action === 'kembalikan') {
+                const currentIndex = nodes.indexOf(data.current);
+                for (let i = 0; i <= currentIndex; i++) {
+                    document.getElementById(nodes[i]).classList.add('active');
+                    if (i < currentIndex) {
+                        const line = document.getElementById(`line-${nodes[i]}-${nodes[i + 1]}`);
+                        if (line) line.classList.add('active');
+                    }
+                }
+                statusText = `Case dikembalikan ke ${nodes[0].toUpperCase()}`;
+            } else if (data.action === 'tolak') {
+                document.getElementById(nodes[0]).classList.add('active');
+                statusText = `Case telah ditolak di ${data.current.toUpperCase()}`;
+            } else if (data.action === 'selesai') {
+                nodes.forEach(node => document.getElementById(node).classList.add('active'));
+                statusText = 'Case selesai';
+            }
+
+            document.getElementById('status').textContent = statusText;
+
+            // Update log table
+            const logBody = document.getElementById('log-body');
+            logBody.innerHTML = '';
+            data.logs.forEach(log => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${log.pemohon}</td>
+                    <td>${log.tujuan}</td>
+                    <td>${log.petugas}</td>
+                    <td>${log.catatan}</td>
+                    <td>${log.status}</td>
+                    <td>${log.updatedAt}</td>
+                    <td>${log.responseTime}</td>
+                `;
+                logBody.appendChild(row);
+            });
+        }
+
+        // Initialize tracker with tracking data
+        updateTracker(trackingData);
+    </script>
+</body>
+</html>
+

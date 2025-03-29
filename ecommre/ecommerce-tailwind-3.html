@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <title>Toko Online</title>
+    <style>
+        /* CSS untuk membuat header tetap di atas */
+        .header-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+        }
+        /* Menambahkan margin untuk konten utama agar tidak tertutup oleh header */
+        body {
+            padding-top: 80px; /* Sesuaikan dengan tinggi header */
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-white shadow header-fixed">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Toko Online</h1>
+            <div class="flex items-center space-x-4">
+                <input type="text" placeholder="Cari produk..." class="border p-2 rounded">
+                <button class="bg-blue-500 text-white py-2 px-4 rounded">Cari</button>
+                <div class="relative">
+                    <button id="cart-button" class="relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2m1 0h11l1.4 7H7M3 3l1.6 2m-1 0h11M7 13h14l-1.5 7H7z" />
+                        </svg>
+                        <span class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs px-1">3</span>
+                    </button>
+                </div>
+                <button id="account-button" class="text-gray-700">Akun</button>
+                <button id="menu-button" class="md:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <nav class="bg-gray-200 hidden md:block" id="navbar">
+            <div class="container mx-auto px-4 py-2 flex space-x-4">
+                <a href="#" class="text-gray-700 hover:text-blue-500">Beranda</a>
+                <a href="#" class="text-gray-700 hover:text-blue-500">Produk</a>
+                <a href="#" class="text-gray-700 hover:text-blue-500">Merek</a>
+                <a href="#" class="text-gray-700 hover:text-blue-500">Kategori</a>
+                <a href="#" class="text-gray-700 hover:text-blue-500">Favorit</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- Carousel -->
+        <div class="relative">
+            <div id="carousel" class="overflow-hidden rounded-lg">
+                <div class="flex transition-transform duration-500" id="carousel-inner">
+                    <div class="flex-none w-full">
+                        <img src="images/banner1.jpg" alt="Banner 1" class="w-full h-64 object-cover rounded-lg">
+                    </div>
+                    <div class="flex-none w-full">
+                        <img src="images/banner2.jpg" alt="Banner 2" class="w-full h-64 object-cover rounded-lg">
+                    </div>
+                    <div class="flex-none w-full">
+                        <img src="images/banner3.jpg" alt="Banner 3" class="w-full h-64 object-cover rounded-lg">
+                    </div>
+                </div>
+            </div>
+            <button id="prev" class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white rounded-full p-2 shadow hover:bg-gray-200">
+                &lt;
+            </button>
+            <button id="next" class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white rounded-full p-2 shadow hover:bg-gray-200">
+                &gt;
+            </button>
+        </div>
+
+        <h2 class="text-xl font-semibold mb-4 mt-8">Produk Populer</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow">
+                <img src="images/produk1.jpg" alt="Produk 1" class="w-full h-48 object-cover rounded">
+                <h3 class="text-lg font-bold mt-2">Nama Produk 1</h3>
+                <p class="text-gray-600">Deskripsi singkat produk 1.</p>
+                <span class="text-blue-500 font-semibold">Rp. 100.000</span>
+                <button class="mt-2 bg-blue-500 text-white py-2 px-4 rounded">Beli Sekarang</button>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow">
+                <img src="images/produk2.jpg" alt="Produk 2" class="w-full h-48 object-cover rounded">
+                <h3 class="text-lg font-bold mt-2">Nama Produk 2</h3>
+                <p class="text-gray-600">Deskripsi singkat produk 2.</p>
+                <span class="text-blue-500 font-semibold">Rp. 200.000</span>
+                <button class="mt-2 bg-blue-500 text-white py-2 px-4 rounded">Beli Sekarang</button>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow">
+                <img src="images/produk3.jpg" alt="Produk 3" class="w-full h-48 object-cover rounded">
+                <h3 class="text-lg font-bold mt-2">Nama Produk 3</h3>
+                <p class="text-gray-600">Deskripsi singkat produk 3.</p>
+                <span class="text-blue-500 font-semibold">Rp. 150.000</span>
+                <button class="mt-2 bg-blue-500 text-white py-2 px-4 rounded">Beli Sekarang</button>
+            </div>
+        </div>
+
+        <div class="mt-8">
+            <h2 class="text-xl font-semibold mb-4">Kategori</h2>
+            <div class="flex space-x-4">
+                <button class="bg-blue-500 text-white py-2 px-4 rounded">Elektronik</button>
+                <button class="bg-blue-500 text-white py-2 px-4 rounded">Fashion</button>
+                <button class="bg-blue-500 text-white py-2 px-4 rounded">Kesehatan</button>
+                <button class="bg-blue-500 text-white py-2 px-4 rounded">Rumah</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white py-4 mt-8">
+        <div class="container mx-auto text-center">
+            <p class="text-gray-600">© 2024 Toko Online. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentSlide = 0;
+
+        const carouselInner = document.getElementById('carousel-inner');
+        const totalSlides = carouselInner.children.length;
+
+        document.getElementById('next').onclick = function() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        };
+
+        document.getElementById('prev').onclick = function() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        };
+
+        function updateCarousel() {
+            const offset = -currentSlide * 100; // -100% for each slide
+            carouselInner.style.transform = `translateX(${offset}%)`;
+        }
+
+        // Toggle navigation menu on mobile
+        document.getElementById('menu-button').onclick = function() {
+            const navbar = document.getElementById('navbar');
+            navbar.classList.toggle('hidden');
+        };
+    </script>
+</body>
+</html>

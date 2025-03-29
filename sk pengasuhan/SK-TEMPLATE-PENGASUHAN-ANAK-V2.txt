@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keputusan Kepala Dinas Sosial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 22px;
+            text-decoration: underline;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .content h2 {
+            font-size: 20px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .content table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+
+        .content table td {
+            padding: 10px;
+            vertical-align: top;
+        }
+
+        .content .label {
+            width: 30%;
+            font-weight: bold;
+        }
+
+        .content .content-detail {
+            width: 70%;
+        }
+
+        .content ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        .content .h-kabkot {
+            line-height: 2pt;
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .footer h4 {
+            margin-top: 20px;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .footer ol {
+            padding-left: 20px;
+            text-align: left;
+        }
+
+        .footer p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        footer img {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .signature {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .signature img {
+            width: 360px;
+            height: 120px;
+        }
+
+        @media print {
+            body {
+                margin: 0;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Gambar Kop Dinas -->
+    <div class="container">
+        <div class="header">
+            <img src="{{ public_path('assets/img/kop_dinas.png') }}" width="700px" alt="Logo Dinas Sosial">
+        </div>
+
+        <!-- Judul Surat -->
+        <div class="header">
+            <h1>KEPUTUSAN KEPALA DINAS SOSIAL</h1>
+            <p>KEPALA DINAS SOSIAL KAB/KOTA ....</p>
+            <p>NOMOR : .....<br> TENTANG<br> PEMBERIAN IZIN PENGASUHAN ANAK OLEH ORANG TUA ASUH (FOSTER CARE) WARGA
+                NEGARA INDONESIA</p>
+        </div>
+
+        <!-- Isi Surat -->
+        <div class="content">
+            <h2>KEPALA DINAS SOSIAL</h2>
+            <h2 class="h-kabkot">KAB/KOTA</h2>
+
+
+            <table>
+                <tr>
+                    <td class="label">Membaca :</td>
+                    <td class="content-detail">Surat permohonan Pengasuhan Anak oleh calon orang tua asuh (foster care)
+                        yang diajukan oleh Lembaga Pengasuhan Anak …………………. Nomor : ……………… tanggal ……………..</td>
+                </tr>
+                <tr>
+                    <td class="label">Menimbang :</td>
+                    <td class="content-detail">
+                        <ul>
+                            <li>a. Bahwa alasan-alasan dan bukti-bukti yang dikemukakan oleh Sdr. ………………………….. sebagai
+                                suami dan ………………………. Sebagai istri, untuk menjadi orang tua asuh dan memberikan
+                                pengasuhan kepada anak WNI, dipandang telah memenuhi syarat-syarat sesuai dengan
+                                peraturan perundang-undangan yang berlaku;</li>
+                            <li>b. Bahwa berdasarkan peraturan dan perundang-undangan yang berlaku, pemberian izin
+                                pengasuhan anak diberikan apabila calon orang tua asuh mengikuti seluruh prosedur dan
+                                telah sampai pada kesesuaian antara anak asuh dan orang tua asuh pada proses penempatan
+                                anak asuh;</li>
+                            <li>c. Bahwa sehubungan dengan hal tersebut di atas di pandang perlu mengeluarkan Keputusan
+                                Kepala Dinas Sosial Kab/Kota tentang Pemberian Izin Pengasuhan Anak Oleh Orang Tua Asuh
+                                (Foster Care) Warga Negara Indonesia.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">Mengingat :</td>
+                    <td class="content-detail">
+                        <ul>
+                            <li>1. Undang-Undang RI. Nomor 4 Tahun 1979 Tentang Kesejahteraan Anak.</li>
+                            <li>2. Undang-Undang Nomor 11 Tahun 2009 Tentang Kesejahteraan Sosial.</li>
+                            <li>3. Undang-Undang RI. Nomor 23 Tahun 2002 tentang Perlindungan Anak.</li>
+                            <li>4. Undang-undang Nomor 14 Tahun 2008 tentang Keterbukaan informasi publik.</li>
+                            <li>5. Undang-undang Nomor 25 Tahun 2009 tentang Pelayanan Publik.</li>
+                            <li>6. Undang Undang Nomor 23 Tahun 2014 Tentang Pemerintahan Daerah.</li>
+                            <li>7. Peraturan Pemerintah Nomor 2 Tahun 1988 tentang Usaha Kesejahteraan Anak bagi Anak
+                                yang Mempunyai Masalah.</li>
+                            <li>8. Peraturan Pemerintah Nomor 44 Tahun 2017 Tentang Pelaksanaan Pengasuhan Anak.</li>
+                            <li>9. Keputusan Menteri Sosial Nomor 13 Tahun 1981 Tentang Organisasi Sosial yang dapat
+                                menyelenggarakan Usaha Penyantunan Anak Terlantar.</li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+
+            <h3>MEMUTUSKAN</h3>
+            <p>Menetapkan : KEPUTUSAN KEPALA DINAS SOSIAL KAB/KOTA ….. TENTANG PEMBERIAN IZIN PENGASUHAN ANAK OLEH ORANG
+                TUA ASUH (FOSTER CARE) WARGA NEGARA INDONESIA.</p>
+
+            <table>
+                <tr>
+                    <td class="label">KESATU:</td>
+                    <td class="content-detail">
+                        Memberikan izin kepada ……………….…………… sebagai suami Warga Negara …..………… dan ………..…………….. sebagai
+                        istri Warga Negara ……………………… dengan alamat di ……………. ………………………………………………………………………………… untuk
+                        mengasuh seorang anak Warga Negara Indonesia bernama ……………………………. Lahir di …………. Tanggal ……
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">KEDUA:</td>
+                    <td class="content-detail">
+                        Kewajiban dan tanggung jawab Orang Tua Asuh sebagaimana dimaksud dalam DIKTUM KESATU yaitu:
+                        <ul>
+                            <li>1. Mengasuh, memelihara, mendidik, dan melindungi anak sesuai dengan harkat dan martabat
+                                kemanusiaan;</li>
+                            <li>2. Menumbuhkembangkan anak secara optimal sesuai dengan kemampuan, bakat dan minatnya;
+                            </li>
+                            <li>3. Mencegah terjadinya perkawinan pada usia Anak;</li>
+                            <li>4. Memberikan pendidikan karakter dan penanaman nilai budi pekerti pada Anak.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">KEEMPAT:</td>
+                    <td class="content-detail">
+                        Keputusan ini berlaku sejak tanggal ……………. Dan berlaku selama 1 (satu) tahun terhitung mulai
+                        tanggal ditetapkan, dengan ketentuan apabila dikemudian hari terdapat kekeliruan dalam
+                        penetapannya, akan diperbaiki sebagaimana mestinya.
+                    </td>
+                </tr>
+            </table>
+
+            <div class="footer">
+                <p>Ditetapkan di: ......<br>Pada tanggal: ......</p>
+                <p>KEPALA DINAS SOSIAL KAB/KOTA .......</p>
+                <p>Nama: __________________<br>NIP: __________________</p>
+
+                <h4>Salinan Surat Keputusan ini disampaikan kepada:</h4>
+                <ol>
+                    <li>Kementerian Sosial RI di Jakarta</li>
+                    <li>Gubernur Provinsi ……………. di…………..</li>
+                    <li>Bupati/Walikota Kab/Kota …………….. di …………….</li>
+                    <li>Direktur Jenderal Rehabilitasi Sosial Kementerian Sosial RI di Jakarta</li>
+                    <li>Ketua Lembaga Pengasuhan Anak …………… di …………. </li>
+                    <li>Sdr ……………………… (suami) dan ……………………. (istri) di …………………. </li>
+                </ol>
+            </div>
+
+        </div>
+
+        <!-- Tanda Tangan dan Footer -->
+        <div class="signature">
+            <img src="{{ public_path('assets/img/ttd_pa_kadis.png') }}" alt="Tanda Tangan Kepala Dinas Sosial">
+        </div>
+        <footer>
+            <img src="{{ public_path('assets/img/Visualisasi_TTE_Dinsos/footer_tte_v2.png') }}" alt="Footer" />
+        </footer>
+    </div>
+
+</body>
+
+</html>
