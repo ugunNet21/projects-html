@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengingat Istirahat 20-20-20</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Pengingat Istirahat 20-20-20</h1>
+        <p>Berhenti sejenak untuk melihat objek sejauh 6 meter selama 20 detik setiap beberapa menit.</p>
+
+        <div class="settings">
+            <label for="interval">Pilih Interval Pengingat:</label>
+            <select id="interval">
+                <option value="10">10 menit</option>
+                <option value="20" selected>20 menit</option>
+                <option value="30">30 menit</option>
+            </select>
+            <button id="addCustomInterval">Tambah Custom</button>
+        </div>
+
+        <div class="custom-interval hidden">
+            <label for="customValue">Masukkan Interval Baru (dalam menit):</label>
+            <input type="number" id="customValue" min="1" max="120" placeholder="Masukkan angka">
+            <button id="saveCustomInterval">Simpan</button>
+        </div>
+
+        <button id="startButton">Mulai Pengingat</button>
+        <button id="resetButton" class="hidden">Reset</button>
+
+        <div id="timer" class="hidden">
+            <p>Waktu tersisa: <span id="timeLeft">00:00</span></p>
+        </div>
+
+        <div id="message" class="hidden">
+            <p>Waktunya beristirahat! Lihat objek yang berjarak sekitar 6 meter selama 20 detik.</p>
+            <button id="dismissButton">Tutup</button>
+        </div>
+    </div>
+
+    <audio id="alertSound" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
