@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Clone</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+    <!-- Header/Navbar -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center p-2">
+            <!-- Left: Logo & Search -->
+            <div class="flex items-center">
+                <div class="text-blue-600 text-4xl font-bold mr-2">f</div>
+                <div class="relative mx-2">
+                    <input type="text" placeholder="Search Facebook" class="bg-gray-100 p-2 pl-8 rounded-full text-sm w-64">
+                    <i class="fas fa-search absolute left-3 top-3 text-gray-500"></i>
+                </div>
+            </div>
+            
+            <!-- Middle: Navigation -->
+            <nav class="hidden md:flex flex-1 justify-center">
+                <div class="flex space-x-2">
+                    <a href="#" class="px-10 py-2 text-blue-500 border-b-4 border-blue-500"><i class="fas fa-home text-2xl"></i></a>
+                    <a href="#" class="px-10 py-2 text-gray-500 hover:bg-gray-100 rounded-lg"><i class="fas fa-tv text-2xl"></i></a>
+                    <a href="#" class="px-10 py-2 text-gray-500 hover:bg-gray-100 rounded-lg"><i class="fas fa-store text-2xl"></i></a>
+                    <a href="#" class="px-10 py-2 text-gray-500 hover:bg-gray-100 rounded-lg"><i class="fas fa-users text-2xl"></i></a>
+                    <a href="#" class="px-10 py-2 text-gray-500 hover:bg-gray-100 rounded-lg"><i class="fas fa-puzzle-piece text-2xl"></i></a>
+                </div>
+            </nav>
+            
+            <!-- Right: User Controls -->
+            <div class="flex items-center space-x-2">
+                <div class="bg-gray-200 rounded-full p-2 cursor-pointer hover:bg-gray-300">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="bg-gray-200 rounded-full p-2 cursor-pointer hover:bg-gray-300">
+                    <i class="fab fa-facebook-messenger"></i>
+                </div>
+                <div class="bg-gray-200 rounded-full p-2 cursor-pointer hover:bg-gray-300">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="bg-gray-200 rounded-full h-10 w-10 cursor-pointer hover:bg-gray-300 flex items-center justify-center">
+                    <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Profile" class="rounded-full h-8 w-8">
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="container mx-auto flex pt-6">
+        <!-- Left Sidebar -->
+        <div class="w-1/4 px-4 hidden md:block">
+            <div class="space-y-2">
+                <a href="#" class="flex items-center p-2 hover:bg-gray-200 rounded-lg">
+                    <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Profile" class="rounded-full h-8 w-8 mr-2">
+                    <span>John Doe</span>
+                </a>
+                <a href="#" class="flex items-center p-2 hover:bg-gray-200 rounded-lg">
+                    <div class="bg-blue-500 text-white rounded-full h-8 w-8 flex items-center justify-center mr-2">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <span>Friends</span>
+                </a>
+                <a href="#" class="flex items-center p-2 hover:bg-gray-200 rounded-lg">
+                    <div class="bg-blue-500 text-white rounded-full h-8 w-8 flex items-center justify-center mr-2">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <span>Groups</span>
+                </a>
+                <a href="#" class="flex items-center p-2 hover:bg-gray-200 rounded-lg">
+                    <div class="bg-blue-500 text-white rounded-full h-8 w-8 flex items-center justify-center mr-2">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <span>Marketplace</span>
+                </a>
+                <a href="#" class="flex items-center p-2 hover:bg-gray-200 rounded-lg">
+                    <div class="bg-blue-500 text-white rounded-full h-8 w-8 flex items-center justify-center mr-2">
+                        <i class="fas fa-tv"></i>
+                    </div>
+                    <span>Watch</span>
+                </a>
+                <a href="#" class="flex items-center p-2 hover:bg-gray-200 rounded-lg">
+                    <div class="bg-blue-500 text-white rounded-full h-8 w-8 flex items-center justify-center mr-2">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <span>Memories</span>
+                </a>
+                <hr class="my-2">
+                <h3 class="font-semibold text-gray-500 p-2">Your Shortcuts</h3>
+                <a href="#" class="flex items-center p-2 hover:bg-gray-200 rounded-lg">
+                    <div class="bg-gray-300 rounded h-8 w-8 flex items-center justify-center mr-2">
+                        <i class="fas fa-gamepad text-blue-500"></i>
+                    </div>
+                    <span>Gaming</span>
+                </a>
+                <a href="#" class="flex items-center p-2 hover:bg-gray-200 rounded-lg">
+                    <div class="bg-gray-300 rounded h-8 w-8 flex items-center justify-center mr-2">
+                        <i class="fas fa-flag text-orange-500"></i>
+                    </div>
+                    <span>Pages</span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Main Feed -->
+        <div class="w-full md:w-2/4 px-4">
+            <!-- Stories -->
+            <div class="bg-white rounded-lg shadow p-4 mb-4">
+                <div class="flex space-x-2 overflow-x-auto pb-2">
+                    <div class="flex-shrink-0 relative cursor-pointer">
+                        <div class="h-48 w-32 bg-gray-300 rounded-lg overflow-hidden relative">
+                            <img src="https://picsum.photos/128/192?random=1" alt="Story" class="h-full w-full object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black to-transparent">
+                                <p class="text-white text-xs">Create Story</p>
+                            </div>
+                            <div class="absolute top-4 left-4 bg-blue-500 text-white rounded-full h-8 w-8 flex items-center justify-center border-4 border-white">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-shrink-0 relative cursor-pointer">
+                        <div class="h-48 w-32 bg-gray-300 rounded-lg overflow-hidden">
+                            <img src="https://picsum.photos/128/192?random=2" alt="Story" class="h-full w-full object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black to-transparent">
+                                <p class="text-white text-xs">Sarah Johnson</p>
+                            </div>
+                            <div class="absolute top-4 left-4">
+                                <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="User" class="rounded-full h-8 w-8 border-4 border-blue-500">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-shrink-0 relative cursor-pointer">
+                        <div class="h-48 w-32 bg-gray-300 rounded-lg overflow-hidden">
+                            <img src="https://picsum.photos/128/192?random=3" alt="Story" class="h-full w-full object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black to-transparent">
+                                <p class="text-white text-xs">Mike Smith</p>
+                            </div>
+                            <div class="absolute top-4 left-4">
+                                <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="User" class="rounded-full h-8 w-8 border-4 border-blue-500">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-shrink-0 relative cursor-pointer">
+                        <div class="h-48 w-32 bg-gray-300 rounded-lg overflow-hidden">
+                            <img src="https://picsum.photos/128/192?random=4" alt="Story" class="h-full w-full object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black to-transparent">
+                                <p class="text-white text-xs">Jessica Lee</p>
+                            </div>
+                            <div class="absolute top-4 left-4">
+                                <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="User" class="rounded-full h-8 w-8 border-4 border-blue-500">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Create Post -->
+            <div class="bg-white rounded-lg shadow p-4 mb-4">
+                <div class="flex items-center space-x-2">
+                    <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Profile" class="rounded-full h-10 w-10">
+                    <input type="text" placeholder="What's on your mind, John?" class="bg-gray-100 rounded-full flex-1 p-2 pl-4">
+                </div>
+                <hr class="my-3">
+                <div class="flex justify-between">
+                    <button class="flex items-center justify-center flex-1 p-2 hover:bg-gray-100 rounded-lg">
+                        <i class="fas fa-video text-red-500 mr-2"></i>
+                        <span>Live Video</span>
+                    </button>
+                    <button class="flex items-center justify-center flex-1 p-2 hover:bg-gray-100 rounded-lg">
+                        <i class="fas fa-images text-green-500 mr-2"></i>
+                        <span>Photo/Video</span>
+                    </button>
+                    <button class="flex items-center justify-center flex-1 p-2 hover:bg-gray-100 rounded-lg">
+                        <i class="fas fa-smile text-yellow-500 mr-2"></i>
+                        <span>Feeling/Activity</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Posts -->
+            <div class="space-y-4">
+                <!-- Post 1 -->
+                <div class="bg-white rounded-lg shadow">
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-2">
+                                <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="User" class="rounded-full h-10 w-10">
+                                <div>
+                                    <p class="font-semibold">Sarah Johnson</p>
+                                    <p class="text-xs text-gray-500">2 hours ago</p>
+                                </div>
+                            </div>
+                            <button class="text-gray-500">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+                        <p class="mb-4">Just finished a great book today! Highly recommend "The Silent Patient" if you're into psychological thrillers. Anyone else read it? 📚</p>
+                        <img src="https://picsum.photos/600/400?random=5" alt="Post image" class="w-full h-64 object-cover rounded-lg">
+                    </div>
+                    <div class="p-4 border-t border-gray-100">
+                        <div class="flex justify-between mb-4">
+                            <div class="flex items-center space-x-1">
+                                <div class="bg-blue-500 text-white rounded-full h-5 w-5 flex items-center justify-center">
+                                    <i class="fas fa-thumbs-up text-xs"></i>
+                                </div>
+                                <p class="text-gray-500 text-sm">142</p>
+                            </div>
+                            <div class="flex space-x-4">
+                                <p class="text-gray-500 text-sm">24 Comments</p>
+                                <p class="text-gray-500 text-sm">3 Shares</p>
+                            </div>
+                        </div>
+                        <hr class="my-2">
+                        <div class="flex justify-around">
+                            <button class="flex items-center justify-center p-2 flex-1 hover:bg-gray-100 rounded-lg">
+                                <i class="far fa-thumbs-up mr-2"></i>
+                                <span>Like</span>
+                            </button>
+                            <button class="flex items-center justify-center p-2 flex-1 hover:bg-gray-100 rounded-lg">
+                                <i class="far fa-comment-alt mr-2"></i>
+                                <span>Comment</span>
+                            </button>
+                            <button class="flex items-center justify-center p-2 flex-1 hover:bg-gray-100 rounded-lg">
+                                <i class="fas fa-share mr-2"></i>
+                                <span>Share</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Post 2 -->
+                <div class="bg-white rounded-lg shadow">
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-2">
+                                <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="User" class="rounded-full h-10 w-10">
+                                <div>
+                                    <p class="font-semibold">Mike Smith</p>
+                                    <p class="text-xs text-gray-500">Yesterday at 8:30 PM</p>
+                                </div>
+                            </div>
+                            <button class="text-gray-500">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+                        <p class="mb-4">Beautiful sunset at the beach today! Nature never ceases to amaze me. 🌅</p>
+                        <img src="https://picsum.photos/600/400?random=6" alt="Post image" class="w-full h-64 object-cover rounded-lg">
+                    </div>
+                    <div class="p-4 border-t border-gray-100">
+                        <div class="flex justify-between mb-4">
+                            <div class="flex items-center space-x-1">
+                                <div class="bg-blue-500 text-white rounded-full h-5 w-5 flex items-center justify-center">
+                                    <i class="fas fa-thumbs-up text-xs"></i>
+                                </div>
+                                <div class="bg-red-500 text-white rounded-full h-5 w-5 flex items-center justify-center">
+                                    <i class="fas fa-heart text-xs"></i>
+                                </div>
+                                <p class="text-gray-500 text-sm">287</p>
+                            </div>
+                            <div class="flex space-x-4">
+                                <p class="text-gray-500 text-sm">56 Comments</p>
+                                <p class="text-gray-500 text-sm">12 Shares</p>
+                            </div>
+                        </div>
+                        <hr class="my-2">
+                        <div class="flex justify-around">
+                            <button class="flex items-center justify-center p-2 flex-1 hover:bg-gray-100 rounded-lg">
+                                <i class="far fa-thumbs-up mr-2"></i>
+                                <span>Like</span>
+                            </button>
+                            <button class="flex items-center justify-center p-2 flex-1 hover:bg-gray-100 rounded-lg">
+                                <i class="far fa-comment-alt mr-2"></i>
+                                <span>Comment</span>
+                            </button>
+                            <button class="flex items-center justify-center p-2 flex-1 hover:bg-gray-100 rounded-lg">
+                                <i class="fas fa-share mr-2"></i>
+                                <span>Share</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Sidebar -->
+        <div class="w-1/4 px-4 hidden md:block">
+            <!-- Sponsored -->
+            <div class="bg-white rounded-lg shadow p-4 mb-4">
+                <h3 class="font-semibold text-gray-500 mb-2">Sponsored</h3>
+                <div class="space-y-4">
+                    <div class="cursor-pointer">
+                        <img src="https://picsum.photos/300/150?random=7" alt="Ad" class="rounded-lg w-full h-32 object-cover mb-2">
+                        <p class="font-medium">New Summer Collection</p>
+                        <p class="text-xs text-gray-500">shop.example.com</p>
+                    </div>
+                    <div class="cursor-pointer">
+                        <img src="https://picsum.photos/300/150?random=8" alt="Ad" class="rounded-lg w-full h-32 object-cover mb-2">
+                        <p class="font-medium">Learn to Code Today</p>
+                        <p class="text-xs text-gray-500">coding.example.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contacts -->
+            <div class="bg-white rounded-lg shadow p-4">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-semibold text-gray-500">Contacts</h3>
+                    <div class="flex space-x-2">
+                        <button class="text-gray-500 hover:bg-gray-100 rounded-full p-1">
+                            <i class="fas fa-video"></i>
+                        </button>
+                        <button class="text-gray-500 hover:bg-gray-100 rounded-full p-1">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <button class="text-gray-500 hover:bg-gray-100 rounded-full p-1">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex items-center p-2 hover:bg-gray-100 rounded-lg cursor-pointer">
+                        <div class="relative">
+                            <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Contact" class="rounded-full h-9 w-9 mr-2">
+                            <div class="absolute bottom-0 right-1 h-3 w-3 bg-green-500 rounded-full border-2 border-white"></div>
+                        </div>
+                        <span>Sarah Johnson</span>
+                    </div>
+                    <div class="flex items-center p-2 hover:bg-gray-100 rounded-lg cursor-pointer">
+                        <div class="relative">
+                            <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Contact" class="rounded-full h-9 w-9 mr-2">
+                            <div class="absolute bottom-0 right-1 h-3 w-3 bg-green-500 rounded-full border-2 border-white"></div>
+                        </div>
+                        <span>Mike Smith</span>
+                    </div>
+                    <div class="flex items-center p-2 hover:bg-gray-100 rounded-lg cursor-pointer">
+                        <div class="relative">
+                            <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Contact" class="rounded-full h-9 w-9 mr-2">
+                            <div class="absolute bottom-0 right-1 h-3 w-3 bg-green-500 rounded-full border-2 border-white"></div>
+                        </div>
+                        <span>Jessica Lee</span>
+                    </div>
+                    <div class="flex items-center p-2 hover:bg-gray-100 rounded-lg cursor-pointer">
+                        <div class="relative">
+                            <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Contact" class="rounded-full h-9 w-9 mr-2">
+                            <div class="absolute bottom-0 right-1 h-3 w-3 bg-green-500 rounded-full border-2 border-white"></div>
+                        </div>
+                        <span>David Wilson</span>
+                    </div>
+                    <div class="flex items-center p-2 hover:bg-gray-100 rounded-lg cursor-pointer">
+                        <div class="relative">
+                            <img src="https://randomuser.me/api/portraits/women/3.jpg" alt="Contact" class="rounded-full h-9 w-9 mr-2">
+                            <div class="absolute bottom-0 right-1 h-3 w-3 bg-green-500 rounded-full border-2 border-white"></div>
+                        </div>
+                        <span>Emily Brown</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        // JavaScript for interactive features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Like button toggle functionality
+            const likeButtons = document.querySelectorAll('button:has(.fa-thumbs-up)');
+            likeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const icon = button.querySelector('i');
+                    if (icon.classList.contains('far')) {
+                        icon.classList.remove('far');
+                        icon.classList.add('fas', 'text-blue-500');
+                    } else {
+                        icon.classList.remove('fas', 'text-blue-500');
+                        icon.classList.add('far');
+                    }
+                });
+            });
+            
+            // Mobile menu toggle (simplified)
+            const menuButton = document.querySelector('.fa-bars').parentElement;
+            if (menuButton) {
+                menuButton.addEventListener('click', function() {
+                    alert('Menu clicked - would toggle mobile menu in full implementation');
+                });
+            }
+            
+            // Post creator focus effect
+            const postInput = document.querySelector('input[placeholder*="What\'s on your mind"]');
+            if (postInput) {
+                postInput.addEventListener('focus', function() {
+                    this.classList.add('ring-2', 'ring-blue-300');
+                });
+                postInput.addEventListener('blur', function() {
+                    this.classList.remove('ring-2', 'ring-blue-300');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
