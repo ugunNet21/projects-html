@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SchoolPulse - A modern school management system for tracking student growth, assessment, and enhancing school-parent communication.">
+    <meta name="keywords" content="school management, student tracking, education software, parent portal">
+    <meta name="author" content="SchoolPulse Team">
+    <title>SchoolPulse - Smart School Management System</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous">
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary: #147EFB;
+            --primary-light: #D6E4FF;
+            --secondary: #5E5CE6;
+            --dark: #1C1C1E;
+            --light: #F2F2F7;
+            --white: #FFFFFF;
+            --success: #4CD964;
+            --warning: #FFCC00;
+            --danger: #FF3B30;
+            --gray: #8E8E93;
+            --gray-light: #E5E5EA;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: var(--dark);
+            background-color: var(--white);
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 1px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        .hero {
+            background: linear-gradient(120deg, #9BE8FF 0%, #1D76FF 100%);
+            color: var(--white);
+            padding: 120px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::after {
+            content: "";
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: var(--white);
+            border-radius: 100% 100% 0 0;
+        }
+        
+        .hero h1 {
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+            font-size: 3.5rem;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 600px;
+        }
+        
+        .btn-ios {
+            background: var(--white);
+            color: var(--primary);
+            font-weight: 600;
+            border-radius: 25px;
+            padding: 12px 28px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .btn-ios:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+            background: var(--white);
+            color: var(--primary);
+        }
+        
+        .btn-ios-outline {
+            background: transparent;
+            color: var(--white);
+            font-weight: 600;
+            border-radius: 25px;
+            padding: 12px 28px;
+            border: 2px solid var(--white);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-ios-outline:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .feature-card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            height: 100%;
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-light);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+        }
+        
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 20px;
+            margin-bottom: 20px;
+            font-size: 1.75rem;
+        }
+        
+        .card-section {
+            background-color: var(--light);
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        .testimonial {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+        
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.2s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--white);
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .device-mockup {
+            position: relative;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        
+        .device-frame {
+            border-radius: 36px;
+            border: 6px solid var(--dark);
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.2);
+        }
+        
+        .device-screen {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        
+        .device-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 24px;
+            background-color: var(--dark);
+            border-radius: 0 0 12px 12px;
+        }
+        
+        .floating-card {
+            position: absolute;
+            background: var(--white);
+            border-radius: 16px;
+            padding: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+        }
+        
+        .floating-card.card-1 {
+            top: 20%;
+            right: -30px;
+            width: 120px;
+        }
+        
+        .floating-card.card-2 {
+            bottom: 15%;
+            left: -40px;
+            width: 150px;
+        }
+        
+        .stat-card {
+            padding: 30px;
+            border-radius: 24px;
+            text-align: center;
+            height: 100%;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(120deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .stat-label {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            color: var(--dark);
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .cta-section {
+            background: linear-gradient(120deg, var(--secondary) 0%, var(--primary) 100%);
+            padding: 80px 0;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -120px;
+            right: -80px;
+        }
+        
+        .cta-section::after {
+            content: "";
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            bottom: -80px;
+            left: -60px;
+        }
+        
+        .pricing-card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 40px 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            height: 100%;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pricing-card.featured {
+            border: 2px solid var(--primary);
+        }
+        
+        .pricing-card.featured::before {
+            content: "Popular";
+            position: absolute;
+            top: 20px;
+            right: -28px;
+            background: var(--primary);
+            color: var(--white);
+            padding: 5px 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transform: rotate(45deg);
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin: 20px 0;
+        }
+        
+        .price span {
+            font-size: 1rem;
+            color: var(--gray);
+            font-weight: 400;
+        }
+        
+        .feature-list {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+        }
+        
+        .feature-list li i {
+            color: var(--success);
+            margin-right: 10px;
+        }
+        
+        .feature-list li.disabled {
+            color: var(--gray);
+        }
+        
+        .feature-list li.disabled i {
+            color: var(--gray-light);
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Media Queries */
+        @media (max-width: 991.98px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .feature-card, .stat-card, .pricing-card {
+                margin-bottom: 30px;
+            }
+        }
+        
+        @media (max-width: 767.98px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero {
+                padding: 80px 0 60px;
+            }
+            
+            .device-mockup {
+                margin-top: 40px;
+            }
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.2rem rgba(20, 126, 251, 0.25);
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">SchoolPulse</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Testimonials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-ios" href="#login">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1>Modern School Management System</h1>
+                    <p class="mb-4">A comprehensive platform for tracking student growth, assessment, and creating meaningful connections between schools and parents.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#demo" class="btn btn-ios">Request Demo</a>
+                        <a href="#features" class="btn btn-ios-outline">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="device-mockup float-animation">
+                        <div class="device-frame">
+                            <div class="device-notch"></div>
+                            <img src="https://via.placeholder.com/400x320" alt="SchoolPulse Dashboard" class="device-screen">
+                        </div>
+                        <div class="floating-card card-1">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar">S</div>
+                                <div>
+                                    <small class="text-muted">Student Progress</small>
+                                    <div class="fw-bold">+15%</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="floating-card card-2">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar">R</div>
+                                <div>
+                                    <small class="text-muted">Report Ready</small>
+                                    <div class="fw-bold">View Now</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <div class="stat-card">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Schools Trust Us</div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <div class="stat-card">
+                        <div class="stat-number">25,000+</div>
+                        <div class="stat-label">Active Students</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Satisfaction Rate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="card-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold mb-3">Powerful Features</h2>
+                <p class="text-muted mx-auto" style="max-width: 600px;">Designed to streamline school management and enhance the educational experience for administrators, teachers, parents, and students.</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h4>Student Management</h4>
+                        <p>Comprehensive student profiles with personal information, academic history, and growth tracking.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>Growth Assessment</h4>
+                        <p>Track physical and developmental metrics with automated BMI calculations and progress reporting.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h4>Teacher Portal</h4>
+                        <p>Tools for educators to manage classes, record assessments, and communicate with parents.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <h4>P5 Project Assessment</h4>
+                        <p>Comprehensive evaluation system for project-based learning aligned with modern educational frameworks.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h4>Parent Engagement</h4>
+                        <p>Dedicated portal for parents to view progress, provide feedback, and communicate with teachers.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-signature"></i>
+                        </div>
+                        <h4>Digital Reports</h4>
+                        <p>Automated report generation with digital signatures for administrative efficiency.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold mb-3">How It Works</h2>
+                <p class="text-muted mx-auto" style="max-width: 600px;">Our intuitive platform makes school management simple and efficient.</p>
+            </div>
+            
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="https://via.placeholder.com/400x320" alt="SchoolPulse Dashboard" class="img-fluid rounded-4 shadow">
+                </div>
+                <div class="col-lg-6">
+                    <div class="d-flex mb-4">
+                        <div class="me-4">
+                            <div class="bg-primary rounded-circle text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">1</div>
+                        </div>
+                        <div>
+                            <h4>Setup Your School Profile</h4>
+                            <p>Create your school profile with all relevant details like location, classes, and staff information.</p>
+                        </div>
+                    </div>
+                    <div class="d-flex mb-4">
+                        <div class="me-4">
+                            <div class="bg-primary rounded-circle text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">2</div>
+                        </div>
+                        <div>
+                            <h4>Add Students and Classes</h4>
+                            <p>Import student data, create class groups, and assign teachers for the academic year.</p>
+                        </div>
+                    </div>
+                    <div class="d-flex mb-4">
+                        <div class="me-4">
+                            <div class="bg-primary rounded-circle text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">3</div>
+                        </div>
+                        <div>
+                            <h4>Configure Assessment Parameters</h4>
+                            <p>Set up evaluation criteria, growth metrics, and reporting periods for your institution.</p>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="me-4">
+                            <div class="bg-primary rounded-circle text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">4</div>
+                        </div>
+                        <div>
+                            <h4>Start Recording and Reporting</h4>
+                            <p>Begin tracking student progress, generating reports, and engaging with parents seamlessly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="card-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold mb-3">Simple, Transparent Pricing</h2>
+                <p class="text-muted mx-auto" style="max-width: 600px;">Choose the plan that fits your school's needs and budget.</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="pricing-card">
+                        <h4>Basic</h4>
+                        <div class="price">Rp800k <span>/year</span></div>
+                        <p class="text-muted">Perfect for small schools with basic needs.</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> Up to 200 students</li>
+                            <li><i class="fas fa-check-circle"></i> Core student management</li>
+                            <li><i class="fas fa-check-circle"></i> Basic reporting</li>
+                            <li class="disabled"><i class="fas fa-times-circle"></i> Parent portal access</li>
+                            <li class="disabled"><i class="fas fa-times-circle"></i> Advanced analytics</li>
+                        </ul>
+                        <a href="#" class="btn btn-ios w-100">Get Started</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="pricing-card featured">
+                        <h4>Professional</h4>
+                        <div class="price">Rp1.5M <span>/year</span></div>
+                        <p class="text-muted">Comprehensive solution for growing schools.</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> Up to 500 students</li>
+                            <li><i class="fas fa-check-circle"></i> Full student management</li>
+                            <li><i class="fas fa-check-circle"></i> Advanced reporting</li>
+                            <li><i class="fas fa-check-circle"></i> Parent portal access</li>
+                            <li class="disabled"><i class="fas fa-times-circle"></i> Advanced analytics</li>
+                        </ul>
+                        <a href="#" class="btn btn-ios w-100">Get Started</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="pricing-card">
+                        <h4>Enterprise</h4>
+                        <div class="price">Rp3.5M <span>/year</span></div>
+                        <p class="text-muted">Ultimate solution for large institutions.</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> Unlimited students</li>
+                            <li><i class="fas fa-check-circle"></i> Complete management suite</li>
+                            <li><i class="fas fa-check-circle"></i> Custom reporting</li>
+                            <li><i class="fas fa-check-circle"></i> Parent portal access</li>
+                            <li><i class="fas fa-check-circle"></i> Advanced analytics</li>
+                        </ul>
+                        <a href="#" class="btn btn-ios w-100">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold mb-3">What Our Users Say</h2>
+                <p class="text-muted mx-auto" style="max-width: 600px;">Trusted by educators and parents across the country.</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial">
+                        <div class="mb-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p>"SchoolPulse has revolutionized how we manage student data and communicate with parents. The growth tracking features are particularly impressive."</p>
+                        <div class="testimonial-author">
+                            <div class="avatar">BR</div>
+                            <div>
+                                <div class="fw-bold">Budi Rahardjo</div>
+                                <div class="text-muted small">Principal, SD Maju Bersama</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial">
+                        <div class="mb-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p>"As a teacher, I appreciate how easy it is to track my students' progress and generate detailed reports. The P5 assessment module is exactly what we needed."</p>
+                        <div class="testimonial-author">
+                            <div class="avatar">SW</div>
+                            <div>
+                                <div class="fw-bold">Siti Widayanti</div>
+                                <div class="text-muted small">Teacher, TK Ceria</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial">
+                        <div class="mb-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star-half-alt text-warning"></i>
+                        </div>
+                        <p>"The parent portal has made it so much easier to stay involved in my child's education. I can see real-time updates and communicate directly with teachers."</p>
+                        <div class="testimonial-author">
+                            <div class="avatar">DH</div>
+                            <div>
+                                <div class="fw-bold">Dewi Hartono</div>
+                                <div class="text-muted small">Parent</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="fw-bold mb-3">Ready to Transform Your School?</h2>
+                <p class="mb-4 mx-auto" style="max-width: 600px;">Join thousands of schools using SchoolPulse to streamline management and enhance education quality.</p>
+                <a href="#demo" class="btn btn-ios">Request a Free Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold mb-3">Get in Touch</h2>
+                <p class="text-muted mx-auto" style="max-width: 600px;">Have questions or need assistance? Our team is here to help you.</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="contact-form">
+                        <form>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" id="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-ios w-100">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="d-flex flex-column h-100 justify-content-center">
+                        <div class="mb-4">
+                            <h4>Contact Information</h4>
+                            <p class="text-muted">Reach out to us anytime.</p>
+                        </div>
+                        <div class="mb-3">
+                            <i class="fas fa-envelope me-2 text-primary"></i>
+                            <a href="mailto:support@schoolpulse.com" class="text-decoration-none">support@schoolpulse.com</a>
+                        </div>
+                        <div class="mb-3">
+                            <i class="fas fa-phone me-2 text-primary"></i>
+                            <a href="tel:+622112345678" class="text-decoration-none">+62 21 1234 5678</a>
+                        </div>
+                        <div class="mb-3">
+                            <i class="fas fa-map-marker-alt me-2 text-primary"></i>
+                            <span>Jl. Pendidikan No. 123, Jakarta, Indonesia</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="fw-bold mb-3">SchoolPulse</h5>
+                    <p class="text-muted">Empowering schools with modern management solutions for better education outcomes.</p>
+                    <div class="d-flex">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5 class="fw-bold mb-3">Product</h5>
+                    <div class="footer-links">
+                        <a href="#features">Features</a>
+                        <a href="#pricing">Pricing</a>
+                        <a href="#testimonials">Testimonials</a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5 class="fw-bold mb-3">Company</h5>
+                    <div class="footer-links">
+                        <a href="#">About Us</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Blog</a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5 class="fw-bold mb-3">Support</h5>
+                    <div class="footer-links">
+                        <a href="#contact">Contact Us</a>
+                        <a href="#">Help Center</a>
+                        <a href="#">FAQ</a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5 class="fw-bold mb-3">Legal</h5>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p class="text-muted mb-0">&copy; 2025 SchoolPulse. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Custom JS -->
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Form submission handling (placeholder)
+        document.querySelector('.contact-form form')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
