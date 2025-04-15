@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School Management System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.20.6/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    function Header() {
+      return (
+        <header className="bg-blue-600 text-white py-6">
+          <div className="container mx-auto px-4">
+            <h1 className="text-3xl font-bold">School Management System</h1>
+            <p className="mt-2 text-lg">Streamlining Education for a Brighter Future</p>
+          </div>
+        </header>
+      );
+    }
+
+    function FeatureCard({ title, description, icon }) {
+      return (
+        <div className="bg-white shadow-lg rounded-lg p-6 text-center">
+          <div className="text-4xl mb-4">{icon}</div>
+          <h3 className="text-xl font-semibold mb-2">{title}</h3>
+          <p className="text-gray-600">{description}</p>
+        </div>
+      );
+    }
+
+    function Features() {
+      const features = [
+        {
+          title: "Student Management",
+          description: "Easily manage student profiles, including personal details, academic records, and growth metrics.",
+          icon: "📚",
+        },
+        {
+          title: "Teacher & Class Management",
+          description: "Organize teachers, classes, and academic periods with seamless integration.",
+          icon: "👩‍🏫",
+        },
+        {
+          title: "Assessment & Reports",
+          description: "Track student progress with detailed assessments and generate comprehensive reports.",
+          icon: "📊",
+        },
+        {
+          title: "Parent Engagement",
+          description: "Enable parents to view reports, provide feedback, and stay connected with their child's education.",
+          icon: "👨‍👩‍👧",
+        },
+      ];
+
+      return (
+        <section className="py-12 bg-gray-100">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold text-center mb-8">Our Features</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {features.map((feature, index) => (
+                <FeatureCard key={index} {...feature} />
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function CallToAction() {
+      return (
+        <section className="py-12 bg-blue-600 text-white text-center">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold mb-4">Join Our Platform Today</h2>
+            <p className="text-lg mb-6">Experience a modern, efficient way to manage your school's operations.</p>
+            <button
+              className="bg-white text-blue-600 font-semibold py-3 px-6 rounded-lg hover:bg-gray-200 transition"
+              onClick={() => alert("Redirect to login/signup page")}
+            >
+              Get Started
+            </button>
+          </div>
+        </section>
+      );
+    }
+
+    function Footer() {
+      return (
+        <footer className="bg-gray-800 text-white py-6">
+          <div className="container mx-auto px-4 text-center">
+            <p>&copy; 2025 School Management System. All rights reserved.</p>
+            <p className="mt-2">
+              <a href="#" className="hover:underline">Privacy Policy</a> | <a href="#" className="hover:underline">Terms of Service</a>
+            </p>
+          </div>
+        </footer>
+      );
+    }
+
+    function App() {
+      return (
+        <div>
+          <Header />
+          <Features />
+          <CallToAction />
+          <Footer />
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
