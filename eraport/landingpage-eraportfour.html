@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Manajemen Sekolah | Digitalisasi Laporan Pendidikan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 5rem 0;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 4rem 0;
+        }
+        
+        .testimonial-card {
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#" style="color: var(--primary-color);">
+                <i class="bi bi-book"></i> EduManage
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Fitur</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">Tentang</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Testimoni</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Kontak</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-outline-primary" href="/login">Masuk</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">Sistem Manajemen Sekolah Terintegrasi</h1>
+                    <p class="lead mb-4">Digitalisasi lengkap untuk administrasi sekolah, penilaian siswa, dan laporan perkembangan pendidikan dengan teknologi terkini.</p>
+                    <div class="d-flex gap-3">
+                        <a href="/register" class="btn btn-light btn-lg">Daftar Sekarang</a>
+                        <a href="#demo" class="btn btn-outline-light btn-lg">Lihat Demo</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block">
+                    <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" alt="Classroom" class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Fitur Unggulan Sistem Kami</h2>
+                <p class="text-muted">Solusi lengkap untuk manajemen sekolah modern</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-people-fill"></i>
+                            </div>
+                            <h4>Manajemen Siswa</h4>
+                            <p class="text-muted">Kelola data siswa secara komprehensif termasuk informasi pribadi, orang tua, dan riwayat akademik.</p>
+                            <ul class="text-start text-muted">
+                                <li>Profil siswa lengkap</li>
+                                <li>Data orang tua/wali</li>
+                                <li>Riwayat kelas</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-clipboard2-data-fill"></i>
+                            </div>
+                            <h4>Penilaian Holistik</h4>
+                            <p class="text-muted">Sistem penilaian multidimensi untuk mengukur perkembangan siswa secara menyeluruh.</p>
+                            <ul class="text-start text-muted">
+                                <li>Aspek kognitif & afektif</li>
+                                <li>Proyek P5 (Profil Pelajar Pancasila)</li>
+                                <li>Pertumbuhan fisik</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-file-earmark-text-fill"></i>
+                            </div>
+                            <h4>Laporan Otomatis</h4>
+                            <p class="text-muted">Hasilkan laporan perkembangan siswa secara otomatis dengan berbagai format periodik.</p>
+                            <ul class="text-start text-muted">
+                                <li>Laporan semesteran</li>
+                                <li>Laporan triwulan</li>
+                                <li>Laporan khusus</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-person-badge-fill"></i>
+                            </div>
+                            <h4>Manajemen Guru</h4>
+                            <p class="text-muted">Kelola data guru, wali kelas, dan struktur pengajar dengan mudah.</p>
+                            <ul class="text-start text-muted">
+                                <li>Profil guru lengkap</li>
+                                <li>Penugasan wali kelas</li>
+                                <li>Hak akses berbeda</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-calendar-check-fill"></i>
+                            </div>
+                            <h4>Manajemen Tahun Ajaran</h4>
+                            <p class="text-muted">Atur tahun ajaran, periode laporan, dan aktivitas akademik dengan fleksibel.</p>
+                            <ul class="text-start text-muted">
+                                <li>Multiple tahun ajaran</li>
+                                <li>Periode laporan custom</li>
+                                <li>Tracking perkembangan</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-phone-fill"></i>
+                            </div>
+                            <h4>Akses Orang Tua</h4>
+                            <p class="text-muted">Orang tua dapat memantau perkembangan anak secara real-time.</p>
+                            <ul class="text-start text-muted">
+                                <li>Notifikasi perkembangan</li>
+                                <li>Refleksi orang tua</li>
+                                <li>Komunikasi dengan guru</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="About Us" class="img-fluid rounded shadow">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="fw-bold mb-4">Tentang Sistem Kami</h2>
+                    <p>EduManage adalah solusi terintegrasi untuk manajemen sekolah berbasis web yang dikembangkan khusus untuk memenuhi kebutuhan administrasi dan pelaporan pendidikan modern.</p>
+                    <p>Sistem kami dirancang berdasarkan database yang komprehensif, mencakup semua aspek manajemen sekolah mulai dari data siswa, guru, penilaian, hingga laporan periodik.</p>
+                    <div class="mt-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-primary bg-opacity-10 p-2 rounded me-3">
+                                <i class="bi bi-check-circle-fill text-primary"></i>
+                            </div>
+                            <span>Menggunakan teknologi terkini dengan arsitektur database yang solid</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-primary bg-opacity-10 p-2 rounded me-3">
+                                <i class="bi bi-check-circle-fill text-primary"></i>
+                            </div>
+                            <span>Mendukung penilaian holistik sesuai kurikulum terbaru</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="bg-primary bg-opacity-10 p-2 rounded me-3">
+                                <i class="bi bi-check-circle-fill text-primary"></i>
+                            </div>
+                            <span>Antarmuka intuitif untuk semua pengguna (admin, guru, orang tua)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Lihat Sistem Kami Beraksi</h2>
+                <p class="text-muted">Jelajahi fitur-fitur utama melalui demo interaktif kami</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="ratio ratio-16x9 mb-3">
+                                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Demo Video" allowfullscreen></iframe>
+                            </div>
+                            <h5>Tur Singkat Sistem</h5>
+                            <p class="text-muted">Lihat gambaran umum sistem dalam 3 menit</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="ratio ratio-16x9 mb-3 bg-light d-flex align-items-center justify-content-center">
+                                <i class="bi bi-play-circle-fill text-primary" style="font-size: 3rem;"></i>
+                            </div>
+                            <h5>Demo Penilaian Siswa</h5>
+                            <p class="text-muted">Proses input dan analisis penilaian</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="ratio ratio-16x9 mb-3 bg-light d-flex align-items-center justify-content-center">
+                                <i class="bi bi-play-circle-fill text-primary" style="font-size: 3rem;"></i>
+                            </div>
+                            <h5>Demo Laporan Orang Tua</h5>
+                            <p class="text-muted">Tampilan orang tua dan fitur refleksi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-primary btn-lg">Request Demo Lengkap</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Apa Kata Pengguna Kami</h2>
+                <p class="text-muted">Testimoni dari sekolah yang telah menggunakan sistem kami</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body p-4">
+                            <div class="testimonial-card">
+                                <p class="fst-italic mb-4">"Sistem ini sangat membantu kami dalam membuat laporan perkembangan siswa yang komprehensif. Penggunaannya mudah namun powerful."</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Testimoni" class="rounded-circle me-3" width="50">
+                                    <div>
+                                        <h6 class="mb-0">Ibu Siti, S.Pd</h6>
+                                        <small class="text-muted">Kepala Sekolah SDN Merdeka</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body p-4">
+                            <div class="testimonial-card">
+                                <p class="fst-italic mb-4">"Sebagai guru, saya sangat terbantu dengan sistem penilaian yang terstruktur. Laporan otomatis menghemat banyak waktu saya."</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Testimoni" class="rounded-circle me-3" width="50">
+                                    <div>
+                                        <h6 class="mb-0">Budi Santoso, M.Pd</h6>
+                                        <small class="text-muted">Guru Kelas SD Tunas Bangsa</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body p-4">
+                            <div class="testimonial-card">
+                                <p class="fst-italic mb-4">"Saya bisa memantau perkembangan anak saya kapan saja melalui portal orang tua. Fitur refleksinya sangat membantu komunikasi dengan guru."</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Testimoni" class="rounded-circle me-3" width="50">
+                                    <div>
+                                        <h6 class="mb-0">Ibu Ani</h6>
+                                        <small class="text-muted">Orang Tua Siswa</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container text-center">
+            <h2 class="fw-bold mb-4">Siap Mengubah Cara Anda Mengelola Sekolah?</h2>
+            <p class="lead mb-5">Mulai digitalisasi administrasi sekolah Anda hari ini dan rasakan kemudahannya.</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="/register" class="btn btn-light btn-lg">Daftar Sekarang</a>
+                <a href="#contact" class="btn btn-outline-light btn-lg">Hubungi Kami</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 class="fw-bold mb-4">Hubungi Kami</h2>
+                    <p class="mb-4">Punya pertanyaan tentang sistem kami? Tim support kami siap membantu Anda.</p>
+                    
+                    <div class="mb-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-primary bg-opacity-10 p-2 rounded me-3">
+                                <i class="bi bi-envelope-fill text-primary"></i>
+                            </div>
+                            <span>support@edumanage.id</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-primary bg-opacity-10 p-2 rounded me-3">
+                                <i class="bi bi-telephone-fill text-primary"></i>
+                            </div>
+                            <span>+62 21 1234 5678</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="bg-primary bg-opacity-10 p-2 rounded me-3">
+                                <i class="bi bi-geo-alt-fill text-primary"></i>
+                            </div>
+                            <span>Jl. Pendidikan No. 123, Jakarta Selatan</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <form>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="school" class="form-label">Nama Sekolah</label>
+                            <input type="text" class="form-control" id="school">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Pesan</label>
+                            <textarea class="form-control" id="message" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Kirim Pesan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5 class="fw-bold mb-3"><i class="bi bi-book"></i> EduManage</h5>
+                    <p>Sistem Manajemen Sekolah Terintegrasi untuk pendidikan yang lebih baik.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-white"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <h5 class="fw-bold mb-3">Tautan</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Beranda</a></li>
+                        <li class="mb-2"><a href="#features" class="text-white text-decoration-none">Fitur</a></li>
+                        <li class="mb-2"><a href="#about" class="text-white text-decoration-none">Tentang</a></li>
+                        <li class="mb-2"><a href="#demo" class="text-white text-decoration-none">Demo</a></li>
+                        <li><a href="#contact" class="text-white text-decoration-none">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <h5 class="fw-bold mb-3">Dukungan</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Pusat Bantuan</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Dokumentasi</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQ</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Kebijakan Privasi</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="fw-bold mb-3">Berlangganan</h5>
+                    <p>Dapatkan update terbaru tentang fitur dan pembaruan sistem.</p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Email Anda">
+                        <button class="btn btn-primary" type="button">OK</button>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2023 EduManage. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
