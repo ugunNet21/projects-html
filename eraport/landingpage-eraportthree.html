@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Raport - Sistem Manajemen Sekolah</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section .bg-shape {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            top: -150px;
+            right: -150px;
+        }
+        .feature-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            border-radius: 15px;
+            background: white;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #3498db;
+        }
+        .cta-section {
+            background: #3498db;
+            color: white;
+            padding: 60px 0;
+        }
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 0;
+        }
+        .navbar {
+            transition: background-color 0.3s;
+        }
+        .navbar.scrolled {
+            background-color: #2c3e50 !important;
+        }
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 60px 0;
+            }
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-transparent fixed-top">
+        <div class="container">
+            <a class="navbar-brand text-white" href="#">E-Raport</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#features">Fitur</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#about">Tentang</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#contact">Kontak</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light ms-2" href="/login">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="bg-shape"></div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">E-Raport: Solusi Digital untuk Pendidikan Modern</h1>
+                    <p class="lead mb-4">Kelola data sekolah, siswa, dan penilaian dengan mudah dan efisien dalam satu platform terintegrasi.</p>
+                    <a href="/login" class="btn btn-light btn-lg">Mulai Sekarang</a>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="https://via.placeholder.com/500x400?text=E-Raport+Illustration" alt="E-Raport Illustration" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Fitur Unggulan</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card feature-card p-4 text-center">
+                        <i class="fas fa-users feature-icon mb-3"></i>
+                        <h5 class="card-title">Manajemen Siswa</h5>
+                        <p class="card-text">Kelola data siswa, orang tua, dan pertumbuhan dengan mudah dan terorganisir.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card feature-card p-4 text-center">
+                        <i class="fas fa-clipboard-list feature-icon mb-3"></i>
+                        <h5 class="card-title">Penilaian Digital</h5>
+                        <p class="card-text">Catat dan analisis perkembangan siswa melalui sistem penilaian yang fleksibel.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card feature-card p-4 text-center">
+                        <i class="fas fa-chalkboard-teacher feature-icon mb-3"></i>
+                        <h5 class="card-title">Data Guru & Kelas</h5>
+                        <p class="card-text">Atur data guru, wali kelas, dan jadwal kelas secara efisien dalam satu platform.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <img src="https://via.placeholder.com/500x300?text=About+Us" alt="About Us" class="img-fluid rounded">
+                </div>
+                <div class="col-lg-6">
+                    <h2>Tentang E-Raport</h2>
+                    <p>E-Raport adalah platform manajemen sekolah yang dirancang untuk mempermudah administrasi pendidikan. Dengan fitur lengkap seperti pengelolaan data siswa, penilaian, dan laporan perkembangan, kami membantu sekolah mencapai efisiensi dan transparansi.</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-primary me-2"></i> Antarmuka yang ramah pengguna</li>
+                        <li><i class="fas fa-check text-primary me-2"></i> Responsif di semua perangkat</li>
+                        <li><i class="fas fa-check text-primary me-2"></i> Integrasi data yang aman</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta-section text-center">
+        <div class="container">
+            <h2 class="mb-4">Siap Mengubah Cara Anda Mengelola Sekolah?</h2>
+            <p class="lead mb-4">Bergabunglah dengan ribuan sekolah yang telah menggunakan E-Raport untuk administrasi yang lebih baik.</p>
+            <a href="/register" class="btn btn-light btn-lg">Daftar Sekarang</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>E-Raport</h5>
+                    <p>Solusi digital untuk manajemen sekolah modern.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Link Cepat</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#home" class="text-white text-decoration-none">Home</a></li>
+                        <li><a href="#features" class="text-white text-decoration-none">Fitur</a></li>
+                        <li><a href="#about" class="text-white text-decoration-none">Tentang</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Kontak</h5>
+                    <p>Email: support@eraport.id<br>Telepon: +62 123 456 789</p>
+                </div>
+            </div>
+            <hr>
+            <p class="text-center mb-0">&copy; 2025 E-Raport. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS and Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
