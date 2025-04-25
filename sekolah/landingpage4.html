@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduSmart - School Management System</title>
+    <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --danger: #f72585;
+            --warning: #f8961e;
+            --info: #560bad;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            color: var(--dark);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');
+            opacity: 0.5;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .feature-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            height: 100%;
+            position: relative;
+            background: white;
+            z-index: 1;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.1), rgba(63, 55, 201, 0.05));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        /* Dashboard Preview */
+        .dashboard-preview {
+            background-color: #f8f9fa;
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .dashboard-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .dashboard-mockup {
+            border-radius: 10px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .dashboard-mockup img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .pricing-card {
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .pricing-card.popular {
+            border: 2px solid var(--primary);
+            transform: scale(1.05);
+        }
+        
+        .pricing-card.popular .pricing-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+        
+        .pricing-header {
+            padding: 30px;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+        
+        .pricing-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .pricing-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+        
+        .pricing-period {
+            opacity: 0.7;
+        }
+        
+        .pricing-body {
+            padding: 30px;
+        }
+        
+        .pricing-feature {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .pricing-feature::before {
+            content: '\2713';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            position: relative;
+            margin: 15px;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: rgba(67, 97, 238, 0.1);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        
+        .testimonial-text {
+            position: relative;
+            z-index: 2;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+        
+        .author-name {
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+        
+        .author-position {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');
+            opacity: 0.5;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+        
+        .cta-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        .footer-links h5 {
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-links h5::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            margin-top: 30px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        .animate-up {
+            animation: fadeInUp 1s ease;
+        }
+        
+        .animate-delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .animate-delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .animate-delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.25rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 0;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .features, .dashboard-preview, .pricing, .testimonials, .cta {
+                padding: 60px 0;
+            }
+            
+            .pricing-card.popular {
+                transform: none;
+                margin-bottom: 30px;
+            }
+        }
+        
+        /* Floating Elements */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        .floating-2 {
+            animation: floating 3.5s ease-in-out infinite;
+            animation-delay: 0.5s;
+        }
+        
+        .floating-3 {
+            animation: floating 4s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Custom Button */
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3);
+        }
+        
+        .btn-outline-light {
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-light:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Navbar */
+        .navbar {
+            padding: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 10px 0;
+            background-color: white !important;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar.scrolled .nav-link {
+            color: var(--dark) !important;
+        }
+        
+        .navbar.scrolled .navbar-brand {
+            color: var(--dark) !important;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .nav-link {
+            font-weight: 600;
+            margin: 0 10px;
+            padding: 8px 15px !important;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .navbar.scrolled .nav-link:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+        
+        /* Badges */
+        .badge {
+            padding: 5px 10px;
+            font-weight: 600;
+            border-radius: 50px;
+        }
+        
+        /* Section Titles */
+        .section-title {
+            position: relative;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+        
+        .section-title h2 {
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #6c757d;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+        }
+        
+        /* Tooltip */
+        .tooltip-inner {
+            background-color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 50px;
+        }
+        
+        .bs-tooltip-auto[data-popper-placement^=top] .tooltip-arrow::before, 
+        .bs-tooltip-top .tooltip-arrow::before {
+            border-top-color: var(--primary);
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
+        
+        /* Floating Shapes */
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--primary);
+            top: -150px;
+            right: -150px;
+        }
+        
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            background: var(--accent);
+            bottom: -100px;
+            left: -100px;
+        }
+        
+        /* Demo Request Form */
+        .demo-form {
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-control {
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+            margin-bottom: 20px;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">EduSmart</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Testimonials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-outline-light" href="#demo">Request Demo</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1 class="hero-title animate-up">Transform Your School with <span class="text-warning">Smart Management</span></h1>
+                    <p class="hero-subtitle animate-up animate-delay-1">All-in-one school management system with AI-powered features to streamline administration, enhance learning, and improve communication.</p>
+                    <div class="animate-up animate-delay-2">
+                        <a href="#demo" class="btn btn-primary me-3">Request Demo</a>
+                        <a href="#features" class="btn btn-outline-light">Explore Features</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block animate-up animate-delay-3">
+                    <img src="https://via.placeholder.com/600x500/4361ee/ffffff?text=EduSmart" alt="School Management Dashboard" class="img-fluid floating">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Comprehensive Features</h2>
+                <p>Everything you need to manage your educational institution efficiently in one powerful platform</p>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Feature 1 -->
+                <div class="col-md-6 col-lg-4 animate-up">
+                    <div class="feature-card p-4">
+                        <div class="feature-icon">
+                            <i class="lni lni-dashboard"></i>
+                        </div>
+                        <h3 class="feature-title">Dashboard Utama</h3>
+                        <p>Real-time overview of your school's performance with customizable widgets and analytics.</p>
+                        <ul class="list-unstyled mt-3">
+                            <li><i class="lni lni-checkmark-circle text-success me-2"></i> Overview Sekolah</li>
+                            <li><i class="lni lni-checkmark-circle text-success me-2"></i> Advanced Analytics</li>
+                            <li><i class="lni lni-checkmark-circle text-success me-2"></i> Quick Actions</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="col-md-6 col-lg-4 animate-up animate-delay-1">
+                    <div class="feature-card p-4">
+                        <div class="feature-icon">
+                            <i class="lni lni-school"></i>
+                        </div>
+                        <h3 class="feature-title">Manajemen Sekolah</h3>
+                        <p>Complete student, teacher, class, and inventory management in one centralized system.</p>
+                        <ul class="list-unstyled mt-3">
+                            <li><i class="lni lni-checkmark-circle text-success me-2"></i> Data Siswa & Guru</li>
+                            <li><i class="lni lni-checkmark-circle text-success me-2"></i> Kelas & Jadwal</li>
+                            <li><i class="lni lni-checkmark-circle text-success me-2"></i> Inventaris Sekolah</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="col-md-6 col-lg-4 animate-up animate-delay-2">
+                    <div class="feature-card p-4">
+                        <div class="feature-icon">
+                            <i class="lni lni-users"></i>
+                            <span class="badge bg-primary ms-2">New</span>
+                        </div>
+                        <h3 class="feature-title">PPDB Online</h3>
+                        <p>Streamline student admissions with our complete online registration and selection system.</p>
+                        <ul class="list-unstyled mt-3">
+                            <li><i class="lni lni-checkmark-circle text-success me-2"></i> Form Pendaftaran</li>
+                            <li><i class="lni lni-checkmark-circle text-success me-2"></i> Verifikasi Dokumen</li>
+                            <li><i class="lni lni-checkmark-circle text-success me-2"></i> Tes Online</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="col-md-6 col-lg-4 animate-up">
+                    <div class="feature-card p-4">
+                        <div class="feature-icon">
+                            <i class="lni lni-book"></i>
+                        </div>
+                        <h3 class="feature-title">E-Learning</h3>
+                        <p>Interactive online learning platform with virtual classes, assignments, and discussions.</p>
+                        <ul class="list-unstyled mt-3">
+                            <li><i class="lni lni-checkmark-circle text-success me-2"></i> Kelas Virtual</li>
+                            <li><i class="lni lni-checkmark-circle text-success me-2"></i> Materi Pembelajaran</li>
+                            <li><i class="lni lni-checkmark-circle text-success me-2"></i> Video Conference</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="col-md-6 col-lg-4 animate-up animate-delay-1">
+                    <div class="feature-card p-4">
+                        <div class="feature-icon">
+                            <i class="lni lni-certificate"></i>
+                        </div>
+                        <h3 class="feature-title">E-Raport & Penilaian</h3>
+                        <p>Automated grading system with comprehensive report generation and competency analysis.</p>
+                        <ul class="list-unstyled mt-3">
+                            <li><i class="lni lni-checkmark-circle text-success me-2"></i> Input Nilai</li>
+                            <li><i class="lni lni-checkmark-circle text-success me-2"></i> Generate Raport</li>
+                            <li><i class="lni lni-checkmark-circle text-success me-2"></i> Portofolio Siswa</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="col-md-6 col-lg-4 animate-up animate-delay-2">
+                    <div class="feature-card p-4">
+                        <div class="feature-icon">
+                            <i class="lni lni-robot"></i>
+                            <span class="badge bg-danger ms-2">PRO</span>
+                        </div>
+                        <h3 class="feature-title">AI Learning Assistant</h3>
+                        <p>Artificial intelligence powered tools to enhance teaching and learning experiences.</p>
+                        <ul class="list-unstyled mt-3">
+                            <li><i class="lni lni-checkmark-circle text-success me-2"></i> Tutor Virtual</li>
+                            <li><i class="lni lni-checkmark-circle text-success me-2"></i> Pembuatan Materi</li>
+                            <li><i class="lni lni-checkmark-circle text-success me-2"></i> Penilaian Esai AI</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5 animate-up animate-delay-3">
+                <a href="#" class="btn btn-primary">View All Features</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Preview -->
+    <section id="dashboard" class="dashboard-preview">
+        <div class="container">
+            <div class="section-title">
+                <h2>Modern Dashboard Interface</h2>
+                <p>Intuitive and user-friendly interface designed for administrators, teachers, students, and parents</p>
+            </div>
+            
+            <div class="dashboard-container">
+                <div class="dashboard-mockup animate-up">
+                    <img src="https://via.placeholder.com/1200x700/f8f9fa/212529?text=Dashboard+Preview" alt="Dashboard Preview" class="img-fluid">
+                </div>
+                
+                <div class="row mt-5 g-4">
+                    <div class="col-md-4 animate-up">
+                        <div class="d-flex">
+                            <div class="me-3">
+                                <i class="lni lni-checkmark-circle text-primary fs-3"></i>
+                            </div>
+                            <div>
+                                <h5>User-Friendly Design</h5>
+                                <p class="mb-0">Intuitive interface with customizable widgets and drag-and-drop functionality.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 animate-up animate-delay-1">
+                        <div class="d-flex">
+                            <div class="me-3">
+                                <i class="lni lni-checkmark-circle text-primary fs-3"></i>
+                            </div>
+                            <div>
+                                <h5>Role-Based Access</h5>
+                                <p class="mb-0">Different dashboards for administrators, teachers, students, and parents.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 animate-up animate-delay-2">
+                        <div class="d-flex">
+                            <div class="me-3">
+                                <i class="lni lni-checkmark-circle text-primary fs-3"></i>
+                            </div>
+                            <div>
+                                <h5>Real-Time Analytics</h5>
+                                <p class="mb-0">Interactive charts and reports with real-time data visualization.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Flexible Pricing Plans</h2>
+                <p>Choose the perfect plan for your institution's needs and budget</p>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Basic Plan -->
+                <div class="col-md-4 animate-up">
+                    <div class="pricing-card h-100">
+                        <div class="pricing-header">
+                            <h4 class="pricing-title">Basic</h4>
+                            <div class="pricing-price">$29</div>
+                            <div class="pricing-period">per month</div>
+                            <small>For small schools</small>
+                        </div>
+                        <div class="pricing-body">
+                            <ul class="list-unstyled">
+                                <li class="pricing-feature">Student Management</li>
+                                <li class="pricing-feature">Teacher Management</li>
+                                <li class="pricing-feature">Basic Reporting</li>
+                                <li class="pricing-feature">Email Support</li>
+                                <li class="pricing-feature text-muted"><del>E-Learning Module</del></li>
+                                <li class="pricing-feature text-muted"><del>AI Features</del></li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100 mt-3">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Popular Plan -->
+                <div class="col-md-4 animate-up animate-delay-1">
+                    <div class="pricing-card popular h-100">
+                        <div class="pricing-header">
+                            <span class="badge bg-white text-primary mb-2">Most Popular</span>
+                            <h4 class="pricing-title">Standard</h4>
+                            <div class="pricing-price">$79</div>
+                            <div class="pricing-period">per month</div>
+                            <small>For medium schools</small>
+                        </div>
+                        <div class="pricing-body">
+                            <ul class="list-unstyled">
+                                <li class="pricing-feature">Everything in Basic</li>
+                                <li class="pricing-feature">E-Learning Module</li>
+                                <li class="pricing-feature">Online Exams</li>
+                                <li class="pricing-feature">Parent Portal</li>
+                                <li class="pricing-feature">Priority Support</li>
+                                <li class="pricing-feature text-muted"><del>AI Features</del></li>
+                            </ul>
+                            <a href="#" class="btn btn-primary w-100 mt-3">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Premium Plan -->
+                <div class="col-md-4 animate-up animate-delay-2">
+                    <div class="pricing-card h-100">
+                        <div class="pricing-header">
+                            <h4 class="pricing-title">Premium</h4>
+                            <div class="pricing-price">$149</div>
+                            <div class="pricing-period">per month</div>
+                            <small>For large institutions</small>
+                        </div>
+                        <div class="pricing-body">
+                            <ul class="list-unstyled">
+                                <li class="pricing-feature">Everything in Standard</li>
+                                <li class="pricing-feature">AI Learning Assistant</li>
+                                <li class="pricing-feature">Advanced Analytics</li>
+                                <li class="pricing-feature">Custom Development</li>
+                                <li class="pricing-feature">24/7 Support</li>
+                                <li class="pricing-feature">API Access</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100 mt-3">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5 animate-up animate-delay-3">
+                <p>Need a custom solution? <a href="#contact">Contact our sales team</a> for enterprise pricing.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Clients Say</h2>
+                <p>Trusted by educational institutions worldwide</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <!-- Testimonial 1 -->
+                            <div class="carousel-item active">
+                                <div class="testimonial-card">
+                                    <p class="testimonial-text">EduSmart has transformed how we manage our school. The comprehensive features save us countless hours of administrative work, and the e-learning module has been especially valuable during remote learning periods.</p>
+                                    <div class="testimonial-author">
+                                        <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Sarah Johnson">
+                                        <div>
+                                            <h6 class="author-name">Sarah Johnson</h6>
+                                            <p class="author-position">Principal, Greenfield High School</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Testimonial 2 -->
+                            <div class="carousel-item">
+                                <div class="testimonial-card">
+                                    <p class="testimonial-text">The AI Learning Assistant has been a game-changer for our students. It provides personalized learning recommendations and helps teachers identify areas where students need extra support.</p>
+                                    <div class="testimonial-author">
+                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen">
+                                        <div>
+                                            <h6 class="author-name">Michael Chen</h6>
+                                            <p class="author-position">IT Director, Oakridge Academy</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Testimonial 3 -->
+                            <div class="carousel-item">
+                                <div class="testimonial-card">
+                                    <p class="testimonial-text">As a parent, I love the parent portal. I can track my child's progress, communicate with teachers, and stay updated on school events all in one place. It's made school-home communication seamless.</p>
+                                    <div class="testimonial-author">
+                                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Lisa Rodriguez">
+                                        <div>
+                                            <h6 class="author-name">Lisa Rodriguez</h6>
+                                            <p class="author-position">Parent, Maplewood Elementary</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                            <i class="lni lni-chevron-left fs-3 text-primary"></i>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                            <i class="lni lni-chevron-right fs-3 text-primary"></i>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        
+                        <div class="carousel-indicators mt-4">
+                            <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active bg-primary" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1" class="bg-primary" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2" class="bg-primary" aria-label="Slide 3"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5 g-4">
+                <div class="col-md-4 text-center animate-up">
+                    <h3 class="display-4 fw-bold text-primary">250+</h3>
+                    <p class="fw-medium">Schools Worldwide</p>
+                </div>
+                <div class="col-md-4 text-center animate-up animate-delay-1">
+                    <h3 class="display-4 fw-bold text-primary">1M+</h3>
+                    <p class="fw-medium">Active Users</p>
+                </div>
+                <div class="col-md-4 text-center animate-up animate-delay-2">
+                    <h3 class="display-4 fw-bold text-primary">99.9%</h3>
+                    <p class="fw-medium">Uptime Reliability</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Request Section -->
+    <section id="demo" class="cta">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="cta-title animate-up">Ready to Transform Your School?</h2>
+                    <p class="cta-subtitle animate-up animate-delay-1">Schedule a personalized demo to see how EduSmart can streamline your school's operations and enhance learning experiences.</p>
+                    <div class="animate-up animate-delay-2">
+                        <a href="#demo-form" class="btn btn-light me-3">Request Demo</a>
+                        <a href="#contact" class="btn btn-outline-light">Contact Sales</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Form Section -->
+    <section id="demo-form" class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="demo-form animate-up">
+                        <h3 class="text-center mb-4">Schedule Your Demo</h3>
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="Full Name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control" placeholder="Email Address" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="School Name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="tel" class="form-control" placeholder="Phone Number">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <select class="form-control" required>
+                                        <option value="">Select Country</option>
+                                        <option>Indonesia</option>
+                                        <option>United States</option>
+                                        <option>United Kingdom</option>
+                                        <option>Australia</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="form-control" required>
+                                        <option value="">Number of Students</option>
+                                        <option>Less than 100</option>
+                                        <option>100-500</option>
+                                        <option>500-1000</option>
+                                        <option>More than 1000</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <textarea class="form-control" rows="4" placeholder="Tell us about your specific needs"></textarea>
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg">Request Demo</button>
+                            </div>
+                            <p class="text-center mt-3 small text-muted">We'll contact you within 24 hours to schedule your demo.</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Have questions? Our team is here to help</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4 animate-up">
+                    <div class="text-center p-4 border rounded">
+                        <div class="feature-icon mb-3">
+                            <i class="lni lni-phone"></i>
+                        </div>
+                        <h5>Phone Support</h5>
+                        <p class="mb-2">Monday - Friday</p>
+                        <p class="fw-bold">+1 (555) 123-4567</p>
+                        <p class="small text-muted">9:00 AM - 6:00 PM EST</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 animate-up animate-delay-1">
+                    <div class="text-center p-4 border rounded">
+                        <div class="feature-icon mb-3">
+                            <i class="lni lni-envelope"></i>
+                        </div>
+                        <h5>Email Support</h5>
+                        <p class="mb-2">24/7 Support</p>
+                        <p class="fw-bold">support@edusmart.com</p>
+                        <p class="small text-muted">Typically responds within 2 hours</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 animate-up animate-delay-2">
+                    <div class="text-center p-4 border rounded">
+                        <div class="feature-icon mb-3">
+                            <i class="lni lni-map-marker"></i>
+                        </div>
+                        <h5>Headquarters</h5>
+                        <p class="mb-2">123 Education St</p>
+                        <p class="fw-bold">San Francisco, CA 94107</p>
+                        <p class="small text-muted">United States</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <a href="#" class="footer-logo">EduSmart</a>
+                    <p class="text-muted">The complete school management solution for the modern educational institution.</p>
+                    <div class="social-links mt-4">
+                        <a href="#" data-bs-toggle="tooltip" title="Facebook"><i class="lni lni-facebook-filled"></i></a>
+                        <a href="#" data-bs-toggle="tooltip" title="Twitter"><i class="lni lni-twitter-filled"></i></a>
+                        <a href="#" data-bs-toggle="tooltip" title="LinkedIn"><i class="lni lni-linkedin-original"></i></a>
+                        <a href="#" data-bs-toggle="tooltip" title="Instagram"><i class="lni lni-instagram-filled"></i></a>
+                        <a href="#" data-bs-toggle="tooltip" title="YouTube"><i class="lni lni-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4">
+                    <div class="footer-links">
+                        <h5>Product</h5>
+                        <ul>
+                            <li><a href="#features">Features</a></li>
+                            <li><a href="#pricing">Pricing</a></li>
+                            <li><a href="#demo">Demo</a></li>
+                            <li><a href="#">Updates</a></li>
+                            <li><a href="#">Roadmap</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4">
+                    <div class="footer-links">
+                        <h5>Company</h5>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Press</a></li>
+                            <li><a href="#">Partners</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4">
+                    <div class="footer-links">
+                        <h5>Resources</h5>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Documentation</a></li>
+                            <li><a href="#">Community</a></li>
+                            <li><a href="#">Webinars</a></li>
+                            <li><a href="#">Tutorials</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2">
+                    <div class="footer-links">
+                        <h5>Legal</h5>
+                        <ul>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                            <li><a href="#">Security</a></li>
+                            <li><a href="#">GDPR</a></li>
+                            <li><a href="#">Compliance</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="row">
+                    <div class="col-md-6 text-md-start text-center mb-3 mb-md-0">
+                        <p>&copy; 2023 EduSmart. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end text-center">
+                        <p>Designed with <i class="lni lni-heart text-danger"></i> for educators worldwide</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Initialize tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Animation on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-up');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (elementPosition < screenPosition) {
+                    element.classList.add('animate__animated', 'animate__fadeInUp');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>

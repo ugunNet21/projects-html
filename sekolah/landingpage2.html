@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SchoolSync - Transform Your School Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f5f7fa;
+        }
+        .hero {
+            background: linear-gradient(45deg, #4f46e5, #7c3aed);
+            color: white;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .cta-button {
+            background: #4f46e5;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            transition: background 0.3s;
+        }
+        .cta-button:hover {
+            background: #7c3aed;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s forwards;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 768px) {
+            .hero {
+                clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-indigo-600">SchoolSync</div>
+            <div class="space-x-6 hidden md:flex">
+                <a href="#home" class="text-gray-600 hover:text-indigo-600">Home</a>
+                <a href="#features" class="text-gray-600 hover:text-indigo-600">Features</a>
+                <a href="#pricing" class="text-gray-600 hover:text-indigo-600">Pricing</a>
+                <a href="#contact" class="text-gray-600 hover:text-indigo-600">Contact</a>
+            </div>
+            <a href="#get-started" class="cta-button hidden md:block">Get Started</a>
+            <button class="md:hidden text-gray-600" onclick="toggleMenu()">
+                <i class="bi bi-list text-2xl"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md">
+            <div class="flex flex-col items-center py-4 space-y-4">
+                <a href="#home" class="text-gray-600 hover:text-indigo-600">Home</a>
+                <a href="#features" class="text-gray-600 hover:text-indigo-600">Features</a>
+                <a href="#pricing" class="text-gray-600 hover:text-indigo-600">Pricing</a>
+                <a href="#contact" class="text-gray-600 hover:text-indigo-600">Contact</a>
+                <a href="#get-started" class="cta-button">Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero py-20 md:py-32">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 fade-in">Transform Your School with SchoolSync</h1>
+            <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto fade-in" style="animation-delay: 0.2s;">
+                An all-in-one, AI-powered platform to streamline school management, enhance learning, and engage your community.
+            </p>
+            <a href="#get-started" class="cta-button fade-in" style="animation-delay: 0.4s;">Start Free Trial</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Powerful Features for Modern Schools</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-card fade-in">
+                    <i class="bi bi-robot text-4xl text-indigo-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">AI Learning Assistant</h3>
+                    <p class="text-gray-600">Virtual tutors, automated content creation, and AI essay grading for personalized education.</p>
+                </div>
+                <div class="feature-card fade-in" style="animation-delay: 0.2s;">
+                    <i class="bi bi-book text-4xl text-indigo-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">E-Learning Platform</h3>
+                    <p class="text-gray-600">Virtual classes, interactive materials, quizzes, and gamified learning experiences.</p>
+                </div>
+                <div class="feature-card fade-in" style="animation-delay: 0.4s;">
+                    <i class="bi bi-person-plus text-4xl text-indigo-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">PPDB Online</h3>
+                    <p class="text-gray-600">Streamlined admissions with online forms, document verification, and real-time analytics.</p>
+                </div>
+                <div class="feature-card fade-in" style="animation-delay: 0.6s;">
+                    <i class="bi bi-book-half text-4xl text-indigo-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Digital Library</h3>
+                    <p class="text-gray-600">Access e-books, manage loans, and explore recommended reads effortlessly.</p>
+                </div>
+                <div class="feature-card fade-in" style="animation-delay: 0.8s;">
+                    <i class="bi bi-people text-4xl text-indigo-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Parent Portal</h3>
+                    <p class="text-gray-600">Monitor progress, communicate with teachers, and handle payments seamlessly.</p>
+                </div>
+                <div class="feature-card fade-in" style="animation-delay: 1s;">
+                    <i class="bi bi-graph-up text-4xl text-indigo-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Analytics & Reports</h3>
+                    <p class="text-gray-600">Track attendance, academic performance, and behavior with custom reports.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="get-started" class="py-20 bg-indigo-600 text-white text-center">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 fade-in">Ready to Revolutionize Your School?</h2>
+            <p class="text-lg mb-8 max-w-xl mx-auto fade-in" style="animation-delay: 0.2s;">
+                Join thousands of schools using SchoolSync to streamline operations and enhance education.
+            </p>
+            <a href="#signup" class="cta-button bg-white text-indigo-600 fade-in" style="animation-delay: 0.4s;">Sign Up Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-10">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-xl font-semibold mb-4">SchoolSync</h3>
+                <p class="text-gray-400">Empowering schools with cutting-edge technology for seamless management and learning.</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="#features" class="text-gray-400 hover:text-white">Features</a></li>
+                    <li><a href="#pricing" class="text-gray-400 hover:text-white">Pricing</a></li>
+                    <li><a href="#contact" class="text-gray-400 hover:text-white">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold mb-4">Support</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">FAQs</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold mb-4">Contact Us</h3>
+                <p class="text-gray-400">Email: support@schoolsync.com</p>
+                <p class="text-gray-400">Phone: +1 234 567 890</p>
+                <div class="flex space-x-4 mt-4">
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-gray-400 mt-8">
+            &copy; 2025 SchoolSync. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Fade-in animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>
