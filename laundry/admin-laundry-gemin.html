@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laundry Admin Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Gaya dasar untuk tema gelap (akan ditimpa/dilengkapi oleh style.css) */
+        body {
+            background-color: #1a1a2e; /* Latar belakang gelap */
+            color: #e0e0e0; /* Teks terang */
+        }
+        .sidebar {
+            background-color: #0f0f25; /* Sidebar sedikit lebih gelap dari body */
+            min-height: 100vh; /* Sidebar setinggi viewport */
+        }
+        .nav-link.active {
+            background-color: #007bff; /* Contoh warna aksen untuk link aktif */
+        }
+         .nav-link {
+            color: rgba(255, 255, 255, 0.75); /* Warna link tidak aktif */
+        }
+         .nav-link:hover {
+            color: #fff; /* Warna link saat hover */
+        }
+        .card {
+            background-color: #25254a; /* Latar belakang kartu gelap */
+            border: none; /* Hilangkan border default */
+            color: #e0e0e0; /* Warna teks di kartu */
+            margin-bottom: 20px; /* Jarak antar kartu */
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow subtil */
+        }
+        .card-title {
+            color: #ffffff; /* Warna judul kartu */
+            font-size: 1rem; /* Ukuran judul kartu */
+        }
+        .display-4 {
+            color: #00bfff; /* Warna aksen cerah untuk angka besar */
+            font-weight: bold;
+        }
+         hr {
+            border-top: 1px solid rgba(255, 255, 255, 0.1); /* Garis pemisah samar */
+        }
+         .list-group-item {
+             background-color: #25254a !important; /* Latar belakang item list grup gelap */
+             color: #e0e0e0 !important; /* Warna teks item list grup terang */
+             border-color: rgba(255, 255, 255, 0.1) !important; /* Border item list samar */
+         }
+         .btn-primary {
+             background-color: #00bfff; /* Warna aksen cerah untuk tombol utama */
+             border-color: #00bfff;
+         }
+         .btn-primary:hover {
+              background-color: #0099cc; /* Warna hover tombol utama */
+              border-color: #0099cc;
+         }
+         .btn-outline-secondary {
+             color: #00bfff; /* Warna teks tombol outline */
+             border-color: #00bfff; /* Warna border tombol outline */
+         }
+         .btn-outline-secondary:hover {
+              background-color: #00bfff; /* Warna background hover tombol outline */
+              color: #1a1a2e; /* Warna teks hover tombol outline (sesuai background body) */
+         }
+         .content-area {
+             /* Padding sudah ada dari p-4 */
+             /* Tambahkan style lain jika perlu di style.css */
+         }
+
+        /* Tambahkan lebih banyak gaya futuristik, responsif, dan detail di sini atau lebih baik di style.css */
+         @media (max-width: 767.98px) {
+             .sidebar {
+                 min-height: auto; /* Atur ulang tinggi sidebar di mobile jika perlu */
+             }
+              .content-area {
+                  padding-top: 20px; /* Sesuaikan padding di mobile */
+              }
+         }
+
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-2 col-lg-2 sidebar p-0">
+                <div class="d-flex flex-column p-3 text-white">
+                    <a href="/"
+                        class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <span class="fs-4">Laundry Admin</span>
+                    </a>
+                    <hr>
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active" id="dashboard-tab">
+                                <i class="fas fa-tachometer-alt me-2"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link" id="orders-tab">
+                                <i class="fas fa-shopping-basket me-2"></i>
+                                Orders
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link" id="customers-tab">
+                                <i class="fas fa-users me-2"></i>
+                                Customers
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link" id="services-tab">
+                                <i class="fas fa-concierge-bell me-2"></i>
+                                Services
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link" id="inventory-tab">
+                                <i class="fas fa-tshirt me-2"></i>
+                                Inventory
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link" id="payments-tab">
+                                <i class="fas fa-money-bill-wave me-2"></i>
+                                Payments
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link" id="reports-tab">
+                                <i class="fas fa-chart-bar me-2"></i>
+                                Reports
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link" id="locations-tab">
+                                <i class="fas fa-store me-2"></i>
+                                Locations
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link" id="staff-tab">
+                                <i class="fas fa-user-tie me-2"></i>
+                                Staff Management
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link" id="notifications-tab">
+                                <i class="fas fa-bell me-2"></i>
+                                Notifications
+                            </a>
+                        </li>
+                    </ul>
+                    <hr>
+                    <div class="dropdown">
+                        <a href="#"
+                            class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                            id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://via.placeholder.com/30" alt="Admin" width="30" height="30"
+                                class="rounded-circle me-2">
+                            <strong>Admin</strong>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-10 col-lg-10 p-4 content-area">
+                <h1 class="mb-4">Dashboard Overview</h1>
+
+                <div class="row mb-4">
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fas fa-shopping-basket me-2"></i>Total Orders Hari Ini</h5>
+                                <p class="card-text display-4">150</p>
+                                <p class="card-text text-muted"><small>+10% dari kemarin</small></p> </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fas fa-clock me-2"></i>Orders Pending</h5>
+                                <p class="card-text display-4">35</p>
+                                <p class="card-text text-muted"><small>Perlu segera diproses</small></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fas fa-users me-2"></i>Total Pelanggan Aktif</h5>
+                                <p class="card-text display-4">850</p>
+                                <p class="card-text text-muted"><small>Pelanggan dalam 30 hari terakhir</small></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fas fa-money-bill-wave me-2"></i>Pendapatan Hari Ini</h5>
+                                <p class="card-text display-4">Rp 2.500.000</p>
+                                <p class="card-text text-muted"><small>Target harian tercapai</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                     <div class="col-lg-8 col-md-12 mb-4 mb-lg-0">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fas fa-chart-line me-2"></i>Tren Orders Mingguan</h5>
+                                <div style="position: relative; height:40vh; width:100%">
+                                     <canvas id="ordersChart"></canvas> </div>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fas fa-chart-pie me-2"></i>Layanan Populer</h5>
+                                <div style="position: relative; height:40vh; width:100%">
+                                    <canvas id="servicesChart"></canvas> </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-7 col-md-12 mb-4 mb-lg-0">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fas fa-history me-2"></i>Aktivitas Terbaru</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <i class="fas fa-check-circle text-success me-2"></i>Pesanan <a href="#" class="text-decoration-none" style="color: #00bfff;">#1234</a> Selesai - Pelanggan: Budi (10:30)
+                                    </li>
+                                     <li class="list-group-item">
+                                        <i class="fas fa-plus-circle text-primary me-2"></i>Pesanan Baru <a href="#" class="text-decoration-none" style="color: #00bfff;">#1235</a> Masuk - Pelanggan: Siti (09:45)
+                                    </li>
+                                     <li class="list-group-item">
+                                        <i class="fas fa-bell text-warning me-2"></i>Stok Deterjen Rendah - Cek <a href="#" class="text-decoration-none" style="color: #00bfff;">Inventory</a>
+                                    </li>
+                                     <li class="list-group-item">
+                                        <i class="fas fa-money-bill-wave text-success me-2"></i>Pembayaran Diterima untuk Pesanan <a href="#" class="text-decoration-none" style="color: #00bfff;">#1230</a>
+                                    </li>
+                                    </ul>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-lg-5 col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                 <h5 class="card-title"><i class="fas fa-bolt me-2"></i>Akses Cepat</h5>
+                                 <div class="d-grid gap-2">
+                                    <button class="btn btn-primary btn-lg"><i class="fas fa-plus-circle me-2"></i>Buat Pesanan Baru</button>
+                                    <a href="#" class="btn btn-outline-secondary btn-lg"><i class="fas fa-list me-2"></i>Lihat Semua Pesanan</a>
+                                    <a href="#" class="btn btn-outline-secondary btn-lg"><i class="fas fa-user-plus me-2"></i>Tambah Pelanggan Baru</a>
+                                    <a href="#" class="btn btn-outline-secondary btn-lg"><i class="fas fa-tshirt me-2"></i>Kelola Inventaris</a>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="script.js"></script>
+
+    <script>
+        // Kode JavaScript untuk menginisialisasi Chart.js dan mengambil data (ini contoh statis)
+        // Kode ini sebaiknya lebih rapi di file script.js pada aplikasi nyata
+
+        // Data Placeholder (ganti dengan data aktual dari backend)
+        const ordersData = {
+            labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
+            datasets: [{
+                label: 'Jumlah Orders',
+                data: [100, 120, 90, 150, 180, 200, 160], // Data placeholder
+                backgroundColor: 'rgba(0, 191, 255, 0.5)', // Contoh warna aksen
+                borderColor: '#00bfff', // Contoh warna aksen
+                borderWidth: 2,
+                tension: 0.3, // Kurva halus
+                fill: true
+            }]
+        };
+
+         const servicesData = {
+            labels: ['Cuci Kering', 'Cuci Setrika', 'Setrika Saja', 'Cuci Karpet'],
+            datasets: [{
+                label: 'Jumlah Layanan',
+                data: [300, 450, 150, 100], // Data placeholder
+                backgroundColor: [
+                    'rgba(0, 191, 255, 0.8)', // Biru aksen 1
+                    'rgba(148, 0, 211, 0.8)', // Ungu aksen 2
+                    'rgba(57, 255, 20, 0.8)', // Hijau aksen 3
+                    'rgba(255, 215, 0, 0.8)' // Emas aksen 4
+                ],
+                 borderColor: '#1a1a2e', // Warna border sama dengan background body
+                 borderWidth: 2
+            }]
+        };
+
+
+        // Konfigurasi Opsi Grafik
+        const chartOptions = {
+             responsive: true,
+             maintainAspectRatio: false, // Penting agar ukuran div induk mengontrol ukuran canvas
+             plugins: {
+                 legend: {
+                     labels: {
+                         color: '#e0e0e0' // Warna teks legend
+                     }
+                 },
+                  tooltip: { // Opsi tooltip untuk hover
+                      callbacks: {
+                          label: function(tooltipItem) {
+                              // Sesuaikan format label tooltip jika perlu
+                              return tooltipItem.label + ': ' + tooltipItem.raw;
+                          }
+                      }
+                  }
+             },
+             scales: { // Opsi sumbu untuk grafik garis/batang
+                 y: {
+                     beginAtZero: true,
+                     grid: {
+                         color: 'rgba(255, 255, 255, 0.1)' // Garis grid samar
+                     },
+                     ticks: {
+                         color: '#e0e0e0' // Warna teks sumbu
+                     }
+                 },
+                  x: {
+                     grid: {
+                         color: 'rgba(255, 255, 255, 0.1)' // Garis grid samar
+                     },
+                      ticks: {
+                         color: '#e0e0e0' // Warna teks sumbu
+                     }
+                 }
+             }
+         };
+
+
+        // Inisialisasi Grafik Orders
+        const ordersCtx = document.getElementById('ordersChart');
+         if (ordersCtx) {
+            const ordersChart = new Chart(ordersCtx, {
+                type: 'line', // Bisa 'bar' juga
+                data: ordersData,
+                options: {
+                     ...chartOptions, // Gabungkan opsi umum
+                      scales: chartOptions.scales // Pastikan scales masuk untuk grafik garis/batang
+                }
+            });
+         }
+
+
+        // Inisialisasi Grafik Services
+        const servicesCtx = document.getElementById('servicesChart');
+         if (servicesCtx) {
+            const servicesChart = new Chart(servicesCtx, {
+                type: 'pie', // Bisa 'doughnut'
+                data: servicesData,
+                 options: {
+                     ...chartOptions, // Gabungkan opsi umum
+                      scales: {} // Tidak ada sumbu untuk grafik pie/donat
+                 }
+            });
+         }
+
+
+    </script>
+
+</body>
+</html>

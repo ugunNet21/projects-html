@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nama Brand Laundry Anda - Layanan Laundry Terbaik</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="style-landing.css">
+
+    <style>
+        /* Gaya Dasar dan Warna (sesuaikan di style-landing.css untuk detail) */
+        :root {
+            --primary-color: #007bff; /* Contoh warna biru */
+            --secondary-color: #6c757d; /* Contoh warna abu-abu */
+            --accent-color: #28a745; /* Contoh warna hijau (untuk CTA) */
+            --dark-bg: #f8f9fa; /* Latar belakang terang */
+            --text-color: #333; /* Warna teks umum */
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; /* Font modern */
+            color: var(--text-color);
+            line-height: 1.6;
+             overflow-x: hidden; /* Hindari scroll horizontal karena elemen responsif */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: #333; /* Warna judul */
+            font-weight: 700;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            font-weight: bold;
+             padding: 10px 25px;
+             border-radius: 50px; /* Tombol membulat */
+        }
+         .btn-primary:hover {
+             background-color: #218838;
+             border-color: #1e7e34;
+         }
+
+        /* Hero Section */
+        .hero-section {
+            background: url('https://via.placeholder.com/1500x800') no-repeat center center/cover; /* Ganti dengan gambar laundry yang bagus */
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+         .hero-section::before {
+             content: '';
+             position: absolute;
+             top: 0;
+             left: 0;
+             right: 0;
+             bottom: 0;
+             background: rgba(0, 0, 0, 0.5); /* Overlay gelap agar teks terbaca */
+         }
+         .hero-content {
+             position: relative;
+             z-index: 1;
+         }
+         .hero-content h1 {
+             color: white;
+             font-size: 3em;
+             margin-bottom: 20px;
+             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+         }
+          .hero-content p {
+              font-size: 1.2em;
+              margin-bottom: 30px;
+              text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+          }
+
+        /* Section Styling Umum */
+        .section-padding {
+            padding: 60px 0;
+        }
+        .section-heading {
+            text-align: center;
+            margin-bottom: 50px;
+             font-size: 2.5em;
+        }
+
+        /* Why Choose Us Section */
+        .feature-item {
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .feature-item .icon {
+            font-size: 3em;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        /* How It Works Section */
+         .step-item {
+             text-align: center;
+             padding: 20px;
+             margin-bottom: 30px;
+         }
+         .step-item .icon {
+             font-size: 3em;
+             color: var(--primary-color);
+             margin-bottom: 15px;
+         }
+          .step-item h3 {
+              font-size: 1.5em;
+          }
+
+        /* Services Section */
+        .service-card {
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 30px;
+             transition: transform 0.3s ease-in-out;
+        }
+         .service-card:hover {
+             transform: translateY(-10px); /* Efek hover mengangkat kartu */
+         }
+        .service-card .icon {
+             font-size: 3em;
+             color: var(--primary-color);
+             margin-bottom: 15px;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+             background-color: var(--dark-bg);
+             padding: 60px 0;
+        }
+        .testimonial-item {
+            font-style: italic;
+            margin-bottom: 30px;
+             padding: 20px;
+             background-color: white;
+             border-radius: 10px;
+             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+         .testimonial-item .author {
+             font-weight: bold;
+             margin-top: 15px;
+             display: block;
+             font-style: normal;
+         }
+
+        /* Contact Section */
+        .contact-form .form-control {
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #343a40; /* Latar belakang gelap */
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+         footer a:hover {
+             text-decoration: underline;
+         }
+         .social-icons a {
+             font-size: 1.5em;
+             margin: 0 10px;
+             color: white;
+         }
+
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Nama Brand Laundry</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#hero">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Kenapa Kami?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-it-works">Cara Kerja</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Layanan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Testimoni</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="#contact">Kontak</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link btn btn-primary text-white ms-2" href="#">Pesan Sekarang</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero" class="hero-section">
+        <div class="hero-content container">
+            <h1>Laundry Bersih, Hidup Lebih Ringan</h1>
+            <p>Nikmati layanan laundry antar-jemput berkualitas tanpa repot. Fokus pada hal yang penting bagi Anda!</p>
+            <a href="#contact" class="btn btn-primary btn-lg">Pesan Sekarang</a>
+            <a href="#services" class="btn btn-outline-light btn-lg ms-2">Lihat Layanan</a>
+        </div>
+    </section>
+
+    <section id="features" class="section-padding">
+        <div class="container">
+            <h2 class="section-heading">Mengapa Pilih Laundry Kami?</h2>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <div class="feature-item">
+                        <div class="icon"><i class="fas fa-truck"></i></div>
+                        <h3>Layanan Antar-Jemput</h3>
+                        <p>Kami jemput pakaian kotor Anda dan antar kembali dalam keadaan rapi.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                     <div class="feature-item">
+                        <div class="icon"><i class="fas fa-gem"></i></div>
+                        <h3>Kualitas Terjamin</h3>
+                        <p>Menggunakan deterjen premium dan proses pencucian terbaik untuk hasil maksimal.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                     <div class="feature-item">
+                        <div class="icon"><i class="fas fa-leaf"></i></div>
+                        <h3>Ramah Lingkungan</h3>
+                        <p>Kami peduli bumi, menggunakan produk dan metode yang lebih ramah lingkungan.</p>
+                    </div>
+                </div>
+            </div>
+             <div class="row text-center">
+                <div class="col-md-4 offset-md-2">
+                    <div class="feature-item">
+                        <div class="icon"><i class="fas fa-clock"></i></div>
+                        <h3>Tepat Waktu</h3>
+                        <p>Proses cepat dan pengiriman sesuai jadwal yang disepakati.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                     <div class="feature-item">
+                        <div class="icon"><i class="fas fa-tags"></i></div>
+                        <h3>Harga Kompetitif</h3>
+                        <p>Layanan berkualitas tinggi dengan harga yang terjangkau.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="section-padding bg-light">
+        <div class="container">
+            <h2 class="section-heading">Cara Kerja Layanan Kami</h2>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <div class="step-item">
+                         <div class="icon"><i class="fas fa-calendar-check"></i></div>
+                        <h3>1. Jadwalkan</h3>
+                        <p>Pesan layanan antar-jemput via website atau aplikasi.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                     <div class="step-item">
+                         <div class="icon"><i class="fas fa-box-open"></i></div>
+                        <h3>2. Serahkan Pakaian</h3>
+                        <p>Tim kami akan datang menjemput pakaian kotor Anda.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                     <div class="step-item">
+                         <div class="icon"><i class="fas fa-dolly-flatbed"></i></div>
+                        <h3>3. Terima Beres</h3>
+                        <p>Pakaian bersih, rapi, dan wangi diantar kembali ke lokasi Anda.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section-padding">
+        <div class="container">
+            <h2 class="section-heading">Layanan Kami</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                         <div class="icon"><i class="fas fa-soap"></i></div>
+                        <h3>Cuci & Kering</h3>
+                        <p>Layanan dasar cuci hingga kering, siap setrika atau lipat sendiri.</p>
+                         </div>
+                </div>
+                 <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                         <div class="icon"><i class="fas fa-tshirt"></i></div>
+                        <h3>Cuci, Kering & Setrika</h3>
+                        <p>Layanan lengkap, pakaian dicuci, dikeringkan, dan disetrika rapi.</p>
+                         </div>
+                </div>
+                 <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                         <div class="icon"><i class="fas fa-socks"></i></div>
+                        <h3>Setrika Saja</h3>
+                        <p>Pakaian yang sudah dicuci, kami bantu setrika hingga rapi.</p>
+                         </div>
+                </div>
+                 <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                         <div class="icon"><i class="fas fa-couch"></i></div>
+                        <h3>Cuci Karpet & Sofa</h3>
+                        <p>Pembersihan profesional untuk karpet, sofa, dan perabotan rumah.</p>
+                         </div>
+                </div>
+                 <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                         <div class="icon"><i class="fas fa-shoe-prints"></i></div>
+                        <h3>Cuci Sepatu & Tas</h3>
+                        <p>Perawatan khusus untuk sepatu, tas, dan aksesoris favorit Anda.</p>
+                         </div>
+                </div>
+                 <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                         <div class="icon"><i class="fas fa-tint"></i></div>
+                        <h3>Dry Cleaning</h3>
+                        <p>Layanan cuci kering untuk bahan-bahan sensitif atau pakaian khusus.</p>
+                         </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials-section">
+        <div class="container">
+            <h2 class="section-heading">Kata Pelanggan Kami</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                     <div class="testimonial-item">
+                        "Layanan antar-jemputnya sangat membantu! Pakaian saya selalu bersih dan wangi. Hemat waktu dan tenaga."
+                        <span class="author">- Budi S.</span>
+                    </div>
+                     <div class="testimonial-item">
+                        "Kualitas setrikanya rapi sekali, seperti di-laundry premium. Harga juga bersahabat. Highly recommended!"
+                        <span class="author">- Siti A.</span>
+                    </div>
+                     <div class="testimonial-item">
+                        "Pesan via aplikasi mudah, proses cepat, dan timnya ramah. Solusi laundry modern yang saya cari."
+                        <span class="author">- Joko P.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-padding">
+        <div class="container">
+            <h2 class="section-heading">Siap Mencoba Layanan Kami?</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <p class="text-center mb-4">Hubungi kami sekarang untuk menjadwalkan pengambilan laundry Anda atau tanyakan lebih lanjut.</p>
+                     <div class="text-center mb-4">
+                         <h4><i class="fas fa-phone-alt me-2"></i>Telepon: (022) XXXX XXXX</h4>
+                         <h4><i class="fas fa-whatsapp me-2"></i>WhatsApp: 08XX XXXX XXXX</h4>
+                         <h4><i class="fas fa-envelope me-2"></i>Email: info@namalaundryanda.com</h4>
+                     </div>
+
+                     </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Nama Brand Laundry Anda. All rights reserved.</p>
+            <div class="social-icons mb-3">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div>
+                <a href="#">Kebijakan Privasi</a> |
+                <a href="#">Syarat & Ketentuan</a>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    <script src="script-landing.js"></script>
+
+    <script>
+        // Contoh JavaScript sederhana: smooth scrolling untuk link di navbar
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Tambahkan script lain di sini atau di script-landing.js
+    </script>
+
+</body>
+</html>
