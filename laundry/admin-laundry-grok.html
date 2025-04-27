@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laundry Admin CMS</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f6f9;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 250px;
+            background-color: #343a40;
+            padding-top: 20px;
+            overflow-y: auto;
+            transition: all 0.3s;
+        }
+        .sidebar .nav-link {
+            color: #c2c7d0;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 5px 10px;
+            display: flex;
+            align-items: center;
+        }
+        .sidebar .nav-link i {
+            margin-right: 10px;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            color: #fff;
+            background-color: #495057;
+        }
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .navbar-top {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 10px 20px;
+            margin-left: 250px;
+        }
+        .content-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+                transform: translateX(-200px);
+            }
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            .main-content, .navbar-top {
+                margin-left: 0;
+            }
+            .navbar-top {
+                position: fixed;
+                width: 100%;
+                z-index: 1000;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navbar -->
+    <nav class="navbar-top d-flex justify-content-between align-items-center">
+        <div>
+            <button class="btn btn-outline-secondary d-md-none" id="toggleSidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+            <span class="h4 mb-0">Laundry Admin CMS</span>
+        </div>
+        <div>
+            <span class="me-3">Welcome, Admin</span>
+            <button class="btn btn-outline-danger" id="logoutBtn">Logout</button>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="text-center mb-4">
+            <h4 class="text-white">Laundry Admin</h4>
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="#dashboard" data-section="dashboard">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#locations" data-section="locations">
+                    <i class="fas fa-map-marker-alt"></i> Locations
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#users" data-section="users">
+                    <i class="fas fa-users"></i> Users
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#customers" data-section="customers">
+                    <i class="fas fa-user-friends"></i> Customers
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#services" data-section="services">
+                    <i class="fas fa-concierge-bell"></i> Services
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#items" data-section="items">
+                    <i class="fas fa-tshirt"></i> Items
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#orders" data-section="orders">
+                    <i class="fas fa-shopping-cart"></i> Orders
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#payments" data-section="payments">
+                    <i class="fas fa-money-bill"></i> Payments
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#notifications" data-section="notifications">
+                    <i class="fas fa-bell"></i> Notifications
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#reports" data-section="reports">
+                    <i class="fas fa-chart-bar"></i> Reports
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#logout" id="sidebarLogout">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Dashboard Section -->
+        <div class="content-section" id="dashboard">
+            <h2>Dashboard</h2>
+            <p>Welcome to the Laundry Admin CMS. Overview of key metrics will be displayed here, such as total orders, pending payments, and active locations.</p>
+            <!-- Placeholder for dashboard widgets -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Orders</h5>
+                            <p class="card-text">0</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Pending Payments</h5>
+                            <p class="card-text">0</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Active Locations</h5>
+                            <p class="card-text">0</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Locations Section -->
+        <div class="content-section d-none" id="locations">
+            <h2>Locations</h2>
+            <p>Manage laundry branches/locations. Add, edit, or deactivate locations.</p>
+            <button class="btn btn-primary mb-3">Add New Location</button>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Populated dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Users Section -->
+        <div class="content-section d-none" id="users">
+            <h2>Users</h2>
+            <p>Manage staff accounts (admin, manager, staff, courier). Assign roles and locations.</p>
+            <button class="btn btn-primary mb-3">Add New User</button>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Role</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Populated dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Customers Section -->
+        <div class="content-section d-none" id="customers">
+            <h2>Customers</h2>
+            <p>Manage customer information and loyalty points.</p>
+            <button class="btn btn-primary mb-3">Add New Customer</button>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Loyalty Points</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Populated dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Services Section -->
+        <div class="content-section d-none" id="services">
+            <h2>Services</h2>
+            <p>Manage laundry services (e.g., Cuci Kiloan, Dry Clean). Set prices and units.</p>
+            <button class="btn btn-primary mb-3">Add New Service</button>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Unit</th>
+                        <th>Base Price</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Populated dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Items Section -->
+        <div class="content-section d-none" id="items">
+            <h2>Items</h2>
+            <p>Manage item types (e.g., Kemeja, Celana Jeans) for piece-based services.</p>
+            <button class="btn btn-primary mb-3">Add New Item</button>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Populated dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Orders Section -->
+        <div class="content-section d-none" id="orders">
+            <h2>Orders</h2>
+            <p>View and manage laundry orders. Track status and details.</p>
+            <button class="btn btn-primary mb-3">Create New Order</button>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Order Number</th>
+                        <th>Customer</th>
+                        <th>Status</th>
+                        <th>Total Amount</th>
+                        <th>Payment Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Populated dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Payments Section -->
+        <div class="content-section d-none" id="payments">
+            <h2>Payments</h2>
+            <p>Track payment transactions for orders.</p>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Order Number</th>
+                        <th>Amount</th>
+                        <th>Method</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Populated dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Notifications Section -->
+        <div class="content-section d-none" id="notifications">
+            <h2>Notifications</h2>
+            <p>Manage customer notifications (e.g., order ready, payment reminders).</p>
+            <button class="btn btn-primary mb-3">Send New Notification</button>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Type</th>
+                        <th>Message</th>
+                        <th>Status</th>
+                        <th>Sent At</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Populated dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Reports Section -->
+        <div class="content-section d-none" id="reports">
+            <h2>Reports</h2>
+            <p>Generate reports for orders, revenue, customer loyalty, and more.</p>
+            <div class="mb-3">
+                <button class="btn btn-primary">Order Summary Report</button>
+                <button class="btn btn-primary">Revenue Report</button>
+                <button class="btn btn-primary">Customer Loyalty Report</button>
+            </div>
+            <!-- Placeholder for report visualizations -->
+            <div id="reportCharts"></div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Sidebar navigation
+        const navLinks = document.querySelectorAll('.sidebar .nav-link');
+        const sections = document.querySelectorAll('.content-section');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const sectionId = link.getAttribute('data-section');
+
+                // Update active link
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+
+                // Show/hide sections
+                sections.forEach(section => {
+                    section.classList.add('d-none');
+                    if (section.id === sectionId) {
+                        section.classList.remove('d-none');
+                    }
+                });
+
+                // Handle logout
+                if (sectionId === 'logout') {
+                    alert('Logging out...');
+                    // Implement logout logic here
+                }
+            });
+        });
+
+        // Toggle sidebar on mobile
+        const toggleSidebarBtn = document.getElementById('toggleSidebar');
+        const sidebar = document.querySelector('.sidebar');
+        toggleSidebarBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+
+        // Logout button
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            alert('Logging out...');
+            // Implement logout logic here
+        });
+        document.getElementById('sidebarLogout').addEventListener('click', () => {
+            alert('Logging out...');
+            // Implement logout logic here
+        });
+    </script>
+</body>
+</html>
