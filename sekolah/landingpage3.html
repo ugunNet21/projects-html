@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduSmart - Sistem Manajemen Sekolah Modern</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/LineIcons/2.0.1/LineIcons.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --success: #4cc9f0;
+            --info: #4895ef;
+            --warning: #f72585;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        
+        .text-primary {
+            color: var(--primary) !important;
+        }
+        
+        .bg-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        
+        .hero-section {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 100px 0;
+            background: linear-gradient(rgba(67, 97, 238, 0.8), rgba(63, 55, 201, 0.9)), url('/api/placeholder/1200/800') center/cover no-repeat;
+            color: white;
+        }
+        
+        .features-card {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .features-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: white;
+        }
+        
+        .testimonial-card {
+            border-radius: 12px;
+            padding: 25px;
+            margin: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            z-index: -1;
+        }
+        
+        .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .nav-pills .nav-link.active {
+            background-color: var(--primary);
+        }
+        
+        .pricing-card {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .pricing-header {
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+        
+        .pricing-features {
+            padding: 30px;
+        }
+        
+        .pricing-features ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .pricing-features li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .pricing-features li i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 15px;
+            background-color: var(--warning);
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .stats-counter {
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .floating-animation {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .feature-icon {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+        }
+        
+        .navbar {
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            background-color: white !important;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar.scrolled .nav-link {
+            color: #333 !important;
+        }
+        
+        .navbar.scrolled .navbar-brand {
+            color: var(--primary) !important;
+        }
+        
+        .demo-dashboard {
+            border-radius: 8px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .demo-dashboard:hover {
+            transform: scale(1.02);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 80px 0;
+                text-align: center;
+            }
+            
+            .stats-counter {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="lni lni-school"></i> EduSmart
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Fitur</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#modules">Modul</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Testimonial</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">Harga</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-outline-light" href="#contact">Hubungi Kami</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h1 class="display-4 fw-bold mb-4">Transformasi Digital untuk Pendidikan Indonesia</h1>
+                    <p class="lead mb-4">EduSmart adalah platform manajemen sekolah lengkap dengan fitur AI, e-learning, dan analisis data untuk mengoptimalkan proses belajar mengajar di era digital.</p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="#" class="btn btn-light btn-lg">Demo Gratis</a>
+                        <a href="#modules" class="btn btn-outline-light btn-lg">Jelajahi Fitur</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="/api/placeholder/600/400" alt="Dashboard Preview" class="img-fluid rounded-3 shadow-lg floating-animation demo-dashboard">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Counter -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-6 col-md-3 mb-4 mb-md-0">
+                    <div class="stats-counter">5000+</div>
+                    <p class="text-muted">Sekolah Pengguna</p>
+                </div>
+                <div class="col-6 col-md-3 mb-4 mb-md-0">
+                    <div class="stats-counter">2.5jt+</div>
+                    <p class="text-muted">Siswa Aktif</p>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stats-counter">150k+</div>
+                    <p class="text-muted">Guru Terhubung</p>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stats-counter">99.9%</div>
+                    <p class="text-muted">Uptime Server</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Features -->
+    <section class="py-5" id="features">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Fitur Utama EduSmart</h2>
+                <p class="text-muted mx-auto" style="max-width: 600px;">Platform all-in-one dengan berbagai fitur inovatif untuk memenuhi kebutuhan sekolah modern</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="features-card h-100 p-4">
+                        <div class="icon-box bg-primary">
+                            <i class="lni lni-dashboard"></i>
+                        </div>
+                        <h4>Dashboard Interaktif</h4>
+                        <p class="text-muted">Pantau semua aktivitas sekolah dari satu tempat dengan tampilan yang informatif dan interaktif.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="features-card h-100 p-4">
+                        <div class="icon-box" style="background-color: var(--success);">
+                            <i class="lni lni-book"></i>
+                        </div>
+                        <h4>E-Learning Terintegrasi</h4>
+                        <p class="text-muted">Sistem pembelajaran online lengkap dengan kelas virtual, tugas interaktif, dan diskusi.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="features-card h-100 p-4">
+                        <div class="icon-box" style="background-color: var(--warning);">
+                            <i class="lni lni-users"></i>
+                        </div>
+                        <h4>PPDB Online</h4>
+                        <p class="text-muted">Kelola penerimaan siswa baru secara online mulai dari pendaftaran hingga pengumuman kelulusan.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="features-card h-100 p-4">
+                        <div class="icon-box" style="background-color: var(--info);">
+                            <i class="lni lni-write"></i>
+                        </div>
+                        <h4>Ujian Online</h4>
+                        <p class="text-muted">Buat, kelola, dan analisis hasil ujian dengan mudah melalui sistem ujian online yang aman.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="features-card h-100 p-4">
+                        <div class="icon-box" style="background-color: var(--danger);">
+                            <i class="lni lni-robot"></i>
+                        </div>
+                        <h4>AI Learning Assistant</h4>
+                        <p class="text-muted">Manfaatkan kecerdasan buatan untuk membantu proses belajar mengajar dan personalisasi.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="features-card h-100 p-4">
+                        <div class="icon-box" style="background-color: var(--secondary);">
+                            <i class="lni lni-stats-up"></i>
+                        </div>
+                        <h4>Laporan & Analytics</h4>
+                        <p class="text-muted">Dapatkan insight berharga tentang performa akademik dan operasional sekolah.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modules Section -->
+    <section class="py-5 bg-light" id="modules">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Modul Lengkap Sistem</h2>
+                <p class="text-muted mx-auto" style="max-width: 600px;">EduSmart menyediakan modul lengkap untuk manajemen semua aspek operasional sekolah</p>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 mb-4">
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <button class="nav-link active mb-2" id="v-pills-manajemen-tab" data-bs-toggle="pill" data-bs-target="#v-pills-manajemen" type="button" role="tab">Manajemen Sekolah</button>
+                        <button class="nav-link mb-2" id="v-pills-elearning-tab" data-bs-toggle="pill" data-bs-target="#v-pills-elearning" type="button" role="tab">E-Learning</button>
+                        <button class="nav-link mb-2" id="v-pills-eraport-tab" data-bs-toggle="pill" data-bs-target="#v-pills-eraport" type="button" role="tab">E-Raport & Penilaian</button>
+                        <button class="nav-link mb-2" id="v-pills-ujian-tab" data-bs-toggle="pill" data-bs-target="#v-pills-ujian" type="button" role="tab">Ujian Online</button>
+                        <button class="nav-link mb-2" id="v-pills-perpus-tab" data-bs-toggle="pill" data-bs-target="#v-pills-perpus" type="button" role="tab">Perpustakaan Digital</button>
+                        <button class="nav-link mb-2" id="v-pills-ai-tab" data-bs-toggle="pill" data-bs-target="#v-pills-ai" type="button" role="tab">AI Learning Assistant</button>
+                        <button class="nav-link mb-2" id="v-pills-career-tab" data-bs-toggle="pill" data-bs-target="#v-pills-career" type="button" role="tab">Career Development</button>
+                        <button class="nav-link" id="v-pills-monetisasi-tab" data-bs-toggle="pill" data-bs-target="#v-pills-monetisasi" type="button" role="tab">Sistem Monetisasi</button>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="tab-content p-4 bg-white rounded-3 shadow-sm" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="v-pills-manajemen" role="tabpanel">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 mb-4 mb-md-0">
+                                    <h3>Manajemen Sekolah</h3>
+                                    <p>Kelola semua data terkait siswa, guru, kelas, dan aset sekolah dalam satu sistem terintegrasi.</p>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Data Siswa & Guru</li>
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Manajemen Kelas</li>
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Jadwal Pelajaran</li>
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Inventaris Sekolah</li>
+                                        <li><i class="lni lni-checkmark text-primary me-2"></i> Mata Pelajaran</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="/api/placeholder/500/300" alt="Manajemen Sekolah" class="img-fluid rounded-3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-elearning" role="tabpanel">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 mb-4 mb-md-0">
+                                    <h3>E-Learning</h3>
+                                    <p>Platform pembelajaran online lengkap untuk mendukung proses belajar mengajar dari mana saja.</p>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Kelas Virtual</li>
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Materi Multimedia</li>
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Tugas & Quiz Online</li>
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Forum Diskusi</li>
+                                        <li><i class="lni lni-checkmark text-primary me-2"></i> Video Conference</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="/api/placeholder/500/300" alt="E-Learning" class="img-fluid rounded-3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-eraport" role="tabpanel">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 mb-4 mb-md-0">
+                                    <h3>E-Raport & Penilaian</h3>
+                                    <p>Sistem penilaian digital yang memudahkan guru dan memberikan insight mendalam tentang perkembangan siswa.</p>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Input Nilai Digital</li>
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Generate Raport Otomatis</li>
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Analisis Kompetensi</li>
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Portofolio Digital</li>
+                                        <li><i class="lni lni-checkmark text-primary me-2"></i> Prediksi Prestasi</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="/api/placeholder/500/300" alt="E-Raport" class="img-fluid rounded-3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-ujian" role="tabpanel">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 mb-4 mb-md-0">
+                                    <h3>Ujian Online</h3>
+                                    <p>Sistem ujian online yang aman dengan fitur anti-kecurangan dan analisis hasil yang komprehensif.</p>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Bank Soal Terstruktur</li>
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> UTS/UAS Online</li>
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Simulasi UNBK</li>
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Proctoring System</li>
+                                        <li><i class="lni lni-checkmark text-primary me-2"></i> Analisis Hasil Ujian</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="/api/placeholder/500/300" alt="Ujian Online" class="img-fluid rounded-3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-perpus" role="tabpanel">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 mb-4 mb-md-0">
+                                    <h3>Perpustakaan Digital</h3>
+                                    <p>Akses ribuan buku dan sumber belajar digital kapan saja dan di mana saja.</p>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Katalog Digital</li>
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> E-Book Collection</li>
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Peminjaman Online</li>
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Rekomendasi Bacaan</li>
+                                        <li><i class="lni lni-checkmark text-primary me-2"></i> Review Buku Digital</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="/api/placeholder/500/300" alt="Perpustakaan Digital" class="img-fluid rounded-3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-ai" role="tabpanel">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 mb-4 mb-md-0">
+                                    <h3>AI Learning Assistant</h3>
+                                    <p>Fitur canggih berbasis AI untuk meningkatkan efektivitas belajar dan mengajar.</p>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Tutor Virtual 24/7</li>
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Pembuat Materi Otomatis</li>
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Penilaian Esai Otomatis</li>
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Rekomendasi Pembelajaran</li>
+                                        <li><i class="lni lni-checkmark text-primary me-2"></i> Deteksi Plagiarisme</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="/api/placeholder/500/300" alt="AI Learning" class="img-fluid rounded-3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-career" role="tabpanel">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 mb-4 mb-md-0">
+                                    <h3>Career Development</h3>
+                                    <p>Bantu siswa merencanakan masa depan karir mereka dengan tools pengembangan karir terintegrasi.</p>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Psikotes Minat Bakat</li>
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Analisis Potensi Karir</li>
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Konseling Online</li>
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Informasi Perguruan Tinggi</li>
+                                        <li><i class="lni lni-checkmark text-primary me-2"></i> Link dengan Industri</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="/api/placeholder/500/300" alt="Career Development" class="img-fluid rounded-3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-monetisasi" role="tabpanel">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 mb-4 mb-md-0">
+                                    <h3>Sistem Monetisasi</h3>
+                                    <p>Buka potensi pendapatan tambahan untuk sekolah dengan berbagai fitur monetisasi.</p>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Marketplace Sekolah</li>
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Kursus Premium</li>
+                                        <li class="mb-2"><i class="lnilni-checkmark text-primary me-2"></i> Iklan Terintegrasi</li>
+                                        <li class="mb-2"><i class="lni lni-checkmark text-primary me-2"></i> Donasi Online</li>
+                                        <li><i class="lni lni-checkmark text-primary me-2"></i> Sistem Pembayaran</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="/api/placeholder/500/300" alt="Sistem Monetisasi" class="img-fluid rounded-3">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="py-5" id="testimonials">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Apa Kata Pengguna Kami</h2>
+                <p class="text-muted mx-auto" style="max-width: 600px;">Dengarkan pengalaman dari sekolah dan pendidik yang telah menggunakan EduSmart untuk transformasi digital.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="text-muted">"EduSmart telah mengubah cara kami mengelola sekolah. Fitur-fiturnya sangat membantu, terutama PPDB online dan dashboard interaktif!"</p>
+                        <div class="d-flex align-items-center mt-4">
+                            <img src="/api/placeholder/60/60" alt="User Avatar" class="avatar me-3">
+                            <div>
+                                <h6 class="mb-0">Dr. Ahmad Santoso</h6>
+                                <small class="text-muted">Kepala Sekolah SMA Nusantara</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="text-muted">"Sistem e-learning dan AI assistant sangat memudahkan siswa belajar secara mandiri. Kami sangat puas!"</p>
+                        <div class="d-flex align-items-center mt-4">
+                            <img src="/api/placeholder/60/60" alt="User Avatar" class="avatar me-3">
+                            <div>
+                                <h6 class="mb-0">Siti Nurhaliza</h6>
+                                <small class="text-muted">Guru Matematika SMP Harapan</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="text-muted">"Ujian online dan analisis hasilnya sangat membantu kami memahami kelemahan siswa dan memperbaiki metode pengajaran."</p>
+                        <div class="d-flex align-items-center mt-4">
+                            <img src="/api/placeholder/60/60" alt="User Avatar" class="avatar me-3">
+                            <div>
+                                <h6 class="mb-0">Budi Hartono</h6>
+                                <small class="text-muted">Kepala Kurikulum SMA Cendekia</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="py-5 bg-light" id="pricing">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Pilih Paket Sesuai Kebutuhan Anda</h2>
+                <p class="text-muted mx-auto" style="max-width: 600px;">Kami menawarkan berbagai paket fleksibel untuk mendukung transformasi digital sekolah Anda.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="pricing-card">
+                        <div class="pricing-header bg-primary">
+                            <h4 class="fw-bold mb-0">Basic</h4>
+                            <p class="text-white-50">Untuk sekolah kecil</p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li><i class="lni lni-checkmark"></i> Manajemen Sekolah</li>
+                                <li><i class="lni lni-checkmark"></i> E-Learning Dasar</li>
+                                <li><i class="lni lni-checkmark"></i> E-Raport</li>
+                                <li><i class="lni lni-close text-muted"></i> Ujian Online</li>
+                                <li><i class="lni lni-close text-muted"></i> AI Assistant</li>
+                            </ul>
+                            <div class="text-center mt-4">
+                                <a href="#" class="btn btn-primary">Pilih Paket</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="pricing-card position-relative">
+                        <div class="popular-badge">Paling Populer</div>
+                        <div class="pricing-header bg-gradient">
+                            <h4 class="fw-bold mb-0">Pro</h4>
+                            <p class="text-white-50">Untuk sekolah menengah</p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li><i class="lni lni-checkmark"></i> Manajemen Sekolah</li>
+                                <li><i class="lni lni-checkmark"></i> E-Learning Lengkap</li>
+                                <li><i class="lni lni-checkmark"></i> E-Raport & Penilaian</li>
+                                <li><i class="lni lni-checkmark"></i> Ujian Online</li>
+                                <li><i class="lni lni-close text-muted"></i> AI Assistant</li>
+                            </ul>
+                            <div class="text-center mt-4">
+                                <a href="#" class="btn btn-primary">Pilih Paket</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="pricing-card">
+                        <div class="pricing-header bg-secondary">
+                            <h4 class="fw-bold mb-0">Enterprise</h4>
+                            <p class="text-white-50">Untuk sekolah besar</p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li><i class="lni lni-checkmark"></i> Semua Fitur Pro</li>
+                                <li><i class="lni lni-checkmark"></i> AI Learning Assistant</li>
+                                <li><i class="lni lni-checkmark"></i> Perpustakaan Digital</li>
+                                <li><i class="lni lni-checkmark"></i> Career Development</li>
+                                <li><i class="lni lni-checkmark"></i> Sistem Monetisasi</li>
+                            </ul>
+                            <div class="text-center mt-4">
+                                <a href="#" class="btn btn-primary">Pilih Paket</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-5" id="contact">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Hubungi Kami</h2>
+                <p class="text-muted mx-auto" style="max-width: 600px;">Kami siap membantu Anda memulai transformasi digital untuk sekolah Anda. Hubungi kami sekarang!</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <form>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nama</label>
+                            <input type="text" class="form-control" id="name" placeholder="Masukkan nama Anda">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Masukkan email Anda">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Pesan</label>
+                            <textarea class="form-control" id="message" rows="5" placeholder="Tulis pesan Anda"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Kirim Pesan</button>
+                    </form>
+                </div>
+                <div class="col-lg-6">
+                    <div class="d-flex flex-column gap-4">
+                        <div class="d-flex align-items-center">
+                            <i class="lni lni-phone feature-icon me-3"></i>
+                            <div>
+                                <h5>Telepon</h5>
+                                <p class="text-muted">+62 21 1234 5678</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="lni lni-envelope feature-icon me-3"></i>
+                            <div>
+                                <h5>Email</h5>
+                                <p class="text-muted">support@edusmart.id</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="lni lni-map-marker feature-icon me-3"></i>
+                            <div>
+                                <h5>Alamat</h5>
+                                <p class="text-muted">Jl. Pendidikan No. 123, Jakarta, Indonesia</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4 class="fw-bold mb-4">EduSmart</h4>
+                    <p class="text-muted">Platform manajemen sekolah modern untuk mendukung transformasi digital pendidikan Indonesia.</p>
+                    <div class="social-links mt-4">
+                        <a href="#"><i class="lni lni-facebook-filled"></i></a>
+                        <a href="#"><i class="lni lni-twitter-filled"></i></a>
+                        <a href="#"><i class="lni lni-instagram-filled"></i></a>
+                        <a href="#"><i class="lni lni-linkedin-original"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-5 mb-md-0">
+                    <h5 class="fw-bold mb-4">Produk</h5>
+                    <ul class="footer-links">
+                        <li><a href="#features">Fitur</a></li>
+                        <li><a href="#modules">Modul</a></li>
+                        <li><a href="#pricing">Harga</a></li>
+                        <li><a href="#testimonials">Testimonial</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-5 mb-md-0">
+                    <h5 class="fw-bold mb-4">Perusahaan</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Karir</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h5 class="fw-bold mb-4">Hubungi Kami</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">support@edusmart.id</a></li>
+                        <li><a href="#">+62 21 1234 5678</a></li>
+                        <li><a href="#">Jl. Pendidikan No. 123, Jakarta</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-5">
+            <div class="text-center">
+                <p class="text-muted">&copy; 2025 EduSmart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('mainNav');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

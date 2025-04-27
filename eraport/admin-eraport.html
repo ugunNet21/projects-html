@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            min-height: 100vh;
+            background-color: #f5f7fa;
+        }
+        .sidebar {
+            min-height: 100vh;
+            background-color: #2c3e50;
+            color: white;
+            position: fixed;
+            width: 250px;
+            transition: all 0.3s;
+        }
+        .sidebar .nav-link {
+            color: #b0b7c0;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 5px 10px;
+            transition: all 0.3s;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            color: white;
+            background-color: #3498db;
+        }
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #3498db;
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+            }
+            .sidebar .sidebar-text {
+                display: none;
+            }
+            .content {
+                margin-left: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="p-3 text-center">
+            <h4 class="text-white mb-4">Admin Panel</h4>
+        </div>
+        <nav class="nav flex-column">
+            <a class="nav-link active" href="#dashboard">
+                <i class="fas fa-tachometer-alt me-2"></i>
+                <span class="sidebar-text">Dashboard</span>
+            </a>
+            <a class="nav-link" href="#sekolah">
+                <i class="fas fa-school me-2"></i>
+                <span class="sidebar-text">Manajemen Sekolah</span>
+            </a>
+            <a class="nav-link" href="#tahun-ajaran">
+                <i class="fas fa-calendar-alt me-2"></i>
+                <span class="sidebar-text">Tahun Ajaran</span>
+            </a>
+            <a class="nav-link" href="#siswa">
+                <i class="fas fa-users me-2"></i>
+                <span class="sidebar-text">Data Siswa</span>
+            </a>
+            <a class="nav-link" href="#orang-tua">
+                <i class="fas fa-user-tie me-2"></i>
+                <span class="sidebar-text">Data Orang Tua</span>
+            </a>
+            <a class="nav-link" href="#guru">
+                <i class="fas fa-chalkboard-teacher me-2"></i>
+                <span class="sidebar-text">Data Guru</span>
+            </a>
+            <a class="nav-link" href="#kelas">
+                <i class="fas fa-door-open me-2"></i>
+                <span class="sidebar-text">Manajemen Kelas</span>
+            </a>
+            <a class="nav-link" href="#wali-kelas">
+                <i class="fas fa-user-check me-2"></i>
+                <span class="sidebar-text">Wali Kelas</span>
+            </a>
+            <a class="nav-link" href="#penilaian">
+                <i class="fas fa-clipboard-list me-2"></i>
+                <span class="sidebar-text">Penilaian Siswa</span>
+            </a>
+            <a class="nav-link" href="#pertumbuhan">
+                <i class="fas fa-chart-line me-2"></i>
+                <span class="sidebar-text">Pertumbuhan Siswa</span>
+            </a>
+            <a class="nav-link" href="#p5">
+                <i class="fas fa-project-diagram me-2"></i>
+                <span class="sidebar-text">Proyek P5</span>
+            </a>
+            <a class="nav-link" href="#users">
+                <i class="fas fa-user-cog me-2"></i>
+                <span class="sidebar-text">Manajemen User</span>
+            </a>
+            <a class="nav-link" href="#logout">
+                <i class="fas fa-sign-out-alt me-2"></i>
+                <span class="sidebar-text">Logout</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <div class="container-fluid">
+            <!-- Dashboard Section -->
+            <section id="dashboard">
+                <h2 class="mb-4">Dashboard</h2>
+                <div class="row">
+                    <div class="col-md-3 mb-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <i class="fas fa-school fa-2x text-primary mb-2"></i>
+                                <h5>Jumlah Sekolah</h5>
+                                <h3 id="total-sekolah">0</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <i class="fas fa-users fa-2x text-success mb-2"></i>
+                                <h5>Jumlah Siswa</h5>
+                                <h3 id="total-siswa">0</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <i class="fas fa-chalkboard-teacher fa-2x text-warning mb-2"></i>
+                                <h5>Jumlah Guru</h5>
+                                <h3 id="total-guru">0</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <i class="fas fa-door-open fa-2x text-danger mb-2"></i>
+                                <h5>Jumlah Kelas</h5>
+                                <h3 id="total-kelas">0</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Example Table Section -->
+            <section id="siswa" class="mt-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Data Siswa</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-3">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahSiswaModal">
+                                <i class="fas fa-plus me-2"></i>Tambah Siswa
+                            </button>
+                            <div class="input-group w-25">
+                                <input type="text" class="form-control" placeholder="Cari siswa...">
+                                <button class="btn btn-outline-secondary" type="button"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>NIS</th>
+                                        <th>Nama</th>
+                                        <th>Jenis Kelamin</th>
+                                        <th>Alamat</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="siswa-table">
+                                    <!-- Data will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Modal Tambah Siswa -->
+    <div class="modal fade" id="tambahSiswaModal" tabindex="-1" aria-labelledby="tambahSiswaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tambahSiswaModalLabel">Tambah Siswa Baru</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-tambah-siswa">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="nis" class="form-label">NIS</label>
+                                <input type="text" class="form-control" id="nis" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="nisn" class="form-label">NISN</label>
+                                <input type="text" class="form-control" id="nisn" required>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="nama" class="form-label">Nama Lengkap</label>
+                                <input type="text" class="form-control" id="nama" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
+                                <input type="text" class="form-control" id="tempat_lahir">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
+                                <input type="date" class="form-control" id="tanggal_lahir">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
+                                <select class="form-select" id="jenis_kelamin">
+                                    <option value="Laki-laki">Laki-laki</option>
+                                    <option value="Perempuan">Perempuan</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="agama" class="form-label">Agama</label>
+                                <input type="text" class="form-control" id="agama">
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="alamat" class="form-label">Alamat</label>
+                                <textarea class="form-control" id="alamat" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary" onclick="simpanSiswa()">Simpan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Mock data for demonstration
+        const siswaData = [
+            { nis: '123456', nama: 'John Doe', jenis_kelamin: 'Laki-laki', alamat: 'Jl. Contoh No. 1' },
+            { nis: '123457', nama: 'Jane Doe', jenis_kelamin: 'Perempuan', alamat: 'Jl. Contoh No. 2' }
+        ];
+
+        // Populate siswa table
+        function populateSiswaTable() {
+            const tableBody = document.getElementById('siswa-table');
+            tableBody.innerHTML = '';
+            siswaData.forEach(siswa => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${siswa.nis}</td>
+                    <td>${siswa.nama}</td>
+                    <td>${siswa.jenis_kelamin}</td>
+                    <td>${siswa.alamat}</td>
+                    <td>
+                        <button class="btn btn-sm btn-warning me-1"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Simpan siswa (mock function)
+        function simpanSiswa() {
+            const form = document.getElementById('form-tambah-siswa');
+            // Add your form submission logic here
+            alert('Data siswa disimpan!');
+            form.reset();
+            bootstrap.Modal.getInstance(document.getElementById('tambahSiswaModal')).hide();
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            populateSiswaTable();
+            // Mock dashboard stats
+            document.getElementById('total-sekolah').textContent = '5';
+            document.getElementById('total-siswa').textContent = '250';
+            document.getElementById('total-guru').textContent = '30';
+            document.getElementById('total-kelas').textContent = '15';
+        });
+    </script>
+</body>
+</html>

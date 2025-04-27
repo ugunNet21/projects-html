@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIAKAD - Sistem Informasi Akademik Terpadu</title>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4caf50;
+            --info: #2196f3;
+            --warning: #ff9800;
+            --danger: #f44336;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f5f7fa;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .btn-light {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        .btn-light:hover {
+            background-color: var(--light);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 32px;
+            color: var(--dark);
+            position: relative;
+            margin-bottom: 15px;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title p {
+            color: #6c757d;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid var(--primary);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            background-color: rgba(67, 97, 238, 0.1);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--primary);
+            font-size: 28px;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .feature-card p {
+            color: #6c757d;
+        }
+        
+        /* Modules Section */
+        .modules {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .module-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .module-content {
+            padding: 20px;
+        }
+        
+        .module-card h3 {
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        
+        .module-card p {
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+        
+        .module-img {
+            height: 180px;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: var(--primary);
+        }
+        
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            padding: 80px 0;
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+        
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        /* Testimonial Section */
+        .testimonials {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 30px;
+            position: relative;
+        }
+        
+        .testimonial-card p {
+            color: #6c757d;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            margin: 0;
+            font-size: 14px;
+            color: #6c757d;
+            font-style: normal;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 2px;
+            background-color: var(--primary);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-column p, .footer-column a {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <i class="fas fa-school"></i> SIAKAD
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#features">Fitur</a></li>
+                    <li><a href="#modules">Modul</a></li>
+                    <li><a href="#testimonials">Testimoni</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                    <li><a href="#" class="btn btn-primary">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Sistem Informasi Akademik Terpadu</h1>
+                <p>Kelola data sekolah, siswa, dan penilaian dengan mudah dalam satu platform terintegrasi yang dirancang khusus untuk kebutuhan pendidikan Indonesia.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-light">Coba Demo</a>
+                    <a href="#" class="btn btn-primary">Mulai Sekarang</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Fitur Unggulan</h2>
+                <p>Dapatkan kemudahan mengelola data akademik dengan fitur-fitur komprehensif yang didukung teknologi terbaru</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3>Manajemen Siswa</h3>
+                    <p>Kelola data lengkap siswa termasuk biodata, riwayat kelas, dan perkembangan akademik dengan mudah</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3>Manajemen Guru</h3>
+                    <p>Atur data guru dan wali kelas beserta pembagian tugas mengajar sesuai tahun ajaran</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Penilaian Komprehensif</h3>
+                    <p>Catat dan analisis perkembangan akademik siswa dengan berbagai indikator penilaian</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <h3>Pemantauan Pertumbuhan</h3>
+                    <p>Pantau pertumbuhan fisik siswa termasuk berat badan, tinggi badan, dan lingkar kepala</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>Projek Profil Pelajar Pancasila</h3>
+                    <p>Implementasikan dan evaluasi program Projek Penguatan Profil Pelajar Pancasila (P5)</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Keterlibatan Orang Tua</h3>
+                    <p>Libatkan orang tua dalam proses pendidikan dengan fitur refleksi dan akses informasi</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modules Section -->
+    <section class="modules" id="modules">
+        <div class="container">
+            <div class="section-title">
+                <h2>Modul Lengkap</h2>
+                <p>SIAKAD menyediakan berbagai modul terintegrasi sesuai kebutuhan sekolah Anda</p>
+            </div>
+            <div class="modules-grid">
+                <div class="module-card">
+                    <div class="module-img">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <div class="module-content">
+                        <h3>Administrasi Sekolah</h3>
+                        <p>Kelola data sekolah, tahun ajaran, dan kelas dengan sistem yang terintegrasi</p>
+                    </div>
+                </div>
+                <div class="module-card">
+                    <div class="module-img">
+                        <i class="fas fa-book-reader"></i>
+                    </div>
+                    <div class="module-content">
+                        <h3>Akademik</h3>
+                        <p>Kelola aspek penilaian, indikator, dan laporan perkembangan siswa</p>
+                    </div>
+                </div>
+                <div class="module-card">
+                    <div class="module-img">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <div class="module-content">
+                        <h3>Kesehatan dan Tumbuh Kembang</h3>
+                        <p>Pantau pertumbuhan siswa dengan grafik dan laporan berkala</p>
+                    </div>
+                </div>
+                <div class="module-card">
+                    <div class="module-img">
+                        <i class="fas fa-flag"></i>
+                    </div>
+                    <div class="module-content">
+                        <h3>Profil Pelajar Pancasila</h3>
+                        <p>Implementasikan dan evaluasi dimensi dan elemen P5 secara terintegrasi</p>
+                    </div>
+                </div>
+                <div class="module-card">
+                    <div class="module-img">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <div class="module-content">
+                        <h3>Rapor Digital</h3>
+                        <p>Buat laporan perkembangan siswa digital lengkap dengan tanda tangan elektronik</p>
+                    </div>
+                </div>
+                <div class="module-card">
+                    <div class="module-img">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="module-content">
+                        <h3>Manajemen Pengguna</h3>
+                        <p>Kelola peran dan hak akses untuk admin, guru, kepala sekolah, dan orang tua</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Siap Tingkatkan Kualitas Pendidikan?</h2>
+            <p>Jadikan SIAKAD sebagai partner sekolah Anda dalam mengelola data akademik yang efisien dan terintegrasi.</p>
+            <a href="#" class="btn btn-light">Mulai Sekarang</a>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Testimoni Pengguna</h2>
+                <p>Lihat apa kata pengguna SIAKAD tentang pengalaman mereka</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p>"SIAKAD sangat membantu kami dalam mengelola data siswa dan laporan penilaian. Proses yang dulunya memakan waktu berhari-hari, kini dapat diselesaikan dalam hitungan jam."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">DS</div>
+                        <div class="author-info">
+                            <h4>Dewi Sartika</h4>
+                            <p>Kepala Sekolah SD Negeri 1</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Sebagai guru wali kelas, saya sangat terbantu dengan adanya modul penilaian yang komprehensif. Laporan perkembangan siswa jadi lebih mudah dan akurat."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">BR</div>
+                        <div class="author-info">
+                            <h4>Budi Raharjo</h4>
+                            <p>Guru Wali Kelas 5B</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Dengan SIAKAD, saya bisa memantau perkembangan anak saya tanpa harus selalu datang ke sekolah. Komunikasi dengan guru juga jadi lebih lancar."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SS</div>
+                        <div class="author-info">
+                            <h4>Sinta Sari</h4>
+                            <p>Orang Tua Siswa</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>SIAKAD</h3>
+                    <p>Sistem Informasi Akademik Terpadu yang dirancang khusus untuk kebutuhan pendidikan Indonesia, dari TK hingga SMA.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Kontak</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Jl. Pendidikan No. 123, Jakarta</p>
+                    <p><i class="fas fa-phone"></i> (021) 1234-5678</p>
+                    <p><i class="fas fa-envelope"></i> info@siakad.id</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Tautan Cepat</h3>
+                    <a href="#features">Fitur</a>
+                    <a href="#modules">Modul</a>
+                    <a href="#testimonials">Testimoni</a>
+                    <a href="#">Demo</a>
+                    <a href="#">Login</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Berlangganan</h3>
+                    <p>Dapatkan informasi terbaru dari kami</p>
+                    <form style="margin-top: 15px;">
+                        <input type="email" placeholder="Email Anda" style="padding: 10px; width: 100%; border-radius: 5px; border: none; margin-bottom: 10px;">
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Berlangganan</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SIAKAD - Sistem Informasi Akademik Terpadu. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

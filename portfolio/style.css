@@ -1,0 +1,74 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-top: 56px;
+}
+
+/* Hero Section */
+.hero-section {
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/random/1920x1080/?technology');
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+/* Skills */
+.skill-item {
+    margin-bottom: 1rem;
+}
+
+.progress {
+    height: 10px;
+    border-radius: 5px;
+}
+
+.progress-bar {
+    background-color: #007bff;
+    transition: width 1.5s ease-in-out;
+}
+
+/* Projects */
+.project-card {
+    transition: transform 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Contact Form */
+#contact-form input,
+#contact-form textarea {
+    border-radius: 0;
+    border: 1px solid #ddd;
+}
+
+#contact-form input:focus,
+#contact-form textarea:focus {
+    box-shadow: none;
+    border-color: #007bff;
+}
+
+/* Social Links */
+.social-links a {
+    font-size: 1.5rem;
+    transition: opacity 0.3s ease;
+}
+
+.social-links a:hover {
+    opacity: 0.7;
+}
+
+/* Animations */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
