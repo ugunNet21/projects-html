@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cinema Management System - Admin Panel</title>
+        <!-- Bootstrap 5 CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="css/style.css">
+      
+        <style>
+        :root {
+    --primary: #4e73df;
+    --secondary: #858796;
+    --success: #1cc88a;
+    --info: #36b9cc;
+    --warning: #f6c23e;
+    --danger: #e74a3b;
+    --light: #f8f9fc;
+    --dark: #5a5c69;
+}
+
+body {
+    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f8f9fc;
+    overflow-x: hidden;
+}
+
+/* Sidebar */
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: #4e73df;
+    color: #fff;
+    transition: all 0.3s;
+    min-height: 100vh;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: #3a5bc7;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+}
+
+#sidebar ul li a {
+    padding: 10px 15px;
+    font-size: 1.1em;
+    display: block;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+#sidebar ul li a:hover {
+    color: #4e73df;
+    background: #fff;
+}
+
+#sidebar ul li a i {
+    margin-right: 10px;
+}
+
+#sidebar ul li.active > a {
+    color: #fff;
+    background: #3a5bc7;
+}
+
+#sidebar ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #3a5bc7;
+}
+
+/* Content */
+#content {
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+/* Navbar */
+.navbar {
+    padding: 15px 10px;
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 40px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 0.35rem;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+}
+
+.card-header {
+    background-color: #f8f9fc;
+    border-bottom: 1px solid #e3e6f0;
+}
+
+/* Progress bars */
+.progress {
+    height: 20px;
+    border-radius: 3px;
+}
+
+.progress-bar {
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Tables */
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #858796;
+}
+
+.table th {
+    font-weight: 600;
+    color: #4e73df;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+}
+    </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <!-- Sidebar -->
+            <nav id="sidebar" class="active">
+                <div class="sidebar-header">
+                    <h3>Cinema CMS</h3>
+                    <strong>CMS</strong>
+                </div>
+
+                <ul class="list-unstyled components">
+                    <li class="active">
+                        <a href="#dashboard" data-bs-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
+                            <i class="fas fa-tachometer-alt"></i>
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <!-- Movies Section -->
+                    <li>
+                        <a href="#moviesSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-film"></i>
+                            Movies
+                        </a>
+                        <ul class="collapse list-unstyled" id="moviesSubmenu">
+                            <li>
+                                <a href="#"><i class="fas fa-list"></i> All Movies</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-plus-circle"></i> Add New</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-certificate"></i> Ratings</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-calendar-alt"></i> Upcoming</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Screenings Section -->
+                    <li>
+                        <a href="#screeningsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-calendar-day"></i>
+                            Screenings
+                        </a>
+                        <ul class="collapse list-unstyled" id="screeningsSubmenu">
+                            <li>
+                                <a href="#"><i class="fas fa-list"></i> All Screenings</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-plus-circle"></i> Schedule New</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-chart-line"></i> Screening Reports</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Cinemas Section -->
+                    <li>
+                        <a href="#cinemasSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-building"></i>
+                            Cinemas
+                        </a>
+                        <ul class="collapse list-unstyled" id="cinemasSubmenu">
+                            <li>
+                                <a href="#"><i class="fas fa-list"></i> All Cinemas</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-plus-circle"></i> Add New</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-map-marked-alt"></i> Locations</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Theaters Section -->
+                    <li>
+                        <a href="#theatersSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-theater-masks"></i>
+                            Theaters
+                        </a>
+                        <ul class="collapse list-unstyled" id="theatersSubmenu">
+                            <li>
+                                <a href="#"><i class="fas fa-list"></i> All Theaters</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-plus-circle"></i> Add New</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-chair"></i> Seat Management</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-chair"></i> Seat Availability</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-tools"></i> Maintenance</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Bookings Section -->
+                    <li>
+                        <a href="#bookingsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-ticket-alt"></i>
+                            Bookings
+                        </a>
+                        <ul class="collapse list-unstyled" id="bookingsSubmenu">
+                            <li>
+                                <a href="#"><i class="fas fa-list"></i> All Bookings</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-search"></i> Find Booking</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-exchange-alt"></i> Refunds</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-chart-pie"></i> Sales Reports</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Users Section -->
+                    <li>
+                        <a href="#usersSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-users"></i>
+                            Users
+                        </a>
+                        <ul class="collapse list-unstyled" id="usersSubmenu">
+                            <li>
+                                <a href="#"><i class="fas fa-list"></i> All Users</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-user-plus"></i> Add New</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-user-shield"></i> Roles & Permissions</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-user-clock"></i> Activity Log</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Payments Section -->
+                    <li>
+                        <a href="#paymentsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-credit-card"></i>
+                            Payments
+                        </a>
+                        <ul class="collapse list-unstyled" id="paymentsSubmenu">
+                            <li>
+                                <a href="#"><i class="fas fa-list"></i> Transactions</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-money-bill-wave"></i> Revenue</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-file-invoice-dollar"></i> Invoices</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Promotions Section -->
+                    <li>
+                        <a href="#promotionsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-tags"></i>
+                            Promotions
+                        </a>
+                        <ul class="collapse list-unstyled" id="promotionsSubmenu">
+                            <li>
+                                <a href="#"><i class="fas fa-list"></i> All Promotions</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-plus-circle"></i> Add New</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-chart-line"></i> Promotion Usage</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Reports Section -->
+                    <li>
+                        <a href="#reportsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-chart-bar"></i>
+                            Reports
+                        </a>
+                        <ul class="collapse list-unstyled" id="reportsSubmenu">
+                            <li>
+                                <a href="#"><i class="fas fa-film"></i> Movie Performance</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-building"></i> Cinema Performance</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-calendar"></i> Daily/Weekly/Monthly</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-star"></i> Customer Insights</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Settings Section -->
+                    <li>
+                        <a href="#settingsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-cog"></i>
+                            Settings
+                        </a>
+                        <ul class="collapse list-unstyled" id="settingsSubmenu">
+                            <li>
+                                <a href="#"><i class="fas fa-sliders-h"></i> System Settings</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-tags"></i> Pricing</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-bell"></i> Notifications</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Page Content -->
+            <div id="content">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+                        <button type="button" id="sidebarCollapse" class="btn btn-info">
+                            <i class="fas fa-align-left"></i>
+                            <span>Toggle Sidebar</span>
+                        </button>
+                        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="fas fa-align-justify"></i>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="nav navbar-nav ms-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><i class="fas fa-bell"></i> <span class="badge bg-danger">5</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><i class="fas fa-envelope"></i> <span class="badge bg-success">3</span></a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-user-circle"></i> Admin User
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Profile</a></li>
+                                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- Main Content Area -->
+                <div class="container-fluid">
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h2>Dashboard</h2>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item active" aria-current="page">Home</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!-- Stats Cards -->
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col me-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Today's Screenings</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">24</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-calendar-day fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col me-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Today's Bookings</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">187</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-ticket-alt fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col me-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                Today's Revenue</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$3,245</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col me-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                Active Movies</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">12</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-film fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+                        <!-- Current Screenings -->
+                        <div class="col-lg-8 mb-4">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Today's Screenings</h6>
+                                    <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuLink">
+                                            <li><a class="dropdown-item" href="#">View All</a></li>
+                                            <li><a class="dropdown-item" href="#">Add New Screening</a></li>
+                                            <li><a class="dropdown-item" href="#">Generate Report</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="screeningsTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Movie</th>
+                                                    <th>Time</th>
+                                                    <th>Theater</th>
+                                                    <th>Seats Booked</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Avengers: Endgame</td>
+                                                    <td>10:00 AM - 1:15 PM</td>
+                                                    <td>Theater 1 (IMAX)</td>
+                                                    <td>
+                                                        <div class="progress">
+                                                            <div class="progress-bar bg-success" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-info"><i class="fas fa-eye"></i></button>
+                                                        <button class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Dune: Part Two</td>
+                                                    <td>2:00 PM - 4:45 PM</td>
+                                                    <td>Theater 3 (4DX)</td>
+                                                    <td>
+                                                        <div class="progress">
+                                                            <div class="progress-bar bg-warning" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%</div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-info"><i class="fas fa-eye"></i></button>
+                                                        <button class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Oppenheimer</td>
+                                                    <td>5:30 PM - 8:45 PM</td>
+                                                    <td>Theater 2 (3D)</td>
+                                                    <td>
+                                                        <div class="progress">
+                                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-info"><i class="fas fa-eye"></i></button>
+                                                        <button class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Bookings -->
+                        <div class="col-lg-4 mb-4">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Recent Bookings</h6>
+                                    <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuLink">
+                                            <li><a class="dropdown-item" href="#">View All</a></li>
+                                            <li><a class="dropdown-item" href="#">Generate Report</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="list-group">
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h6 class="mb-1">#BK20230501</h6>
+                                                <small class="text-success">Paid</small>
+                                            </div>
+                                            <p class="mb-1">Avengers: Endgame - 10:00 AM</p>
+                                            <small class="text-muted">John Doe - $45.00</small>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h6 class="mb-1">#BK20230502</h6>
+                                                <small class="text-warning">Pending</small>
+                                            </div>
+                                            <p class="mb-1">Dune: Part Two - 2:00 PM</p>
+                                            <small class="text-muted">Jane Smith - $32.50</small>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h6 class="mb-1">#BK20230503</h6>
+                                                <small class="text-success">Paid</small>
+                                            </div>
+                                            <p class="mb-1">Oppenheimer - 5:30 PM</p>
+                                            <small class="text-muted">Robert Johnson - $28.00</small>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+                        <!-- Movie Performance -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Top Performing Movies</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-bar">
+                                        <canvas id="moviePerformanceChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Revenue by Cinema -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Revenue by Cinema</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-pie pt-4">
+                                        <canvas id="cinemaRevenueChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Chart.js -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <!-- Custom JS -->
+        <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Sidebar toggle
+        document.getElementById('sidebarCollapse').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('active');
+        });
+
+        // Initialize charts
+        initCharts();
+    });
+
+    function initCharts() {
+        // Movie Performance Chart
+        const moviePerformanceCtx = document.getElementById('moviePerformanceChart');
+        const moviePerformanceChart = new Chart(moviePerformanceCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Avengers', 'Dune', 'Oppenheimer', 'Inception', 'Interstellar', 'The Dark Knight'],
+                datasets: [{
+                    label: 'Bookings',
+                    data: [4215, 3312, 2845, 1968, 1587, 1432],
+                    backgroundColor: 'rgba(78, 115, 223, 0.7)',
+                    borderColor: 'rgba(78, 115, 223, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Cinema Revenue Chart
+        const cinemaRevenueCtx = document.getElementById('cinemaRevenueChart');
+        const cinemaRevenueChart = new Chart(cinemaRevenueCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Downtown', 'Mall of City', 'Westside', 'East End', 'Central Park'],
+                datasets: [{
+                    data: [35, 25, 20, 15, 5],
+                    backgroundColor: [
+                        'rgba(78, 115, 223, 0.7)',
+                        'rgba(28, 200, 138, 0.7)',
+                        'rgba(246, 194, 62, 0.7)',
+                        'rgba(231, 74, 59, 0.7)',
+                        'rgba(54, 185, 204, 0.7)'
+                    ],
+                    hoverBackgroundColor: [
+                        'rgba(78, 115, 223, 1)',
+                        'rgba(28, 200, 138, 1)',
+                        'rgba(246, 194, 62, 1)',
+                        'rgba(231, 74, 59, 1)',
+                        'rgba(54, 185, 204, 1)'
+                    ],
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                    },
+                },
+                cutout: '70%',
+            },
+        });
+    }
+        </script>
+    </body>
+</html>
