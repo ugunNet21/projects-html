@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al-Qur'an Indonesia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/quran/app/styles/main.css">
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="container mx-auto max-w-md bg-white min-h-screen shadow-lg">
+        <!-- Header -->
+        <header class="bg-green-600 text-white p-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold">Al-Qur'an Indonesia</h1>
+            <button class="text-sm bg-green-700 px-3 py-1 rounded">Go Premium</button>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="flex border-b">
+            <button id="tab-surah" class="flex-1 py-3 font-medium text-center border-b-2 border-green-600 text-green-600">
+                SURAH
+            </button>
+            <button id="tab-juz" class="flex-1 py-3 font-medium text-center text-gray-500">
+                JUZ
+            </button>
+            <button id="tab-bookmark" class="flex-1 py-3 font-medium text-center text-gray-500">
+                BOOKMARK
+            </button>
+        </nav>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Surah View -->
+            <div id="surah-view" class="p-4">
+                <div class="flex justify-between mb-4">
+                    <button class="px-3 py-1 bg-gray-100 rounded">7. Al-Araf</button>
+                    <button class="px-3 py-1 bg-gray-100 rounded">6. Al-Anam</button>
+                    <button class="px-3 py-1 bg-gray-100 rounded">5. Al-Maidah</button>
+                </div>
+
+                <div id="surah-content" class="mb-6">
+                    <!-- Ayat akan dimuat di sini -->
+                </div>
+
+                <div class="flex justify-between mb-4">
+                    <button id="prev-ayat" class="px-3 py-1 bg-gray-100 rounded">
+                        <i class="fas fa-chevron-left"></i> Sebelumnya
+                    </button>
+                    <button id="next-ayat" class="px-3 py-1 bg-gray-100 rounded">
+                        Selanjutnya <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <div class="flex justify-around border-t pt-4">
+                    <button class="text-center">
+                        <i class="fas fa-play-circle text-green-600 text-2xl"></i>
+                        <p class="text-xs mt-1">Murattal</p>
+                    </button>
+                    <button class="text-center">
+                        <i class="fas fa-share-alt text-green-600 text-2xl"></i>
+                        <p class="text-xs mt-1">Share</p>
+                    </button>
+                    <button class="text-center">
+                        <i class="fas fa-copy text-green-600 text-2xl"></i>
+                        <p class="text-xs mt-1">Copy</p>
+                    </button>
+                    <button class="text-center">
+                        <i class="fas fa-bookmark text-green-600 text-2xl"></i>
+                        <p class="text-xs mt-1">Bookmark</p>
+                    </button>
+                    <button class="text-center">
+                        <i class="fas fa-book text-green-600 text-2xl"></i>
+                        <p class="text-xs mt-1">Terakhir Baca</p>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Juz View (hidden by default) -->
+            <div id="juz-view" class="p-4 hidden">
+                <div class="space-y-2">
+                    <div class="p-3 border rounded">
+                        <h3 class="font-bold">Juz 1</h3>
+                        <p class="text-sm text-gray-600">MULAI DI: AL-FATIHAH AYAT 1</p>
+                    </div>
+                    <div class="p-3 border rounded">
+                        <h3 class="font-bold">Juz 2</h3>
+                        <p class="text-sm text-gray-600">MULAI DI: AL-BAQARAH AYAT 142</p>
+                    </div>
+                    <!-- Juz lainnya akan dimuat di sini -->
+                </div>
+            </div>
+
+            <!-- Bookmark View (hidden by default) -->
+            <div id="bookmark-view" class="p-4 hidden">
+                <div class="text-center py-8">
+                    <p class="mb-4">Masuk dengan Google untuk menyimpan otomatis data Terakhir Baca dan Bookmark Anda ke Cloud kami.</p>
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded flex items-center mx-auto">
+                        <i class="fab fa-google mr-2"></i> Masuk Google
+                    </button>
+                </div>
+                <div class="border-t pt-4">
+                    <h3 class="font-bold mb-2">Terakhir Baca</h3>
+                    <p class="text-sm">QS. Al-Fatihah 1: Ayat 1 (Juz: 1)</p>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="fixed bottom-0 left-0 right-0 bg-white border-t flex justify-around py-2 max-w-md mx-auto">
+                <button class="text-center text-green-600">
+                    <i class="fas fa-book-quran block text-xl"></i>
+                    <p class="text-xs mt-1">Baca Qur'an</p>
+                </button>
+                <button class="text-center text-gray-500">
+                    <i class="fas fa-history block text-xl"></i>
+                    <p class="text-xs mt-1">Terakhir Baca</p>
+                </button>
+                <button class="text-center text-gray-500">
+                    <i class="fas fa-search block text-xl"></i>
+                    <p class="text-xs mt-1">Pencarian</p>
+                </button>
+                <button class="text-center text-gray-500">
+                    <i class="fas fa-clock block text-xl"></i>
+                    <p class="text-xs mt-1">Jadwal Sholat</p>
+                </button>
+                <button class="text-center text-gray-500">
+                    <i class="fas fa-cog block text-xl"></i>
+                    <p class="text-xs mt-1">Pengaturan</p>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for Ayat Navigation -->
+    <div id="ayat-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white p-4 rounded-lg w-64">
+            <h3 class="font-bold mb-2">6. Al-An'am</h3>
+            <p class="text-sm mb-4">Masukkan nomor ayat antara 1-165</p>
+            <div class="flex justify-between mb-4">
+                <span class="text-gray-500">1-165</span>
+            </div>
+            <div class="flex justify-between">
+                <button id="cancel-ayat" class="px-4 py-2 bg-gray-200 rounded">Batal</button>
+                <button id="go-to-ayat" class="px-4 py-2 bg-green-600 text-white rounded">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/quran/app/scripts/api.js"></script>
+    <script src="/quran/app/scripts/utils.js"></script>
+    <script src="/quran/app/scripts/app.js"></script>
+</body>
+</html>
