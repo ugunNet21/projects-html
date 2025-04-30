@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduSphere - Sistem Manajemen Sekolah Futuristik</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --success: #4cc9f0;
+            --gradient: linear-gradient(135deg, #4361ee 0%, #3f37c9 50%, #4895ef 100%);
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--dark);
+            overflow-x: hidden;
+            background-color: #fafbff;
+        }
+        
+        /* Navbar */
+        .navbar {
+            padding: 1.5rem 0;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.8rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            margin: 0 0.5rem;
+            color: var(--dark);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .btn-primary {
+            background: var(--gradient);
+            border: none;
+            padding: 0.6rem 1.5rem;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 6rem 0 5rem;
+            background: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center;
+            background-size: cover;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 26, 46, 0.7);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-weight: 800;
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        
+        .hero-btns .btn {
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .btn-outline-light {
+            border: 2px solid white;
+            background: transparent;
+            color: white;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-light:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        /* Features */
+        .features {
+            padding: 6rem 0;
+            background: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title h2 {
+            font-weight: 800;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .section-title p {
+            color: #6c757d;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(67, 97, 238, 0.1);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(67, 97, 238, 0.1);
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+        
+        .feature-card h3 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card p {
+            color: #6c757d;
+        }
+        
+        /* Dashboard Preview */
+        .dashboard-preview {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f6f9ff 0%, #f0f4ff 100%);
+        }
+        
+        .dashboard-img {
+            border-radius: 12px;
+            box-shadow: 0 25px 50px rgba(67, 97, 238, 0.15);
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+        
+        .dashboard-img:hover {
+            transform: scale(1.02);
+        }
+        
+        .dashboard-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 6rem 0;
+            background: white;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+        
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+        
+        .testimonial-author h5 {
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+        
+        .testimonial-author p {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+        
+        .testimonial-quote {
+            color: #6c757d;
+            font-style: italic;
+            position: relative;
+        }
+        
+        .testimonial-quote::before {
+            content: '"';
+            font-size: 3rem;
+            color: rgba(67, 97, 238, 0.1);
+            position: absolute;
+            top: -1.5rem;
+            left: -1rem;
+            font-family: serif;
+        }
+        
+        /* Pricing */
+        .pricing {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f6f9ff 0%, #f0f4ff 100%);
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-card.popular {
+            border: 2px solid var(--primary);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--gradient);
+            color: white;
+            padding: 0.3rem 1.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-bottom-left-radius: 12px;
+        }
+        
+        .pricing-card h3 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 1.5rem 0;
+            color: var(--dark);
+        }
+        
+        .price span {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #6c757d;
+        }
+        
+        .pricing-features {
+            margin: 2rem 0;
+        }
+        
+        .pricing-features li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .pricing-features li i {
+            color: var(--primary);
+            margin-right: 0.5rem;
+        }
+        
+        /* CTA */
+        .cta {
+            padding: 6rem 0;
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-weight: 800;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 4rem 0 2rem;
+            background: var(--dark);
+            color: white;
+        }
+        
+        .footer-logo {
+            font-weight: 800;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            color: white;
+        }
+        
+        .footer p {
+            opacity: 0.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            margin-right: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links h5 {
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 4rem 0;
+                text-align: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .hero-btns {
+                justify-content: center;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">EduSphere</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Fitur</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Testimoni</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">Harga</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-primary" href="#contact">Demo Gratis</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1>Revolusi Sistem Manajemen Sekolah dengan Teknologi AI</h1>
+                    <p>Platform all-in-one untuk mengelola seluruh operasional sekolah dengan efisien, modern, dan berorientasi masa depan.</p>
+                    <div class="hero-btns d-flex">
+                        <a href="#pricing" class="btn btn-primary">Mulai Sekarang</a>
+                        <a href="#features" class="btn btn-outline-light">Pelajari Fitur</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://cdn.dribbble.com/users/1126935/screenshots/15099253/media/4d3b0a7c5f8a1a1a5e4e1d5b5b5b5b5.png" alt="Dashboard Preview" class="img-fluid floating d-none d-lg-block">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Fitur Unggulan EduSphere</h2>
+                <p>Solusi lengkap untuk transformasi digital sekolah Anda dengan teknologi terkini dan antarmuka yang intuitif.</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="lni lni-dashboard"></i>
+                        </div>
+                        <h3>Dashboard Cerdas</h3>
+                        <p>Analisis data real-time dengan visualisasi interaktif untuk pengambilan keputusan berbasis data.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="lni lni-school"></i>
+                        </div>
+                        <h3>Manajemen Sekolah</h3>
+                        <p>Kelola siswa, guru, kelas, jadwal, dan inventaris sekolah dalam satu platform terintegrasi.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="lni lni-book"></i>
+                        </div>
+                        <h3>E-Learning Modern</h3>
+                        <p>Sistem pembelajaran online dengan kelas virtual, materi interaktif, dan sistem penilaian otomatis.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="lni lni-certificate"></i>
+                        </div>
+                        <h3>E-Raport Digital</h3>
+                        <p>Generate raport otomatis dengan analisis kompetensi dan prediksi kelulusan berbasis AI.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="lni lni-robot"></i>
+                        </div>
+                        <h3>AI Learning Assistant</h3>
+                        <p>Asisten virtual untuk pembuatan materi otomatis dan penilaian esai cerdas.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="lni lni-users"></i>
+                        </div>
+                        <h3>Portal Orang Tua</h3>
+                        <p>Monitoring perkembangan anak, pembayaran digital, dan komunikasi langsung dengan guru.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Preview -->
+    <section class="dashboard-preview" id="dashboard">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5">
+                    <h2>Antarmuka Modern & Intuitif</h2>
+                    <p class="mb-4">Dashboard yang dirancang khusus untuk kemudahan penggunaan dengan pengalaman pengguna yang optimal.</p>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><i class="lni lni-checkmark-circle text-primary me-2"></i> Desain responsif untuk semua perangkat</li>
+                        <li class="mb-3"><i class="lni lni-checkmark-circle text-primary me-2"></i> Navigasi sederhana dengan akses cepat</li>
+                        <li class="mb-3"><i class="lni lni-checkmark-circle text-primary me-2"></i> Customizable sesuai kebutuhan sekolah</li>
+                        <li class="mb-3"><i class="lni lni-checkmark-circle text-primary me-2"></i> Dark mode untuk kenyamanan mata</li>
+                    </ul>
+                </div>
+                <div class="col-lg-7">
+                    <div class="dashboard-img">
+                        <img src="https://cdn.dribbble.com/users/1126935/screenshots/15099253/media/4d3b0a7c5f8a1a1a5e4e1d5b5b5b5b5.png" alt="Dashboard Preview" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Apa Kata Mereka</h2>
+                <p>Testimoni dari sekolah-sekolah yang telah mengalami transformasi digital dengan EduSphere.</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Testimonial" class="testimonial-avatar">
+                            <div class="testimonial-author">
+                                <h5>Dr. Ani Wijaya</h5>
+                                <p>Kepala Sekolah SMA Futura</p>
+                            </div>
+                        </div>
+                        <p class="testimonial-quote">"Sejak menggunakan EduSphere, efisiensi administrasi sekolah kami meningkat 70%. Sistem yang sangat membantu untuk manajemen modern."</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Testimonial" class="testimonial-avatar">
+                            <div class="testimonial-author">
+                                <h5>Budi Santoso</h5>
+                                <p>Guru Matematika SMP Cendekia</p>
+                            </div>
+                        </div>
+                        <p class="testimonial-quote">"Fitur E-Learning-nya sangat membantu terutama untuk pembuatan materi dan penilaian otomatis. Menghemat banyak waktu saya."</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Testimonial" class="testimonial-avatar">
+                            <div class="testimonial-author">
+                                <h5>Siti Rahmawati</h5>
+                                <p>Orang Tua Siswa SD Mentari</p>
+                            </div>
+                        </div>
+                        <p class="testimonial-quote">"Portal orang tua memudahkan saya memantau perkembangan anak dan berkomunikasi dengan guru tanpa harus datang ke sekolah."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Paket Harga</h2>
+                <p>Pilih paket yang sesuai dengan kebutuhan sekolah Anda. Semua paket termasuk update dan support 24/7.</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="pricing-card">
+                        <h3>Dasar</h3>
+                        <div class="price">Rp 1.500.000<span>/bulan</span></div>
+                        <ul class="pricing-features list-unstyled">
+                            <li><i class="lni lni-checkmark-circle"></i> Manajemen Siswa & Guru</li>
+                            <li><i class="lni lni-checkmark-circle"></i> E-Raport Dasar</li>
+                            <li><i class="lni lni-checkmark-circle"></i> Portal Orang Tua</li>
+                            <li><i class="lni lni-checkmark-circle"></i> Support Email</li>
+                            <li><i class="lni lni-close"></i> Fitur AI</li>
+                            <li><i class="lni lni-close"></i> E-Learning Premium</li>
+                        </ul>
+                        <a href="#" class="btn btn-outline-primary w-100">Mulai Sekarang</a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="pricing-card popular">
+                        <div class="popular-badge">POPULAR</div>
+                        <h3>Premium</h3>
+                        <div class="price">Rp 3.500.000<span>/bulan</span></div>
+                        <ul class="pricing-features list-unstyled">
+                            <li><i class="lni lni-checkmark-circle"></i> Semua Fitur Dasar</li>
+                            <li><i class="lni lni-checkmark-circle"></i> Sistem E-Learning Lengkap</li>
+                            <li><i class="lni lni-checkmark-circle"></i> Ujian Online & Proctoring</li>
+                            <li><i class="lni lni-checkmark-circle"></i> AI Learning Assistant</li>
+                            <li><i class="lni lni-checkmark-circle"></i> Support Prioritas</li>
+                            <li><i class="lni lni-checkmark-circle"></i> Integrasi Payment Gateway</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary w-100">Mulai Sekarang</a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="pricing-card">
+                        <h3>Enterprise</h3>
+                        <div class="price">Custom</div>
+                        <ul class="pricing-features list-unstyled">
+                            <li><i class="lni lni-checkmark-circle"></i> Semua Fitur Premium</li>
+                            <li><i class="lni lni-checkmark-circle"></i> Custom Development</li>
+                            <li><i class="lni lni-checkmark-circle"></i> Dedicated Server</li>
+                            <li><i class="lni lni-checkmark-circle"></i> Onsite Training</li>
+                            <li><i class="lni lni-checkmark-circle"></i> Branding Khusus</li>
+                            <li><i class="lni lni-checkmark-circle"></i> Manajer Akun Dedicated</li>
+                        </ul>
+                        <a href="#" class="btn btn-outline-primary w-100">Hubungi Kami</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container">
+            <h2>Siap Transformasi Sekolah Anda?</h2>
+            <p>Jadwalkan demo gratis sekarang dan lihat bagaimana EduSphere dapat merevolusi manajemen sekolah Anda dalam hitungan menit.</p>
+            <a href="#" class="btn btn-light btn-lg me-2">Jadwalkan Demo</a>
+            <a href="#" class="btn btn-outline-light btn-lg">Hubungi Sales</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <a href="#" class="footer-logo">EduSphere</a>
+                    <p>Platform manajemen sekolah terintegrasi dengan teknologi AI untuk pendidikan masa depan.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="lni lni-facebook-filled"></i></a>
+                        <a href="#"><i class="lni lni-twitter-filled"></i></a>
+                        <a href="#"><i class="lni lni-instagram-filled"></i></a>
+                        <a href="#"><i class="lni lni-linkedin-filled"></i></a>
+                        <a href="#"><i class="lni lni-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <div class="footer-links">
+                        <h5>Produk</h5>
+                        <ul>
+                            <li><a href="#">Fitur</a></li>
+                            <li><a href="#">Harga</a></li>
+                            <li><a href="#">Integrasi</a></li>
+                            <li><a href="#">Update</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <div class="footer-links">
+                        <h5>Dukungan</h5>
+                        <ul>
+                            <li><a href="#">Dokumentasi</a></li>
+                            <li><a href="#">Panduan</a></li>
+                            <li><a href="#">API</a></li>
+                            <li><a href="#">Status</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <div class="footer-links">
+                        <h5>Perusahaan</h5>
+                        <ul>
+                            <li><a href="#">Tentang</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Karir</a></li>
+                            <li><a href="#">Kontak</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4">
+                    <div class="footer-links">
+                        <h5>Legal</h5>
+                        <ul>
+                            <li><a href="#">Kebijakan Privasi</a></li>
+                            <li><a href="#">Syarat & Ketentuan</a></li>
+                            <li><a href="#">Lisensi</a></li>
+                            <li><a href="#">GDPR</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 EduSphere. All rights reserved. Dibuat dengan <i class="lni lni-heart text-danger"></i> untuk pendidikan Indonesia yang lebih baik.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Navbar background change on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.9)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.05)';
+            }
+        });
+    </script>
+</body>
+</html>

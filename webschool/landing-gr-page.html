@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduVerse - Future of Education</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/lineicons@2.0/lni/css/lni.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0057FF;
+            --secondary-color: #00D4FF;
+            --text-color: #1A1A1A;
+            --bg-light: #F8FAFC;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-color);
+            background: var(--bg-light);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section {
+            background: var(--gradient);
+            color: white;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://source.unsplash.com/random/1920x1080/?education') no-repeat center center/cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+
+        .cta-section {
+            background: var(--gradient);
+            color: white;
+            padding: 80px 0;
+            border-radius: 20px;
+            margin: 50px 0;
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            padding: 5px 10px;
+            border-radius: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 60px 0;
+            }
+
+            .feature-card {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">EduVerse</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="btn btn-primary ms-2" href="#">Get Started</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container hero-content text-center">
+            <h1 class="display-4 fw-bold mb-4">Transform Education with EduVerse</h1>
+            <p class="lead mb-4">Discover a futuristic platform with AI-driven tools, seamless management, and innovative learning solutions for schools.</p>
+            <a href="#" class="btn btn-light btn-lg">Explore Now</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Our Cutting-Edge Features</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card text-center">
+                        <i class="lni lni-dashboard feature-icon mb-3"></i>
+                        <h4>Dashboard</h4>
+                        <p>Get a comprehensive overview of your school with real-time analytics and quick actions.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card text-center">
+                        <i class="lni lni-school feature-icon mb-3"></i>
+                        <h4>Manajemen Sekolah</h4>
+                        <p>Effortlessly manage student data, staff, classes, schedules, and school inventory.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card text-center">
+                        <i class="lni lni-users feature-icon mb-3"></i>
+                        <h4>PPDB Online <span class="badge bg-primary">New</span></h4>
+                        <p>Streamline admissions with online forms, document verification, and real-time statistics.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card text-center">
+                        <i class="lni lni-book feature-icon mb-3"></i>
+                        <h4>E-Learning</h4>
+                        <p>Engage students with virtual classes, interactive materials, and gamified learning.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card text-center">
+                        <i class="lni lni-certificate feature-icon mb-3"></i>
+                        <h4>E-Raport & Penilaian</h4>
+                        <p>Automate grading, generate reports, and analyze student competencies.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card text-center">
+                        <i class="lni lni-write feature-icon mb-3"></i>
+                        <h4>Ujian Online</h4>
+                        <p>Create exams, manage question banks, and analyze results with proctoring tools.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card text-center">
+                        <i class="lni lni-library feature-icon mb-3"></i>
+                        <h4>Perpustakaan Digital</h4>
+                        <p>Access e-books, manage loans, and explore book recommendations online.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card text-center">
+                        <i class="lni lni-robot feature-icon mb-3"></i>
+                        <h4>AI Learning Assistant <span class="badge bg-danger">PRO</span></ляться: 500px; float: left; margin-right: 10px; margin-bottom: 10px; AI Learning Assistant <span class="badge bg-danger">PRO</span></h4>
+                        <p>Virtual tutors, automated content creation, and AI-driven essay grading.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card text-center">
+                        <i class="lni lni-briefcase feature-icon mb-3"></i>
+                        <h4>Career Development <span class="badge bg-success">New</span></h4>
+                        <p>Online psychometric tests, talent analysis, and career counseling.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card text-center">
+                        <i class="lni lni-users feature-icon mb-3"></i>
+                        <h4>Portal Orang Tua</h4>
+                        <p>Monitor student progress, communicate with teachers, and manage payments.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card text-center">
+                        <i class="lni lni-cart feature-icon mb-3"></i>
+                        <h4>Sistem Monetisasi <span class="badge bg-warning">Income</span></h4>
+                        <p>Create revenue with school marketplaces, premium courses, and sponsorships.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card text-center">
+                        <i class="lni lni-stats-up feature-icon mb-3"></i>
+                        <h4>Laporan & Analytics</h4>
+                        <p>Track attendance, academic performance, and generate custom reports.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card text-center">
+                        <i class="lni lni-cog feature-icon mb-3"></i>
+                        <h4>Administrasi</h4>
+                        <p>Manage users, customize landing pages, and integrate APIs seamlessly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section text-center">
+        <div class="container">
+            <h2 class="mb-4">Join the Future of Education</h2>
+            <p class="lead mb-4">Empower your school with EduVerse's innovative tools and AI-driven solutions.</p>
+            <a href="#" class="btn btn-light btn-lg">Get Started Today</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 text-center">
+        <div class="container">
+            <p>© 2025 EduVerse. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
