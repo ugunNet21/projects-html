@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMKM Super App - Admin Dashboard</title>
+    <!-- Local Tailwind CSS for reliability -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #4F46E5;
+            --sidebar-width: 280px;
+            --sidebar-collapsed-width: 80px;
+            --bg-color: #F3F4F6;
+            --text-color: #111827;
+            --card-bg: #FFFFFF;
+        }
+        [data-theme="dark"] {
+            --primary-color: #818CF8;
+            --bg-color: #1F2937;
+            --text-color: #F3F4F6;
+            --card-bg: #374151;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .sidebar {
+            transition: width 0.3s ease, background-color 0.3s ease;
+            overflow-y: auto;
+        }
+        .sidebar-collapsed {
+            width: var(--sidebar-collapsed-width);
+        }
+        .sidebar-collapsed .sidebar-text {
+            display: none;
+        }
+        .content {
+            transition: margin-left 0.3s ease;
+        }
+        .hover\:text-primary:hover {
+            color: var(--primary-color);
+        }
+        /* Fallback for icons if Font Awesome fails */
+        .icon-fallback::before {
+            content: '⚙️';
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: fixed;
+                z-index: 50;
+                top: 0;
+            }
+            .sidebar-collapsed {
+                width: 0;
+                overflow: hidden;
+            }
+            .content {
+                margin-left: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-[var(--bg-color)] text-[var(--text-color)] transition-colors duration-300" data-theme="light">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar fixed top-0 left-0 h-full bg-[var(--card-bg)] shadow-lg w-[var(--sidebar-width)] z-20">
+        <div class="flex items-center justify-between p-4 border-b border-gray-200">
+            <div class="flex items-center space-x-2">
+                <img src="https://via.placeholder.com/40" alt="Logo" class="w-10 h-10 rounded-full">
+                <span id="logo-text" class="text-xl font-bold sidebar-text">UMKM Super</span>
+            </div>
+            <button id="toggle-sidebar" class="text-gray-600 hover:text-[var(--primary-color)]">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <nav class="mt-4">
+            <ul>
+                <li>
+                    <a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-100 hover:text-primary">
+                        <i class="fas fa-home w-6"></i>
+                        <span class="ml-3 sidebar-text">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-100 hover:text-primary">
+                        <i class="fas fa-store w-6"></i>
+                        <span class="ml-3 sidebar-text">Businesses</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-100 hover:text-primary">
+                        <i class="fas fa-box w-6"></i>
+                        <span class="ml-3 sidebar-text">Products</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-100 hover:text-primary">
+                        <i class="fas fa-tags w-6"></i>
+                        <span class="ml-3 sidebar-text">Categories</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-100 hover:text-primary">
+                        <i class="fas fa-shopping-cart w-6"></i>
+                        <span class="ml-3 sidebar-text">Sales</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-100 hover:text-primary">
+                        <i class="fas fa-truck w-6"></i>
+                        <span class="ml-3 sidebar-text">Orders</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-100 hover:text-primary">
+                        <i class="fas fa-users w-6"></i>
+                        <span class="ml-3 sidebar-text">Customers</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-100 hover:text-primary">
+                        <i class="fas fa-user-shield w-6"></i>
+                        <span class="ml-3 sidebar-text">Users & Roles</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-100 hover:text-primary">
+                        <i class="fas fa-credit-card w-6"></i>
+                        <span class="ml-3 sidebar-text">Payment Methods</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-100 hover:text-primary">
+                        <i class="fas fa-percentage w-6"></i>
+                        <span class="ml-3 sidebar-text">Promotions</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-100 hover:text-primary">
+                        <i class="fas fa-industry w-6"></i>
+                        <span class="ml-3 sidebar-text">Suppliers</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-100 hover:text-primary">
+                        <i class="fas fa-hand-holding-heart w-6"></i>
+                        <span class="ml-3 sidebar-text">CSR Programs</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-100 hover:text-primary">
+                        <i class="fas fa-cog w-6"></i>
+                        <span class="ml-3 sidebar-text">Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div id="content" class="content ml-[var(--sidebar-width)] min-h-screen p-6 transition-all duration-300">
+        <!-- Top Bar -->
+        <header class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-semibold">Dashboard</h1>
+            <div class="flex items-center space-x-4">
+                <button id="toggle-theme" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="flex items-center space-x-2">
+                    <img src="https://via.placeholder.com/32" alt="User" class="w-8 h-8 rounded-full">
+                    <span class="font-medium">Admin</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+            <!-- Card: Total Sales -->
+            <div class="bg-[var(--card-bg)] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500">Total Sales</p>
+                        <h2 class="text-2xl font-bold">Rp 12,500,000</h2>
+                    </div>
+                    <i class="fas fa-shopping-cart text-3xl text-[var(--primary-color)]"></i>
+                </div>
+            </div>
+            <!-- Card: Total Products -->
+            <div class="bg-[var(--card-bg)] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500">Total Products</p>
+                        <h2 class="text-2xl font-bold">245</h2>
+                    </div>
+                    <i class="fas fa-box text-3xl text-[var(--primary-color)]"></i>
+                </div>
+            </div>
+            <!-- Card: Active Customers -->
+            <div class="bg-[var(--card-bg)] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500">Active Customers</p>
+                        <h2 class="text-2xl font-bold">132</h2>
+                    </div>
+                    <i class="fas fa-users text-3xl text-[var(--primary-color)]"></i>
+                </div>
+            </div>
+            <!-- Card: CSR Donations -->
+            <div class="bg-[var(--card-bg)] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500">CSR Donations</p>
+                        <h2 class="text-2xl font-bold">Rp 5,000,000</h2>
+                    </div>
+                    <i class="fas fa-hand-holding-heart text-3xl text-[var(--primary-color)]"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sales Chart -->
+        <div class="bg-[var(--card-bg)] p-6 rounded-lg shadow-md mb-6">
+            <h3 class="text-lg font-semibold mb-4">Sales Overview</h3>
+            <canvas id="salesChart" class="max-h-96"></canvas>
+        </div>
+
+        <!-- Recent Sales Table -->
+        <div class="bg-[var(--card-bg)] p-6 rounded-lg shadow-md">
+            <h3 class="text-lg font-semibold mb-4">Recent Sales</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-separate border-spacing-y-2">
+                    <thead>
+                        <tr class="border-b">
+                            <th class="py-3 px-4">Sale ID</th>
+                            <th class="py-3 px-4">Customer</th>
+                            <th class="py-3 px-4">Date</th>
+                            <th class="py-3 px-4">Amount</th>
+                            <th class="py-3 px-4">Payment Method</th>
+                            <th class="py-3 px-4">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="py-3 px-4">SALE001</td>
+                            <td class="py-3 px-4">John Doe</td>
+                            <td class="py-3 px-4">2025-05-13</td>
+                            <td class="py-3 px-4">Rp 1,200,000</td>
+                            <td class="py-3 px-4">QRIS</td>
+                            <td class="py-3 px-4"><span class="text-green-600">Completed</span></td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="py-3 px-4">SALE002</td>
+                            <td class="py-3 px-4">Jane Smith</td>
+                            <td class="py-3 px-4">2025-05-12</td>
+                            <td class="py-3 px-4">Rp 850,000</td>
+                            <td class="py-3 px-4">Digital Wallet</td>
+                            <td class="py-3 px-4"><span class="text-yellow-600">Pending</span></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4">SALE003</td>
+                            <td class="py-3 px-4">Mike Johnson</td>
+                            <td class="py-3 px-4">2025-05-11</td>
+                            <td class="py-3 px-4">Rp 2,000,000</td>
+                            <td class="py-3 px-4">Cash</td>
+                            <td class="py-3 px-4"><span class="text-green-600">Completed</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sidebar Toggle
+        const sidebar = document.getElementById('sidebar');
+        const content = document.getElementById('content');
+        const toggleSidebarBtn = document.getElementById('toggle-sidebar');
+
+        toggleSidebarBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('sidebar-collapsed');
+            content.classList.toggle('ml-[var(--sidebar-width)]');
+            content.classList.toggle('ml-[var(--sidebar-collapsed-width)]');
+        });
+
+        // Theme Toggle
+        const toggleThemeBtn = document.getElementById('toggle-theme');
+        const body = document.body;
+
+        toggleThemeBtn.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            body.setAttribute('data-theme', currentTheme === 'light' ? 'dark' : 'light');
+            toggleThemeBtn.innerHTML = currentTheme === 'light' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
+
+        // Sales Chart
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                datasets: [{
+                    label: 'Sales (Rp)',
+                    data: [3000000, 4500000, 2000000, 5000000, 3500000],
+                    borderColor: 'var(--primary-color)',
+                    backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return 'Rp ' + value.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Fallback for Font Awesome
+        document.querySelectorAll('.fas').forEach(icon => {
+            icon.addEventListener('error', () => {
+                icon.classList.add('icon-fallback');
+            });
+        });
+    </script>
+</body>
+</html>
