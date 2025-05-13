@@ -1,0 +1,76 @@
+body {
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+#sidebar-wrapper {
+    min-height: 100vh;
+    margin-left: -15rem;
+    transition: margin 0.25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+    width: 15rem;
+}
+
+#page-content-wrapper {
+    min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    min-width: calc(100vw - 15rem); /* Adjust based on sidebar width */
+    width: calc(100vw - 15rem);
+}
+
+
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+
+    #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: -15rem;
+    }
+     #wrapper.toggled #page-content-wrapper {
+        min-width: 100vw;
+        width: 100vw;
+    }
+}
+
+/* Custom sidebar item colors */
+#sidebar-wrapper .list-group-item {
+    border: none;
+}
+#sidebar-wrapper .list-group-item.active {
+    background-color: #0d6efd; /* Bootstrap primary */
+    color: white;
+}
+#sidebar-wrapper .list-group-item:hover {
+    background-color: #495057;
+    color: white;
+}
+#sidebar-wrapper .list-group-item-dark {
+    color: #adb5bd; /* Lighter text for dark background */
+    background-color: #212529; /* Bootstrap dark */
+}
+#sidebar-wrapper .list-group-item-dark.active,
+#sidebar-wrapper .list-group-item-dark:hover {
+    background-color: #0d6efd;
+    color: white;
+}
+#sidebar-wrapper .list-group-item-dark strong {
+    color: #f8f9fa; /* Lighter for headings */
+}

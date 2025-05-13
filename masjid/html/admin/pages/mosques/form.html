@@ -1,0 +1,174 @@
+<div id="main-content-page">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2" id="formMosqueTitle">Tambah Masjid Baru</h1>
+        <div>
+             <a href="pages/mosques/list.html" class="btn btn-sm btn-outline-secondary load-content">
+                <i class="bi bi-arrow-left-circle me-1"></i> Kembali ke Daftar
+            </a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <form id="mosqueForm">
+                <input type="hidden" id="mosqueId" name="id"> <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="mosqueName" class="form-label">Nama Masjid <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="mosqueName" name="name" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="mosqueSubdomain" class="form-label">Subdomain</label>
+                        <input type="text" class="form-control" id="mosqueSubdomain" name="subdomain">
+                        <div class="form-text">Contoh: masjid-agung (akan menjadi masjid-agung.domain.com)</div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="mosqueAddress" class="form-label">Alamat Lengkap <span class="text-danger">*</span></label>
+                    <textarea class="form-control" id="mosqueAddress" name="address" rows="3" required></textarea>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="mosqueCity" class="form-label">Kota</label>
+                        <input type="text" class="form-control" id="mosqueCity" name="city">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="mosqueProvince" class="form-label">Provinsi</label>
+                        <input type="text" class="form-control" id="mosqueProvince" name="province">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="mosqueContactPhone" class="form-label">Telepon Kontak</label>
+                        <input type="tel" class="form-control" id="mosqueContactPhone" name="contact_phone">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="mosqueContactEmail" class="form-label">Email Kontak</label>
+                        <input type="email" class="form-control" id="mosqueContactEmail" name="contact_email">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="mosqueLogo" class="form-label">Logo Masjid (URL atau Upload)</label>
+                    <input type="file" class="form-control" id="mosqueLogoFile" name="logo_file" accept="image/*">
+                    <input type="text" class="form-control mt-2" id="mosqueLogoUrl" name="logo_url" placeholder="Atau masukkan URL logo">
+                    <img id="logoPreview" src="#" alt="Preview Logo" class="mt-2" style="max-height: 100px; display: none;"/>
+                </div>
+                <hr>
+                <h5>Lokasi & Jadwal Sholat (Tabel: mosque_locations)</h5>
+                 <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="mosqueLatitude" class="form-label">Latitude <span class="text-danger">*</span></label>
+                        <input type="number" step="any" class="form-control" id="mosqueLatitude" name="latitude" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="mosqueLongitude" class="form-label">Longitude <span class="text-danger">*</span></label>
+                        <input type="number" step="any" class="form-control" id="mosqueLongitude" name="longitude" required>
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="mosqueTimezone" class="form-label">Zona Waktu</label>
+                        <select class="form-select" id="mosqueTimezone" name="timezone">
+                            <option value="Asia/Jakarta">Asia/Jakarta (WIB)</option>
+                            <option value="Asia/Makassar">Asia/Makassar (WITA)</option>
+                            <option value="Asia/Jayapura">Asia/Jayapura (WIT)</option>
+                            </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="mosqueCalcMethod" class="form-label">Metode Kalkulasi Jadwal Sholat</label>
+                        <select class="form-select" id="mosqueCalcMethod" name="calculation_method">
+                            <option value="MWL">MWL (Muslim World League)</option>
+                            <option value="ISNA">ISNA (Islamic Society of North America)</option>
+                            <option value="Egypt">Egypt (Egyptian General Authority of Survey)</option>
+                            <option value="Makkah">Makkah (Umm al-Qura University, Makkah)</option>
+                            <option value="Karachi">Karachi (University of Islamic Sciences, Karachi)</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Simpan Masjid</button>
+                <a href="pages/mosques/list.html" class="btn btn-secondary load-content">Batal</a>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    // Script untuk form ini (misalnya, preview logo, load data untuk edit)
+    document.addEventListener('DOMContentLoaded', function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const mosqueId = urlParams.get('id'); // Cek apakah ini mode edit
+        const formTitle = document.getElementById('formMosqueTitle');
+        const mosqueIdField = document.getElementById('mosqueId');
+
+        if (mosqueId) {
+            formTitle.textContent = 'Edit Masjid';
+            mosqueIdField.value = mosqueId;
+            // TODO: Fungsi untuk memuat data masjid berdasarkan ID dan mengisi form
+            // loadMosqueData(mosqueId);
+            console.log("Mode Edit untuk Masjid ID:", mosqueId);
+        } else {
+            formTitle.textContent = 'Tambah Masjid Baru';
+        }
+
+        const logoFileInput = document.getElementById('mosqueLogoFile');
+        const logoPreview = document.getElementById('logoPreview');
+        if(logoFileInput && logoPreview) {
+            logoFileInput.onchange = evt => {
+                const [file] = logoFileInput.files;
+                if (file) {
+                    logoPreview.src = URL.createObjectURL(file);
+                    logoPreview.style.display = 'block';
+                    document.getElementById('mosqueLogoUrl').value = ''; // Kosongkan field URL jika file dipilih
+                } else {
+                    logoPreview.style.display = 'none';
+                }
+            }
+        }
+
+        // Handle form submission (AJAX)
+        const mosqueForm = document.getElementById('mosqueForm');
+        if(mosqueForm) {
+            mosqueForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Kumpulkan data form
+                const formData = new FormData(this);
+                // Untuk debug:
+                // for (let [key, value] of formData.entries()) {
+                //     console.log(key, value);
+                // }
+                // TODO: Kirim data ke backend via AJAX (fetch API)
+                // fetch(mosqueId ? '/api/mosques/update' : '/api/mosques/create', {
+                //     method: 'POST',
+                //     body: formData
+                // }).then(...).catch(...);
+                alert('Form submitted (simulasi). Cek console untuk data.');
+                console.log("Form data:", Object.fromEntries(formData));
+            });
+        }
+    });
+    // Pastikan event listener untuk .load-content di-attach ulang jika konten dimuat dinamis
+    document.querySelectorAll('.load-content').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const pageUrl = this.getAttribute("href");
+            // ... (logika fetch sama seperti di script.js utama) ...
+            // Ini hanya contoh, idealnya logika ini terpusat.
+             fetch(pageUrl)
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, "text/html");
+                    const newContent = doc.querySelector("#main-content-page");
+                    if (newContent) {
+                        document.getElementById("main-content").innerHTML = newContent.innerHTML;
+                    } else {
+                         document.getElementById("main-content").innerHTML = `<h1>Konten tidak ditemukan atau format salah</h1><p>Pastikan file ${pageUrl} memiliki elemen dengan id="main-content-page" yang membungkus kontennya.</p>`;
+                    }
+                })
+        });
+    });
+</script>
