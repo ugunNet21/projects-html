@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gugun Gunawan - Layanan Elektronik & IT Solutions</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark-color);
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: white !important;
+        }
+        
+        .nav-link {
+            color: rgba(255,255,255,0.8) !important;
+            font-weight: 500;
+            margin: 0 5px;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: white !important;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 50px;
+            color: var(--primary-color);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .service-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            margin-bottom: 20px;
+            height: 100%;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        
+        .school-service {
+            background-color: #f8f9fa;
+            padding: 80px 0;
+        }
+        
+        .siplah-badge {
+            background-color: #28a745;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            padding: 10px 25px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline-light {
+            padding: 10px 25px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-outline-light:hover {
+            background-color: white;
+            color: var(--secondary-color);
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            color: white;
+        }
+        
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/6282320163626" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Gugun Gunawan</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Layanan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#school">Untuk Sekolah</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">Tentang Kami</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Kontak</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content animate">
+                    <h1 class="display-4 fw-bold mb-4">Solusi Elektronik & IT Terbaik untuk Bisnis dan Pendidikan</h1>
+                    <p class="lead mb-4">Layanan profesional untuk perbaikan laptop, pengadaan barang elektronik, pengembangan aplikasi, dan solusi IoT untuk kebutuhan bisnis dan pendidikan.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#contact" class="btn btn-light btn-lg">Hubungi Kami</a>
+                        <a href="#services" class="btn btn-outline-light btn-lg">Layanan Kami</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 animate delay-1">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="IT Services" class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-5" id="services">
+        <div class="container py-5">
+            <h2 class="text-center section-title animate">Layanan Kami</h2>
+            <div class="row g-4">
+                <div class="col-md-4 animate delay-1">
+                    <div class="card service-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon">
+                                <i class="fas fa-laptop"></i>
+                            </div>
+                            <h4 class="card-title">Service Laptop & Komputer</h4>
+                            <p class="card-text">Perbaikan profesional untuk semua merek laptop dan komputer dengan garansi resmi.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 animate delay-2">
+                    <div class="card service-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <h4 class="card-title">Jual Beli Elektronik</h4>
+                            <p class="card-text">Penjualan produk elektronik berkualitas dengan harga kompetitif dan garansi resmi.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 animate delay-3">
+                    <div class="card service-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon">
+                                <i class="fas fa-file-contract"></i>
+                            </div>
+                            <h4 class="card-title">Pengadaan Barang Tender</h4>
+                            <p class="card-text">Layanan pengadaan barang untuk pemerintah, sekolah, dan perusahaan swasta.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 animate">
+                    <div class="card service-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h4 class="card-title">Pengembangan Aplikasi</h4>
+                            <p class="card-text">Pembuatan aplikasi web dan mobile custom untuk kebutuhan bisnis dan pendidikan.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 animate delay-1">
+                    <div class="card service-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <h4 class="card-title">Solusi IoT</h4>
+                            <p class="card-text">Implementasi Internet of Things untuk otomasi dan monitoring cerdas.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 animate delay-2">
+                    <div class="card service-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <h4 class="card-title">IT Support</h4>
+                            <p class="card-text">Layanan dukungan IT untuk bisnis dan institusi pendidikan.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- School Service Section -->
+    <section class="school-service" id="school">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 animate">
+                    <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="School IT Services" class="img-fluid rounded shadow">
+                </div>
+                <div class="col-lg-6 animate delay-1">
+                    <h2 class="section-title text-start">Layanan Khusus Sekolah</h2>
+                    <p>Kami menyediakan solusi IT lengkap untuk kebutuhan sekolah dengan kualitas terbaik dan harga kompetitif.</p>
+                    
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="me-3 text-primary">
+                            <i class="fas fa-check-circle fa-lg"></i>
+                        </div>
+                        <div>
+                            <h5>Pengadaan Barang Elektronik Sekolah</h5>
+                            <p>Komputer, laptop, proyektor, dan peralatan IT lainnya untuk kebutuhan pembelajaran.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="me-3 text-primary">
+                            <i class="fas fa-check-circle fa-lg"></i>
+                        </div>
+                        <div>
+                            <h5>Pemesanan Melalui SIPLah <span class="siplah-badge">TERDAFTAR</span></h5>
+                            <p>Kami terdaftar sebagai vendor di platform SIPLah untuk memudahkan proses pengadaan sekolah.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="me-3 text-primary">
+                            <i class="fas fa-check-circle fa-lg"></i>
+                        </div>
+                        <div>
+                            <h5>Aplikasi Sekolah</h5>
+                            <p>Pengembangan sistem informasi sekolah, aplikasi pembelajaran, dan platform manajemen sekolah.</p>
+                        </div>
+                    </div>
+                    
+                    <a href="https://wa.me/6282320163626?text=Saya%20tertarik%20dengan%20layanan%20untuk%20sekolah" class="btn btn-primary mt-3">Info Lebih Lanjut</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-5" id="about">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 animate">
+                    <h2 class="section-title text-start">Tentang Kami</h2>
+                    <p>Gugun Gunawan adalah perusahaan yang berfokus pada layanan elektronik dan solusi IT yang berlokasi di Bandung. Dengan pengalaman bertahun-tahun di bidang ini, kami telah melayani berbagai klien mulai dari perorangan, bisnis, hingga institusi pemerintah dan pendidikan.</p>
+                    <p>Kami bangga dapat memberikan solusi yang komprehensif, mulai dari perbaikan perangkat, pengadaan barang, hingga pengembangan sistem custom untuk memenuhi kebutuhan spesifik klien kami.</p>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="d-flex mb-3">
+                                <div class="me-3 text-primary">
+                                    <i class="fas fa-award fa-lg"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">Profesional</h5>
+                                    <p class="mb-0">Tim ahli bersertifikat</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex mb-3">
+                                <div class="me-3 text-primary">
+                                    <i class="fas fa-shield-alt fa-lg"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">Bergaransi</h5>
+                                    <p class="mb-0">Garansi resmi untuk semua layanan</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 animate delay-1">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Our Team" class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center animate">
+                    <h2 class="display-5 fw-bold mb-4">Siap Meningkatkan Kinerja IT Anda?</h2>
+                    <p class="lead mb-5">Hubungi kami sekarang untuk konsultasi gratis dan dapatkan solusi terbaik untuk kebutuhan elektronik dan IT Anda.</p>
+                    <a href="https://wa.me/6282320163626" class="btn btn-light btn-lg me-3">Chat via WhatsApp</a>
+                    <a href="tel:082320163626" class="btn btn-outline-light btn-lg">Telepon Kami</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-5" id="contact">
+        <div class="container py-5">
+            <h2 class="text-center section-title animate">Hubungi Kami</h2>
+            <div class="row">
+                <div class="col-lg-6 animate">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <h4 class="card-title mb-4">Informasi Kontak</h4>
+                            <div class="d-flex mb-4">
+                                <div class="me-3 text-primary">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">Lokasi</h5>
+                                    <p class="mb-0">Bandung, Jawa Barat</p>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-4">
+                                <div class="me-3 text-primary">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">Telepon</h5>
+                                    <p class="mb-0"><a href="tel:082320163626">0823-2016-3626</a></p>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-4">
+                                <div class="me-3 text-primary">
+                                    <i class="fab fa-whatsapp"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">WhatsApp</h5>
+                                    <p class="mb-0"><a href="https://wa.me/6282320163626">0823-2016-3626</a></p>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="me-3 text-primary">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">Email</h5>
+                                    <p class="mb-0"><a href="mailto:info@gugungunawan.com">info@gugungunawan.com</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 animate delay-1">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <h4 class="card-title mb-4">Kirim Pesan</h4>
+                            <form id="contactForm">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Nama Anda</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Nomor Telepon</label>
+                                    <input type="tel" class="form-control" id="phone">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Pesan</label>
+                                    <textarea class="form-control" id="message" rows="4" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Kirim Pesan</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h4>Gugun Gunawan</h4>
+                    <p>Solusi lengkap untuk kebutuhan elektronik dan IT Anda. Layanan profesional dengan kualitas terbaik.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://wa.me/6282320163626"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Layanan</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50">Service Laptop</a></li>
+                        <li><a href="#" class="text-white-50">Jual Beli Elektronik</a></li>
+                        <li><a href="#" class="text-white-50">Pengadaan Barang</a></li>
+                        <li><a href="#" class="text-white-50">Aplikasi Web/Mobile</a></li>
+                        <li><a href="#" class="text-white-50">Solusi IoT</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Untuk Sekolah</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50">Melalui SIPLah</a></li>
+                        <li><a href="#" class="text-white-50">Pengadaan Lab Komputer</a></li>
+                        <li><a href="#" class="text-white-50">Aplikasi Sekolah</a></li>
+                        <li><a href="#" class="text-white-50">Pelatihan Guru</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5>Jam Operasional</h5>
+                    <p class="text-white-50">Senin - Jumat: 08.00 - 17.00 WIB</p>
+                    <p class="text-white-50">Sabtu: 08.00 - 14.00 WIB</p>
+                    <p class="text-white-50">Minggu: Tutup</p>
+                </div>
+            </div>
+            <hr class="my-4 bg-secondary">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small mb-0">&copy; 2023 Gugun Gunawan. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="small mb-0">Designed with <i class="fas fa-heart text-danger"></i> in Bandung</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.animate');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animateElements.forEach(element => {
+                element.style.opacity = 0;
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(element);
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Here you would typically send the form data to a server
+                    // For this example, we'll just show an alert
+                    alert('Terima kasih! Pesan Anda telah terkirim. Kami akan segera menghubungi Anda.');
+                    this.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
