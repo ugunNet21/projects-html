@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Super App - Admin Panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f6f9;
+        }
+        .sidebar {
+            transition: transform 0.3s ease;
+        }
+        .sidebar-hidden {
+            transform: translateX(-100%);
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100%;
+                z-index: 50;
+            }
+            .main-content {
+                margin-left: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar w-64 bg-white shadow-md flex flex-col">
+        <div class="p-4 border-b">
+            <h1 class="text-xl font-bold text-gray-800">Healthcare Admin</h1>
+        </div>
+        <nav class="flex-1 p-4">
+            <ul class="space-y-2">
+                <li>
+                    <a href="#" class="flex items-center p-2 text-gray-700 hover:bg-gray-100 rounded" onclick="loadPage('dashboard')">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center p-2 text-gray-700 hover:bg-gray-100 rounded" onclick="loadPage('appointments')">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        Appointments
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center p-2 text-gray-700 hover:bg-gray-100 rounded" onclick="loadPage('patients')">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        Patients
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center p-2 text-gray-700 hover:bg-gray-100 rounded" onclick="loadPage('inventory')">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                        Inventory
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="p-4 border-t">
+            <a href="#" class="flex items-center p-2 text-gray-700 hover:bg-gray-100 rounded">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                Logout
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 main-content ml-64 p-6">
+        <header class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-semibold text-gray-800">Dashboard</h2>
+            <button id="toggleSidebar" class="md:hidden p-2 bg-gray-200 rounded">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </header>
+        <div id="content" class="bg-white p-6 rounded-lg shadow">
+            <!-- Dashboard Content -->
+            <div id="dashboard" class="space-y-6">
+                <h3 class="text-xl font-semibold">Overview</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="p-4 bg-blue-100 rounded-lg">
+                        <h4 class="text-gray-600">Total Patients</h4>
+                        <p class="text-2xl font-bold">1,234</p>
+                    </div>
+                    <div class="p-4 bg-green-100 rounded-lg">
+                        <h4 class="text-gray-600">Appointments Today</h4>
+                        <p class="text-2xl font-bold">56</p>
+                    </div>
+                    <div class="p-4 bg-yellow-100 rounded-lg">
+                        <h4 class="text-gray-600">Low Stock Items</h4>
+                        <p class="text-2xl font-bold">12</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Appointments Content (Hidden by Default) -->
+            <div id="appointments" class="hidden space-y-6">
+                <h3 class="text-xl font-semibold">Appointments</h3>
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr class="bg-gray-100">
+                            <th class="p-2 text-left">Patient</th>
+                            <th class="p-2 text-left">Doctor</th>
+                            <th class="p-2 text-left">Time</th>
+                            <th class="p-2 text-left">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="p-2">John Doe</td>
+                            <td class="p-2">Dr. Smith</td>
+                            <td class="p-2">10:00 AM</td>
+                            <td class="p-2"><span class="px-2 py-1 bg-green-100 text-green-800 rounded">Confirmed</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Patients Content (Hidden by Default) -->
+            <div id="patients" class="hidden space-y-6">
+                <h3 class="text-xl font-semibold">Patients</h3>
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr class="bg-gray-100">
+                            <th class="p-2 text-left">Name</th>
+                            <th class="p-2 text-left">ID</th>
+                            <th class="p-2 text-left">Last Visit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="p-2">Jane Roe</td>
+                            <td class="p-2">P12345</td>
+                            <td class="p-2">2025-05-10</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Inventory Content (Hidden by Default) -->
+            <div id="inventory" class="hidden space-y-6">
+                <h3 class="text-xl font-semibold">Inventory</h3>
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr class="bg-gray-100">
+                            <th class="p-2 text-left">Item</th>
+                            <th class="p-2 text-left">Quantity</th>
+                            <th class="p-2 text-left">Expiry</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="p-2">Paracetamol</td>
+                            <td class="p-2">50</td>
+                            <td class="p-2">2025-12-31</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Toggle sidebar on mobile
+        const sidebar = document.getElementById('sidebar');
+        const toggleSidebar = document.getElementById('toggleSidebar');
+        toggleSidebar.addEventListener('click', () => {
+            sidebar.classList.toggle('sidebar-hidden');
+        });
+
+        // Load page content dynamically
+        function loadPage(page) {
+            const pages = ['dashboard', 'appointments', 'patients', 'inventory'];
+            pages.forEach(p => {
+                document.getElementById(p).classList.add('hidden');
+            });
+            document.getElementById(page).classList.remove('hidden');
+            document.querySelector('header h2').textContent = page.charAt(0).toUpperCase() + page.slice(1);
+        }
+
+        // Initialize dashboard
+        loadPage('dashboard');
+    </script>
+</body>
+</html>

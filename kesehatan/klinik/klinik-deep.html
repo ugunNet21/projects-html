@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuperApp Klinik - Dashboard</title>
+    <style>
+        :root {
+            --primary: #4e73df;
+            --secondary: #f8f9fc;
+            --danger: #e74a3b;
+            --success: #1cc88a;
+        }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            background: #f5f5f5;
+        }
+        .sidebar {
+            width: 250px;
+            background: white;
+            height: 100vh;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: fixed;
+        }
+        .sidebar-header {
+            padding: 20px;
+            background: var(--primary);
+            color: white;
+        }
+        .sidebar-menu {
+            padding: 15px;
+        }
+        .sidebar-menu a {
+            display: block;
+            padding: 10px;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+        .sidebar-menu a:hover {
+            background: var(--secondary);
+        }
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .stat-card {
+            text-align: center;
+            padding: 20px;
+            border-radius: 5px;
+            color: white;
+        }
+        .bg-primary { background: var(--primary); }
+        .bg-success { background: var(--success); }
+        .bg-danger { background: var(--danger); }
+        @media (max-width: 768px) {
+            .sidebar { width: 70px; }
+            .sidebar-header span { display: none; }
+            .sidebar-menu a span { display: none; }
+            .main-content { margin-left: 70px; }
+            .grid-3 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h3><span>SuperApp Klinik</span></h3>
+        </div>
+        <div class="sidebar-menu">
+            <a href="#"><span>Dashboard</span></a>
+            <a href="#"><span>Pasien</span></a>
+            <a href="#"><span>Antrian</span></a>
+            <a href="#"><span>Resep</span></a>
+            <a href="#"><span>BPJS</span></a>
+            <a href="#"><span>Laporan</span></a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h2>Dashboard Dokter</h2>
+        
+        <!-- Stats Cards -->
+        <div class="grid-3">
+            <div class="card stat-card bg-primary">
+                <h3>15</h3>
+                <p>Pasien Hari Ini</p>
+            </div>
+            <div class="card stat-card bg-success">
+                <h3>8</h3>
+                <p>Resep Diproses</p>
+            </div>
+            <div class="card stat-card bg-danger">
+                <h3>2</h3>
+                <p>Pasien Darurat</p>
+            </div>
+        </div>
+
+        <!-- Antrian -->
+        <div class="card">
+            <h3>Antrian Hari Ini</h3>
+            <ul id="queue-list">
+                <li>P001 - Budi Santoso (10:00)</li>
+                <li>P002 - Ani Wijaya (10:15)</li>
+            </ul>
+            <button onclick="nextQueue()">Next Pasien</button>
+        </div>
+    </div>
+
+    <script>
+        function nextQueue() {
+            alert("Memanggil pasien berikutnya!");
+        }
+    </script>
+</body>
+</html>
