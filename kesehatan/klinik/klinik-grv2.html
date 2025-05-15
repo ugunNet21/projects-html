@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinic Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+        }
+        .sidebar {
+            transition: transform 0.3s ease-in-out;
+        }
+        .sidebar-hidden {
+            transform: translateX(-100%);
+        }
+        .glow {
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+        .neon-border {
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                z-index: 50;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar fixed top-0 left-0 h-full w-64 bg-gray-900 p-4 overflow-y-auto">
+        <div class="flex items-center mb-6">
+            <img src="https://via.placeholder.com/40" alt="Logo" class="w-10 h-10 mr-2 rounded-full">
+            <h1 class="text-xl font-bold text-blue-400">Clinic System</h1>
+        </div>
+        <nav>
+            <ul class="space-y-2">
+                <li>
+                    <a href="#dashboard" class="flex items-center p-2 rounded-lg hover:bg-gray-800 text-blue-300">
+                        <i class="fas fa-home mr-2"></i> Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="#patients" class="flex items-center p-2 rounded-lg hover:bg-gray-800 text-blue-300">
+                        <i class="fas fa-user mr-2"></i> Patients
+                    </a>
+                </li>
+                <li>
+                    <a href="#appointments" class="flex items-center p-2 rounded-lg hover:bg-gray-800 text-blue-300">
+                        <i class="fas fa-calendar mr-2"></i> Appointments
+                    </a>
+                </li>
+                <li>
+                    <a href="#queues" class="flex items-center p-2 rounded-lg hover:bg-gray-800 text-blue-300">
+                        <i class="fas fa-list-ol mr-2"></i> Queues
+                    </a>
+                </li>
+                <li>
+                    <a href="#medical-records" class="flex items-center p-2 rounded-lg hover:bg-gray-800 text-blue-300">
+                        <i class="fas fa-file-medical mr-2"></i> Medical Records
+                    </a>
+                </li>
+                <li>
+                    <a href="#prescriptions" class="flex items-center p-2 rounded-lg hover:bg-gray-800 text-blue-300">
+                        <i class="fas fa-prescription mr-2"></i> Prescriptions
+                    </a>
+                </li>
+                <li>
+                    <a href="#inventory" class="flex items-center p-2 rounded-lg hover:bg-gray-800 text-blue-300">
+                        <i class="fas fa-boxes mr-2"></i> Inventory
+                    </a>
+                </li>
+                <li>
+                    <a href="#billings" class="flex items-center p-2 rounded-lg hover:bg-gray-800 text-blue-300">
+                        <i class="fas fa-file-invoice mr-2"></i> Billings
+                    </a>
+                </li>
+                <li>
+                    <a href="#staff" class="flex items-center p-2 rounded-lg hover:bg-gray-800 text-blue-300">
+                        <i class="fas fa-users mr-2"></i> Staff
+                    </a>
+                </li>
+                <li>
+                    <a href="#clinics" class="flex items-center p-2 rounded-lg hover:bg-gray-800 text-blue-300">
+                        <i class="fas fa-clinic-medical mr-2"></i> Clinics
+                    </a>
+                </li>
+                <li>
+                    <a href="#notifications" class="flex items-center p-2 rounded-lg hover:bg-gray-800 text-blue-300">
+                        <i class="fas fa-bell mr-2"></i> Notifications
+                    </a>
+                </li>
+                <li>
+                    <a href="#settings" class="flex items-center p-2 rounded-lg hover:bg-gray-800 text-blue-300">
+                        <i class="fas fa-cog mr-2"></i> Settings
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="ml-64 p-6">
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-6">
+            <button id="toggleSidebar" class="md:hidden text-blue-400">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <input type="text" placeholder="Search..." class="bg-gray-800 text-white pl-10 pr-4 py-2 rounded-lg focus:outline-none neon-border">
+                    <i class="fas fa-search absolute left-3 top-3 text-blue-400"></i>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <img src="https://via.placeholder.com/40" alt="User" class="w-10 h-10 rounded-full glow">
+                    <span class="hidden md:block">Dr. John Doe</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard -->
+        <section id="dashboard" class="mb-8">
+            <h2 class="text-2xl font-bold text-blue-400 mb-4">Dashboard</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-gray-800 p-4 rounded-lg neon-border">
+                    <h3 class="text-lg">Total Patients</h3>
+                    <p class="text-3xl text-blue-400">1,234</p>
+                </div>
+                <div class="bg-gray-800 p-4 rounded-lg neon-border">
+                    <h3 class="text-lg">Appointments Today</h3>
+                    <p class="text-3xl text-blue-400">45</p>
+                </div>
+                <div class="bg-gray-800 p-4 rounded-lg neon-border">
+                    <h3 class="text-lg">Pending Bills</h3>
+                    <p class="text-3xl text-blue-400">12</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Patients -->
+        <section id="patients" class="mb-8 hidden">
+            <h2 class="text-2xl font-bold text-blue-400 mb-4">Patients</h2>
+            <div class="bg-gray-800 p-4 rounded-lg neon-border">
+                <div class="flex justify-between mb-4">
+                    <h3 class="text-lg">Patient List</h3>
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Add Patient</button>
+                </div>
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="text-blue-400">
+                            <th class="p-2">Medical Record</th>
+                            <th class="p-2">Name</th>
+                            <th class="p-2">Gender</th>
+                            <th class="p-2">Phone</th>
+                            <th class="p-2">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-t border-gray-700">
+                            <td class="p-2">MRN001</td>
+                            <td class="p-2">Jane Doe</td>
+                            <td class="p-2">Female</td>
+                            <td class="p-2">+123456789</td>
+                            <td class="p-2">
+                                <button class="text-blue-400 hover:text-blue-600"><i class="fas fa-edit"></i></button>
+                                <button class="text-red-400 hover:text-red-600"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Appointments -->
+        <section id="appointments" class="mb-8 hidden">
+            <h2 class="text-2xl font-bold text-blue-400 mb-4">Appointments</h2>
+            <div class="bg-gray-800 p-4 rounded-lg neon-border">
+                <div class="flex justify-between mb-4">
+                    <h3 class="text-lg">Appointment List</h3>
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Add Appointment</button>
+                </div>
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="text-blue-400">
+                            <th class="p-2">Date</th>
+                            <th class="p-2">Time</th>
+                            <th class="p-2">Patient</th>
+                            <th class="p-2">Service</th>
+                            <th class="p-2">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-t border-gray-700">
+                            <td class="p-2">2025-05-16</td>
+                            <td class="p-2">10:00</td>
+                            <td class="p-2">Jane Doe</td>
+                            <td class="p-2">General Checkup</td>
+                            <td class="p-2">Confirmed</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Queues -->
+        <section id="queues" class="mb-8 hidden">
+            <h2 class="text-2xl font-bold text-blue-400 mb-4">Queues</h2>
+            <div class="bg-gray-800 p-4 rounded-lg neon-border">
+                <h3 class="text-lg mb-4">Queue List</h3>
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="text-blue-400">
+                            <th class="p-2">Queue Number</th>
+                            <th class="p-2">Patient</th>
+                            <th class="p-2">Service</th>
+                            <th class="p-2">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-t border-gray-700">
+                            <td class="p-2">Q001</td>
+                            <td class="p-2">Jane Doe</td>
+                            <td class="p-2">General Checkup</td>
+                            <td class="p-2">Waiting</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Medical Records -->
+        <section id="medical-records" class="mb-8 hidden">
+            <h2 class="text-2xl font-bold text-blue-400 mb-4">Medical Records</h2>
+            <div class="bg-gray-800 p-4 rounded-lg neon-border">
+                <div class="flex justify-between mb-4">
+                    <h3 class="text-lg">Medical Records</h3>
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Add Record</button>
+                </div>
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="text-blue-400">
+                            <th class="p-2">Date</th>
+                            <th class="p-2">Patient</th>
+                            <th class="p-2">Diagnosis</th>
+                            <th class="p-2">Staff</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-t border-gray-700">
+                            <td class="p-2">2025-05-15</td>
+                            <td class="p-2">Jane Doe</td>
+                            <td class="p-2">Flu</td>
+                            <td class="p-2">Dr. John</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Prescriptions -->
+        <section id="prescriptions" class="mb-8 hidden">
+            <h2 class="text-2xl font-bold text-blue-400 mb-4">Prescriptions</h2>
+            <div class="bg-gray-800 p-4 rounded-lg neon-border">
+                <div class="flex justify-between mb-4">
+                    <h3 class="text-lg">Prescription List</h3>
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Add Prescription</button>
+                </div>
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="text-blue-400">
+                            <th class="p-2">Date</th>
+                            <th class="p-2">Patient</th>
+                            <th class="p-2">Medication</th>
+                            <th class="p-2">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-t border-gray-700">
+                            <td class="p-2">2025-05-15</td>
+                            <td class="p-2">Jane Doe</td>
+                            <td class="p-2">Paracetamol</td>
+                            <td class="p-2">Active</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Inventory -->
+        <section id="inventory" class="mb-8 hidden">
+            <h2 class="text-2xl font-bold text-blue-400 mb-4">Inventory</h2>
+            <div class="bg-gray-800 p-4 rounded-lg neon-border">
+                <div class="flex justify-between mb-4">
+                    <h3 class="text-lg">Inventory Items</h3>
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Add Item</button>
+                </div>
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="text-blue-400">
+                            <th class="p-2">Code</th>
+                            <th class="p-2">Name</th>
+                            <th class="p-2">Type</th>
+                            <th class="p-2">Stock</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-t border-gray-700">
+                            <td class="p-2">MED001</td>
+                            <td class="p-2">Paracetamol</td>
+                            <td class="p-2">Medicine</td>
+                            <td class="p-2">100</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Billings -->
+        <section id="billings" class="mb-8 hidden">
+            <h2 class="text-2xl font-bold text-blue-400 mb-4">Billings</h2>
+            <div class="bg-gray-800 p-4 rounded-lg neon-border">
+                <div class="flex justify-between mb-4">
+                    <h3 class="text-lg">Billing List</h3>
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Add Billing</button>
+                </div>
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="text-blue-400">
+                            <th class="p-2">Billing Number</th>
+                            <th class="p-2">Patient</th>
+                            <th class="p-2">Total</th>
+                            <th class="p-2">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-t border-gray-700">
+                            <td class="p-2">BILL001</td>
+                            <td class="p-2">Jane Doe</td>
+                            <td class="p-2">$50.00</td>
+                            <td class="p-2">Pending</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Staff -->
+        <section id="staff" class="mb-8 hidden">
+            <h2 class="text-2xl font-bold text-blue-400 mb-4">Staff</h2>
+            <div class="bg-gray-800 p-4 rounded-lg neon-border">
+                <div class="flex justify-between mb-4">
+                    <h3 class="text-lg">Staff List</h3>
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Add Staff</button>
+                </div>
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="text-blue-400">
+                            <th class="p-2">Employee Number</th>
+                            <th class="p-2">Name</th>
+                            <th class="p-2">Position</th>
+                            <th class="p-2">Phone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-t border-gray-700">
+                            <td class="p-2">EMP001</td>
+                            <td class="p-2">Dr. John</td>
+                            <td class="p-2">Doctor</td>
+                            <td class="p-2">+123456789</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Clinics -->
+        <section id="clinics" class="mb-8 hidden">
+            <h2 class="text-2xl font-bold text-blue-400 mb-4">Clinics</h2>
+            <div class="bg-gray-800 p-4 rounded-lg neon-border">
+                <div class="flex justify-between mb-4">
+                    <h3 class="text-lg">Clinic List</h3>
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Add Clinic</button>
+                </div>
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="text-blue-400">
+                            <th class="p-2">Code</th>
+                            <th class="p-2">Name</th>
+                            <th class="p-2">Address</th>
+                            <th class="p-2">Phone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-t border-gray-700">
+                            <td class="p-2">CLN001</td>
+                            <td class="p-2">Main Clinic</td>
+                            <td class="p-2">123 Street</td>
+                            <td class="p-2">+123456789</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Notifications -->
+        <section id="notifications" class="mb-8 hidden">
+            <h2 class="text-2xl font-bold text-blue-400 mb-4">Notifications</h2>
+            <div class="bg-gray-800 p-4 rounded-lg neon-border">
+                <h3 class="text-lg mb-4">Notification List</h3>
+                <ul class="space-y-2">
+                    <li class="p-2 bg-gray-700 rounded-lg">
+                        <p class="text-blue-400">New appointment scheduled for Jane Doe</p>
+                        <p class="text-sm text-gray-400">2025-05-15 09:00</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Settings -->
+        <section id="settings" class="mb-8 hidden">
+            <h2 class="text-2xl font-bold text-blue-400 mb-4">Settings</h2>
+            <div class="bg-gray-800 p-4 rounded-lg neon-border">
+                <h3 class="text-lg mb-4">System Settings</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm">Clinic Name</label>
+                        <input type="text" class="w-full bg-gray-900 p-2 rounded-lg neon-border" value="Main Clinic">
+                    </div>
+                    <div>
+                        <label class="block text-sm">Currency</label>
+                        <select class="w-full bg-gray-900 p-2 rounded-lg neon-border">
+                            <option>USD</option>
+                            <option>IDR</option>
+                        </select>
+                    </div>
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Save</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Sidebar toggle for mobile
+        const toggleSidebar = document.getElementById('toggleSidebar');
+        const sidebar = document.getElementById('sidebar');
+        toggleSidebar.addEventListener('click', () => {
+            sidebar.classList.toggle('sidebar-hidden');
+        });
+
+        // Navigation handling
+        const navLinks = document.querySelectorAll('nav a');
+        const sections = document.querySelectorAll('main section');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                
+                // Hide all sections
+                sections.forEach(section => {
+                    section.classList.add('hidden');
+                });
+                
+                // Show target section
+                document.getElementById(targetId).classList.remove('hidden');
+                
+                // Update active link
+                navLinks.forEach(l => l.classList.remove('bg-gray-800'));
+                link.classList.add('bg-gray-800');
+                
+                // Close sidebar on mobile
+                if (window.innerWidth < 768) {
+                    sidebar.classList.add('sidebar-hidden');
+                }
+            });
+        });
+
+        // Show dashboard by default
+        document.getElementById('dashboard').classList.remove('hidden');
+    </script>
+</body>
+</html>

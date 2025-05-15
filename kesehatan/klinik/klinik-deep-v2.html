@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusClinic - Modern Healthcare Management</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dark-theme">
+    <!-- Sidebar Navigation -->
+    <nav id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <div class="clinic-logo">
+                <i class="fas fa-heartbeat logo-icon"></i>
+                <span class="clinic-name">NexusClinic</span>
+            </div>
+            <button class="btn toggle-sidebar">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+        </div>
+        
+        <div class="sidebar-menu">
+            <div class="user-profile">
+                <div class="avatar">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=4e73df&color=fff" alt="User">
+                </div>
+                <div class="user-info">
+                    <h5>Admin User</h5>
+                    <span>Super Administrator</span>
+                </div>
+            </div>
+            
+            <ul class="nav flex-column">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="patients.html">
+                        <i class="fas fa-user-injured"></i>
+                        <span>Patients</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="appointments.html">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Appointments</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="queue.html">
+                        <i class="fas fa-list-ol"></i>
+                        <span>Queue</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="medical-records.html">
+                        <i class="fas fa-file-medical"></i>
+                        <span>Medical Records</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="prescriptions.html">
+                        <i class="fas fa-prescription-bottle-alt"></i>
+                        <span>Prescriptions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="billing.html">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        <span>Billing</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="inventory.html">
+                        <i class="fas fa-pills"></i>
+                        <span>Inventory</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="staff.html">
+                        <i class="fas fa-user-md"></i>
+                        <span>Staff</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="reports.html">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="settings.html">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="sidebar-footer">
+            <button class="btn theme-toggle">
+                <i class="fas fa-moon"></i>
+                <span>Dark Mode</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Navigation -->
+        <nav class="top-nav">
+            <div class="nav-left">
+                <button class="btn toggle-sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+            </div>
+            <div class="nav-right">
+                <div class="notifications">
+                    <button class="btn notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </button>
+                    <div class="notification-dropdown">
+                        <div class="notification-header">
+                            <h5>Notifications</h5>
+                            <span class="badge">3 New</span>
+                        </div>
+                        <div class="notification-list">
+                            <a href="#" class="notification-item unread">
+                                <div class="notification-icon">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <p>New appointment scheduled for today</p>
+                                    <span>10 mins ago</span>
+                                </div>
+                            </a>
+                            <a href="#" class="notification-item unread">
+                                <div class="notification-icon">
+                                    <i class="fas fa-prescription-bottle-alt"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <p>Prescription #PR-10025 ready for dispensing</p>
+                                    <span>25 mins ago</span>
+                                </div>
+                            </a>
+                            <a href="#" class="notification-item unread">
+                                <div class="notification-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <p>Low stock alert for Paracetamol 500mg</p>
+                                    <span>2 hours ago</span>
+                                </div>
+                            </a>
+                            <a href="#" class="notification-item">
+                                <div class="notification-icon">
+                                    <i class="fas fa-user-injured"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <p>New patient registered - John Doe</p>
+                                    <span>Yesterday</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="notification-footer">
+                            <a href="#">View All Notifications</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-dropdown">
+                    <button class="btn user-btn">
+                        <img src="https://ui-avatars.com/api/?name=Admin+User&background=4e73df&color=fff" alt="User">
+                        <span>Admin User</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="user-dropdown-menu">
+                        <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                        <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Page Content -->
+        <div class="page-content">
+            <div class="page-header">
+                <h1>Dashboard</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                    </ol>
+                </nav>
+            </div>
+            
+            <div class="row stats-row">
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-primary">
+                            <i class="fas fa-user-injured"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>1,254</h3>
+                            <p>Total Patients</p>
+                        </div>
+                        <div class="stat-progress">
+                            <div class="progress">
+                                <div class="progress-bar bg-primary" style="width: 75%"></div>
+                            </div>
+                            <span>+12% from last month</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-success">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>48</h3>
+                            <p>Today's Appointments</p>
+                        </div>
+                        <div class="stat-progress">
+                            <div class="progress">
+                                <div class="progress-bar bg-success" style="width: 60%"></div>
+                            </div>
+                            <span>+5% from yesterday</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-warning">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>$12,540</h3>
+                            <p>Today's Revenue</p>
+                        </div>
+                        <div class="stat-progress">
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" style="width: 45%"></div>
+                            </div>
+                            <span>+8% from yesterday</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-danger">
+                            <i class="fas fa-prescription-bottle-alt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>12</h3>
+                            <p>Low Stock Items</p>
+                        </div>
+                        <div class="stat-progress">
+                            <div class="progress">
+                                <div class="progress-bar bg-danger" style="width: 30%"></div>
+                            </div>
+                            <span>+3 from last week</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Appointments Overview</h3>
+                            <div class="card-actions">
+                                <select class="form-select">
+                                    <option>This Week</option>
+                                    <option>This Month</option>
+                                    <option>This Year</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="appointmentsChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Today's Schedule</h3>
+                            <div class="card-actions">
+                                <button class="btn btn-sm btn-primary">View All</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="schedule-list">
+                                <div class="schedule-item">
+                                    <div class="schedule-time">
+                                        <span>09:00</span>
+                                        <span>-</span>
+                                        <span>09:30</span>
+                                    </div>
+                                    <div class="schedule-info">
+                                        <h5>John Smith</h5>
+                                        <p>General Checkup</p>
+                                        <span class="badge bg-success">Confirmed</span>
+                                    </div>
+                                </div>
+                                <div class="schedule-item">
+                                    <div class="schedule-time">
+                                        <span>10:15</span>
+                                        <span>-</span>
+                                        <span>10:45</span>
+                                    </div>
+                                    <div class="schedule-info">
+                                        <h5>Sarah Johnson</h5>
+                                        <p>Dental Consultation</p>
+                                        <span class="badge bg-success">Confirmed</span>
+                                    </div>
+                                </div>
+                                <div class="schedule-item">
+                                    <div class="schedule-time">
+                                        <span>11:30</span>
+                                        <span>-</span>
+                                        <span>12:00</span>
+                                    </div>
+                                    <div class="schedule-info">
+                                        <h5>Michael Brown</h5>
+                                        <p>Follow-up Visit</p>
+                                        <span class="badge bg-warning">Pending</span>
+                                    </div>
+                                </div>
+                                <div class="schedule-item">
+                                    <div class="schedule-time">
+                                        <span>14:00</span>
+                                        <span>-</span>
+                                        <span>14:30</span>
+                                    </div>
+                                    <div class="schedule-info">
+                                        <h5>Emily Davis</h5>
+                                        <p>Vaccination</p>
+                                        <span class="badge bg-success">Confirmed</span>
+                                    </div>
+                                </div>
+                                <div class="schedule-item">
+                                    <div class="schedule-time">
+                                        <span>15:45</span>
+                                        <span>-</span>
+                                        <span>16:15</span>
+                                    </div>
+                                    <div class="schedule-info">
+                                        <h5>Robert Wilson</h5>
+                                        <p>Blood Test</p>
+                                        <span class="badge bg-danger">Cancelled</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Recent Patients</h3>
+                            <div class="card-actions">
+                                <button class="btn btn-sm btn-primary">View All</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Patient ID</th>
+                                            <th>Name</th>
+                                            <th>Last Visit</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>MR-10025</td>
+                                            <td>
+                                                <div class="patient-info">
+                                                    <img src="https://ui-avatars.com/api/?name=John+Doe&background=4e73df&color=fff" alt="Patient">
+                                                    <span>John Doe</span>
+                                                </div>
+                                            </td>
+                                            <td>Today, 09:30</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>MR-10024</td>
+                                            <td>
+                                                <div class="patient-info">
+                                                    <img src="https://ui-avatars.com/api/?name=Sarah+Smith&background=4e73df&color=fff" alt="Patient">
+                                                    <span>Sarah Smith</span>
+                                                </div>
+                                            </td>
+                                            <td>Yesterday, 14:15</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>MR-10023</td>
+                                            <td>
+                                                <div class="patient-info">
+                                                    <img src="https://ui-avatars.com/api/?name=Michael+Johnson&background=4e73df&color=fff" alt="Patient">
+                                                    <span>Michael Johnson</span>
+                                                </div>
+                                            </td>
+                                            <td>2 days ago</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>MR-10022</td>
+                                            <td>
+                                                <div class="patient-info">
+                                                    <img src="https://ui-avatars.com/api/?name=Emily+Brown&background=4e73df&color=fff" alt="Patient">
+                                                    <span>Emily Brown</span>
+                                                </div>
+                                            </td>
+                                            <td>3 days ago</td>
+                                            <td><span class="badge bg-warning">Inactive</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>MR-10021</td>
+                                            <td>
+                                                <div class="patient-info">
+                                                    <img src="https://ui-avatars.com/api/?name=Robert+Wilson&background=4e73df&color=fff" alt="Patient">
+                                                    <span>Robert Wilson</span>
+                                                </div>
+                                            </td>
+                                            <td>1 week ago</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Quick Actions</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="quick-actions">
+                                <a href="new-patient.html" class="quick-action">
+                                    <div class="action-icon bg-primary">
+                                        <i class="fas fa-user-plus"></i>
+                                    </div>
+                                    <span>New Patient</span>
+                                </a>
+                                <a href="new-appointment.html" class="quick-action">
+                                    <div class="action-icon bg-success">
+                                        <i class="fas fa-calendar-plus"></i>
+                                    </div>
+                                    <span>New Appointment</span>
+                                </a>
+                                <a href="prescriptions.html" class="quick-action">
+                                    <div class="action-icon bg-info">
+                                        <i class="fas fa-prescription-bottle-alt"></i>
+                                    </div>
+                                    <span>New Prescription</span>
+                                </a>
+                                <a href="billing.html" class="quick-action">
+                                    <div class="action-icon bg-warning">
+                                        <i class="fas fa-file-invoice-dollar"></i>
+                                    </div>
+                                    <span>Create Bill</span>
+                                </a>
+                                <a href="inventory.html" class="quick-action">
+                                    <div class="action-icon bg-danger">
+                                        <i class="fas fa-pills"></i>
+                                    </div>
+                                    <span>Inventory</span>
+                                </a>
+                                <a href="reports.html" class="quick-action">
+                                    <div class="action-icon bg-secondary">
+                                        <i class="fas fa-chart-bar"></i>
+                                    </div>
+                                    <span>Reports</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Low Stock Alert</h3>
+                            <div class="card-actions">
+                                <button class="btn btn-sm btn-primary">View All</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert-list">
+                                <div class="alert-item">
+                                    <div class="alert-icon">
+                                        <i class="fas fa-exclamation-triangle text-danger"></i>
+                                    </div>
+                                    <div class="alert-content">
+                                        <h5>Paracetamol 500mg</h5>
+                                        <p>Only 12 tablets remaining</p>
+                                    </div>
+                                </div>
+                                <div class="alert-item">
+                                    <div class="alert-icon">
+                                        <i class="fas fa-exclamation-triangle text-danger"></i>
+                                    </div>
+                                    <div class="alert-content">
+                                        <h5>Amoxicillin 250mg</h5>
+                                        <p>Only 5 capsules remaining</p>
+                                    </div>
+                                </div>
+                                <div class="alert-item">
+                                    <div class="alert-icon">
+                                        <i class="fas fa-exclamation-triangle text-warning"></i>
+                                    </div>
+                                    <div class="alert-content">
+                                        <h5>Bandages (Medium)</h5>
+                                        <p>Only 8 packs remaining</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        // Initialize charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Appointments Chart
+            const appointmentsCtx = document.getElementById('appointmentsChart').getContext('2d');
+            const appointmentsChart = new Chart(appointmentsCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Appointments',
+                        data: [12, 19, 15, 22, 18, 10, 7],
+                        backgroundColor: 'rgba(78, 115, 223, 0.05)',
+                        borderColor: 'rgba(78, 115, 223, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(78, 115, 223, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: 'rgba(78, 115, 223, 1)',
+                        pointHoverBorderColor: '#fff',
+                        pointHitRadius: 10,
+                        pointBorderWidth: 2,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#fff'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#fff'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Toggle sidebar
+            const toggleSidebar = document.querySelectorAll('.toggle-sidebar');
+            toggleSidebar.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.getElementById('sidebar').classList.toggle('collapsed');
+                    document.querySelector('.main-content').classList.toggle('expanded');
+                });
+            });
+            
+            // Toggle theme
+            const themeToggle = document.querySelector('.theme-toggle');
+            themeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('light-theme');
+                document.body.classList.toggle('dark-theme');
+                
+                const icon = this.querySelector('i');
+                if (document.body.classList.contains('light-theme')) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                    this.querySelector('span').textContent = 'Light Mode';
+                } else {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                    this.querySelector('span').textContent = 'Dark Mode';
+                }
+            });
+            
+            // Toggle notifications dropdown
+            const notificationBtn = document.querySelector('.notification-btn');
+            notificationBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                document.querySelector('.notification-dropdown').classList.toggle('show');
+            });
+            
+            // Toggle user dropdown
+            const userBtn = document.querySelector('.user-btn');
+            userBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                document.querySelector('.user-dropdown-menu').classList.toggle('show');
+            });
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function() {
+                document.querySelector('.notification-dropdown').classList.remove('show');
+                document.querySelector('.user-dropdown-menu').classList.remove('show');
+            });
+        });
+    </script>
+</body>
+</html>
