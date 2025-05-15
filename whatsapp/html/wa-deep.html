@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Clone</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/whatsapp/html/css/styles.css">
+</head>
+<body>
+    <div class="container-fluid whatsapp-container">
+        <div class="row">
+            <!-- Left sidebar -->
+            <div class="col-md-4 col-lg-3 left-sidebar">
+                <!-- User profile header -->
+                <div class="user-profile-header d-flex justify-content-between align-items-center p-3">
+                    <div class="d-flex align-items-center">
+                        <img src="https://via.placeholder.com/40" alt="Profile" class="rounded-circle me-2 profile-img">
+                        <span class="fw-bold">My Profile</span>
+                    </div>
+                    <div>
+                        <button class="btn btn-sm btn-outline-secondary me-2">
+                            <i class="fas fa-users"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-secondary me-2">
+                            <i class="fas fa-comment-dots"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-secondary">
+                            <i class="fas fa-ellipsis-vertical"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Search bar -->
+                <div class="search-bar p-2">
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-0">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <input type="text" class="form-control bg-light border-0" placeholder="Search or start new chat">
+                    </div>
+                </div>
+
+                <!-- Chat list -->
+                <div class="chat-list" id="chatList">
+                    <!-- Chats will be loaded here dynamically -->
+                </div>
+            </div>
+
+            <!-- Right content area -->
+            <div class="col-md-8 col-lg-9 right-content-area d-flex flex-column">
+                <!-- Chat header -->
+                <div class="chat-header d-flex justify-content-between align-items-center p-3 border-bottom">
+                    <div class="d-flex align-items-center">
+                        <img src="https://via.placeholder.com/40" alt="Profile" class="rounded-circle me-2 profile-img">
+                        <div>
+                            <div class="fw-bold">Chat Name</div>
+                            <small class="text-muted">last seen today at 12:45 PM</small>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-sm btn-outline-secondary me-2">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-secondary me-2">
+                            <i class="fas fa-phone"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-secondary me-2">
+                            <i class="fas fa-video"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-secondary">
+                            <i class="fas fa-ellipsis-vertical"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Messages area -->
+                <div class="messages-area flex-grow-1 p-3" id="messagesArea">
+                    <!-- Messages will be loaded here dynamically -->
+                </div>
+
+                <!-- Message input -->
+                <div class="message-input p-3 border-top">
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-sm btn-outline-secondary me-2">
+                            <i class="fas fa-paperclip"></i>
+                        </button>
+                        <div class="flex-grow-1">
+                            <input type="text" class="form-control" placeholder="Type a message" id="messageInput">
+                        </div>
+                        <button class="btn btn-sm btn-outline-secondary ms-2" id="sendMessageBtn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="/whatsapp/html/js/scripts.js"></script>
+</body>
+</html>

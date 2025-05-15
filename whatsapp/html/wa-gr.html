@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Clone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom WhatsApp-like styles */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        .chat-bubble {
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+        .chat-bubble.sender {
+            background-color: #DCF8C6;
+            border-radius: 12px 12px 0 12px;
+        }
+        .chat-bubble.receiver {
+            background-color: #FFFFFF;
+            border-radius: 12px 12px 12px 0;
+        }
+        .status-circle {
+            border: 2px solid #00A884;
+        }
+        .scrollbar-hidden::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hidden {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-[#111B21] text-gray-900 dark:text-gray-100">
+    <!-- Main Container -->
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar (Chat List & Status) -->
+        <div class="w-full md:w-1/3 lg:w-1/4 bg-[#F5F6F5] dark:bg-[#1F2A44] border-r border-gray-200 dark:border-gray-700 flex flex-col">
+            <!-- Header -->
+            <div class="flex items-center justify-between p-4 bg-[#00A884] text-white">
+                <div class="flex items-center space-x-3">
+                    <img src="https://via.placeholder.com/40" alt="User Avatar" class="w-10 h-10 rounded-full">
+                    <h1 class="text-lg font-semibold">WhatsApp</h1>
+                </div>
+                <div class="flex space-x-4">
+                    <button onclick="openProfileModal()" class="focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                    </button>
+                    <button class="focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Tabs: Chats, Status -->
+            <div class="flex border-b border-gray-200 dark:border-gray-600">
+                <button class="flex-1 py-3 text-center text-sm font-medium text-gray-700 dark:text-gray-300 bg-[#E7ECE8] dark:bg-[#2A3B5A]" onclick="showTab('chats')">Chats</button>
+                <button class="flex-1 py-3 text-center text-sm font-medium text-gray-500 dark:text-gray-400" onclick="showTab('status')">Status</button>
+            </div>
+            <!-- Chats Tab -->
+            <div id="chats-tab" class="flex-1 overflow-y-auto scrollbar-hidden">
+                <div id="chat-list" class="divide-y divide-gray-200 dark:divide-gray-600">
+                    <!-- Chat items populated by JS -->
+                </div>
+            </div>
+            <!-- Status Tab -->
+            <div id="status-tab" class="flex-1 overflow-y-auto scrollbar-hidden hidden">
+                <div id="status-list" class="p-4 space-y-4">
+                    <!-- Status items populated by JS -->
+                </div>
+            </div>
+        </div>
+        <!-- Main Chat Window -->
+        <div class="flex-1 flex flex-col bg-[#ECE5DD] dark:bg-[#0B141A] hidden md:flex">
+            <!-- Chat Header -->
+            <div id="chat-header" class="flex items-center p-4 bg-[#F0F2F5] dark:bg-[#1F2A44] border-b border-gray-200 dark:border-gray-700">
+                <img id="chat-avatar" src="https://via.placeholder.com/40" alt="Chat Avatar" class="w-10 h-10 rounded-full mr-3">
+                <div class="flex-1">
+                    <h2 id="chat-name" class="text-lg font-semibold"></h2>
+                    <p id="chat-status" class="text-sm text-gray-500 dark:text-gray-400"></p>
+                </div>
+            </div>
+            <!-- Messages -->
+            <div id="messages" class="flex-1 p-4 overflow-y-auto scrollbar-hidden">
+                <!-- Messages populated by JS -->
+            </div>
+            <!-- Message Input -->
+            <div class="p-4 bg-[#F0F2F5] dark:bg-[#1F2A44] flex items-center space-x-3">
+                <input id="message-input" type="text" placeholder="Type a message" class="flex-1 p-3 rounded-lg bg-white dark:bg-[#2A3B5A] text-gray-900 dark:text-gray-100 focus:outline-none">
+                <button onclick="sendMessage()" class="p-3 bg-[#00A884] text-white rounded-full">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Profile Modal -->
+    <div id="profile-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white dark:bg-[#1F2A44] p-6 rounded-lg w-full max-w-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold">Profile</h2>
+                <button onclick="closeProfileModal()" class="text-gray-500 dark:text-gray-400">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <img src="https://via.placeholder.com/80" alt="User Avatar" class="w-20 h-20 rounded-full mx-auto mb-4">
+            <p class="text-lg font-semibold text-center">John Doe</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400 text-center">john.doe@example.com</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400 text-center mt-2">Bio: Hey there! I'm using WhatsApp.</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400 text-center">Last seen: Just now</p>
+        </div>
+    </div>
+
+    <script>
+        // Simulated database data
+        const users = [
+            { id: '1', name: 'John Doe', email: 'john.doe@example.com', avatar: 'https://via.placeholder.com/40', bio: 'Hey there! I\'m using WhatsApp.', last_seen: '2025-05-15T18:00:00Z' }
+        ];
+        const chats = [
+            { id: '1', type: 'private', name: 'Alice', created_by: '1', updated_at: '2025-05-15T18:25:00Z' },
+            { id: '2', type: 'group', name: 'Family Group', created_by: '1', updated_at: '2025-05-15T18:20:00Z' }
+        ];
+        const messages = [
+            { id: '1', chat_id: '1', sender_id: '1', content: 'Hey, how are you?', message_type: 'text', created_at: '2025-05-15T18:20:00Z', status: 'seen' },
+            { id: '2', chat_id: '1', sender_id: '2', content: 'I\'m good, thanks!', message_type: 'text', created_at: '2025-05-15T18:25:00Z', status: 'delivered' }
+        ];
+        const statuses = [
+            { id: '1', user_id: '1', content: 'Feeling great!', media_url: null, expires_at: '2025-05-16T18:00:00Z', created_at: '2025-05-15T18:00:00Z' }
+        ];
+
+        // Initialize app
+        function init() {
+            renderChatList();
+            renderStatusList();
+            selectChat('1');
+        }
+
+        // Render chat list
+        function renderChatList() {
+            const chatList = document.getElementById('chat-list');
+            chatList.innerHTML = '';
+            chats.forEach(chat => {
+                const lastMessage = messages.filter(m => m.chat_id === chat.id).pop();
+                const chatItem = `
+                    <div class="flex items-center p-4 hover:bg-gray-100 dark:hover:bg-[#2A3B5A] cursor-pointer" onclick="selectChat('${chat.id}')">
+                        <img src="https://via.placeholder.com/40" alt="Chat Avatar" class="w-12 h-12 rounded-full mr-3">
+                        <div class="flex-1">
+                            <div class="flex justify-between">
+                                <h3 class="text-base font-semibold">${chat.name}</h3>
+                                <span class="text-xs text-gray-500 dark:text-gray-400">${new Date(chat.updated_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                            </div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 truncate">${lastMessage ? lastMessage.content : ''}</p>
+                        </div>
+                    </div>
+                `;
+                chatList.innerHTML += chatItem;
+            });
+        }
+
+        // Render status list
+        function renderStatusList() {
+            const statusList = document.getElementById('status-list');
+            statusList.innerHTML = '';
+            statuses.forEach(status => {
+                const user = users.find(u => u.id === status.user_id);
+                const statusItem = `
+                    <div class="flex items-center p-2 hover:bg-gray-100 dark:hover:bg-[#2A3B5A] cursor-pointer">
+                        <div class="w-12 h-12 rounded-full status-circle mr-3 flex items-center justify-center">
+                            <img src="${user.avatar}" alt="User Avatar" class="w-10 h-10 rounded-full">
+                        </div>
+                        <div>
+                            <h3 class="text-base font-semibold">${user.name}</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">${status.content}</p>
+                        </div>
+                    </div>
+                `;
+                statusList.innerHTML += statusItem;
+            });
+        }
+
+        // Select a chat
+        function selectChat(chatId) {
+            const chat = chats.find(c => c.id === chatId);
+            const chatHeader = document.getElementById('chat-header');
+            const chatName = document.getElementById('chat-name');
+            const chatStatus = document.getElementById('chat-status');
+            const chatAvatar = document.getElementById('chat-avatar');
+            chatName.textContent = chat.name;
+            chatStatus.textContent = chat.type === 'private' ? 'Last seen today at ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Group';
+            chatAvatar.src = 'https://via.placeholder.com/40';
+            renderMessages(chatId);
+            document.querySelector('.md\\:flex').classList.remove('hidden');
+        }
+
+        // Render messages
+        function renderMessages(chatId) {
+            const messagesDiv = document.getElementById('messages');
+            messagesDiv.innerHTML = '';
+            const chatMessages = messages.filter(m => m.chat_id === chatId);
+            chatMessages.forEach(msg => {
+                const isSender = msg.sender_id === '1';
+                const message = `
+                    <div class="flex ${isSender ? 'justify-end' : 'justify-start'} mb-4">
+                        <div class="chat-bubble ${isSender ? 'sender' : 'receiver'} p-3 relative">
+                            <p>${msg.content}</p>
+                            <span class="text-xs text-gray-500 absolute bottom-1 right-2">${new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} ${msg.status === 'seen' ? '<span class="text-blue-500">✔✔</span>' : ''}</span>
+                        </div>
+                    </div>
+                `;
+                messagesDiv.innerHTML += message;
+            });
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        // Send message (simulated)
+        function sendMessage() {
+            const input = document.getElementById('message-input');
+            if (input.value.trim()) {
+                const newMessage = {
+                    id: Date.now().toString(),
+                    chat_id: chats[0].id,
+                    sender_id: '1',
+                    content: input.value,
+                    message_type: 'text',
+                    created_at: new Date().toISOString(),
+                    status: 'sent'
+                };
+                messages.push(newMessage);
+                renderMessages(chats[0].id);
+                input.value = '';
+            }
+        }
+
+        // Tab switching
+        function showTab(tab) {
+            document.getElementById('chats-tab').classList.toggle('hidden', tab !== 'chats');
+            document.getElementById('status-tab').classList.toggle('hidden', tab !== 'status');
+            document.querySelectorAll('.flex.border-b button').forEach(btn => {
+                btn.classList.toggle('bg-[#E7ECE8]', btn.textContent.toLowerCase() === tab);
+                btn.classList.toggle('dark:bg-[#2A3B5A]', btn.textContent.toLowerCase() === tab);
+                btn.classList.toggle('text-gray-700', btn.textContent.toLowerCase() === tab);
+                btn.classList.toggle('dark:text-gray-300', btn.textContent.toLowerCase() === tab);
+                btn.classList.toggle('text-gray-500', btn.textContent.toLowerCase() !== tab);
+                btn.classList.toggle('dark:text-gray-400', btn.textContent.toLowerCase() !== tab);
+            });
+        }
+
+        // Profile modal
+        function openProfileModal() {
+            document.getElementById('profile-modal').classList.remove('hidden');
+        }
+        function closeProfileModal() {
+            document.getElementById('profile-modal').classList.add('hidden');
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
