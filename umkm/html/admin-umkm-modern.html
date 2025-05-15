@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMKM Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/apexcharts@3.35.0/dist/apexcharts.min.css" rel="stylesheet">
+    <style>
+        .sidebar {
+            transition: all 0.3s ease;
+        }
+        .sidebar.collapsed {
+            width: 80px;
+        }
+        .sidebar.collapsed .sidebar-text {
+            display: none;
+        }
+        .sidebar.collapsed .logo-text {
+            display: none;
+        }
+        .sidebar.collapsed .menu-item {
+            justify-content: center;
+        }
+        .content {
+            transition: margin-left 0.3s ease;
+        }
+        .content.expanded {
+            margin-left: 80px;
+        }
+        .active-menu {
+            background-color: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+            color: #3b82f6;
+        }
+        .dark .active-menu {
+            background-color: rgba(59, 130, 246, 0.2);
+        }
+        .dropdown-enter-active, .dropdown-leave-active {
+            transition: all 0.3s ease;
+        }
+        .dropdown-enter-from, .dropdown-leave-to {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="sidebar bg-white dark:bg-gray-800 shadow-md w-64 flex flex-col h-full fixed z-50">
+            <!-- Logo -->
+            <div class="p-4 flex items-center justify-between border-b border-gray-200 dark:border-gray-700">
+                <div class="flex items-center">
+                    <img src="https://via.placeholder.com/40" alt="Logo" class="h-8 w-8 rounded">
+                    <span class="logo-text ml-3 font-bold text-xl">UMKM Admin</span>
+                </div>
+                <button id="toggleSidebar" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <!-- User Profile -->
+            <div class="p-4 flex items-center border-b border-gray-200 dark:border-gray-700">
+                <img src="https://via.placeholder.com/40" alt="User" class="h-10 w-10 rounded-full">
+                <div class="ml-3 sidebar-text">
+                    <p class="font-medium">Admin User</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">admin@example.com</p>
+                </div>
+            </div>
+            
+            <!-- Menu -->
+            <div class="flex-1 overflow-y-auto">
+                <ul class="py-2">
+                    <!-- Dashboard -->
+                    <li>
+                        <a href="#" class="menu-item flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 active-menu">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span class="sidebar-text ml-3">Dashboard</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Users -->
+                    <li>
+                        <a href="#" class="menu-item flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-users"></i>
+                            <span class="sidebar-text ml-3">Users</span>
+                            <span class="sidebar-text ml-auto bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 text-xs px-2 py-1 rounded-full">5</span>
+                        </a>
+                    </li>
+                    
+                    <!-- UMKM Businesses -->
+                    <li>
+                        <a href="#" class="menu-item flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-store"></i>
+                            <span class="sidebar-text ml-3">UMKM Businesses</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Products -->
+                    <li>
+                        <a href="#" class="menu-item flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-box-open"></i>
+                            <span class="sidebar-text ml-3">Products</span>
+                            <span class="sidebar-text ml-auto bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100 text-xs px-2 py-1 rounded-full">42</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Categories -->
+                    <li>
+                        <a href="#" class="menu-item flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-tags"></i>
+                            <span class="sidebar-text ml-3">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Orders -->
+                    <li>
+                        <a href="#" class="menu-item flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="sidebar-text ml-3">Orders</span>
+                            <span class="sidebar-text ml-auto bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-100 text-xs px-2 py-1 rounded-full">12</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Payments -->
+                    <li>
+                        <a href="#" class="menu-item flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-credit-card"></i>
+                            <span class="sidebar-text ml-3">Payments</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Inventory -->
+                    <li>
+                        <a href="#" class="menu-item flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-warehouse"></i>
+                            <span class="sidebar-text ml-3">Inventory</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Financial Records -->
+                    <li>
+                        <a href="#" class="menu-item flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-chart-line"></i>
+                            <span class="sidebar-text ml-3">Financial Records</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Promotions -->
+                    <li>
+                        <a href="#" class="menu-item flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-percentage"></i>
+                            <span class="sidebar-text ml-3">Promotions</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Loyalty Programs -->
+                    <li>
+                        <a href="#" class="menu-item flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-award"></i>
+                            <span class="sidebar-text ml-3">Loyalty Programs</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Reviews -->
+                    <li>
+                        <a href="#" class="menu-item flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-star"></i>
+                            <span class="sidebar-text ml-3">Reviews</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Forum -->
+                    <li>
+                        <a href="#" class="menu-item flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-comments"></i>
+                            <span class="sidebar-text ml-3">Forum</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Customer Support -->
+                    <li>
+                        <a href="#" class="menu-item flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-headset"></i>
+                            <span class="sidebar-text ml-3">Customer Support</span>
+                            <span class="sidebar-text ml-auto bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-100 text-xs px-2 py-1 rounded-full">3</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Audit Logs -->
+                    <li>
+                        <a href="#" class="menu-item flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span class="sidebar-text ml-3">Audit Logs</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Settings -->
+                    <li>
+                        <a href="#" class="menu-item flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-cog"></i>
+                            <span class="sidebar-text ml-3">Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="content flex-1 flex flex-col overflow-hidden ml-64">
+            <!-- Top Navigation -->
+            <header class="bg-white dark:bg-gray-800 shadow-sm z-40">
+                <div class="flex items-center justify-between px-6 py-3">
+                    <div class="flex items-center">
+                        <h1 class="text-xl font-semibold">Dashboard Overview</h1>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <!-- Search -->
+                        <div class="relative">
+                            <input type="text" placeholder="Search..." class="pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                        </div>
+                        
+                        <!-- Notifications -->
+                        <div class="relative" x-data="{ open: false }">
+                            <button @click="open = !open" class="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 relative">
+                                <i class="fas fa-bell"></i>
+                                <span class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"></span>
+                            </button>
+                            <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-md shadow-lg overflow-hidden z-50">
+                                <div class="p-3 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700">
+                                    <h3 class="font-medium">Notifications (3)</h3>
+                                </div>
+                                <div class="divide-y divide-gray-200 dark:divide-gray-700">
+                                    <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        <div class="flex-shrink-0 bg-blue-500 text-white rounded-full p-2">
+                                            <i class="fas fa-shopping-cart text-xs"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium">New order received</p>
+                                            <p class="text-xs text-gray-500 dark:text-gray-400">2 minutes ago</p>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        <div class="flex-shrink-0 bg-green-500 text-white rounded-full p-2">
+                                            <i class="fas fa-user text-xs"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium">New user registered</p>
+                                            <p class="text-xs text-gray-500 dark:text-gray-400">15 minutes ago</p>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        <div class="flex-shrink-0 bg-red-500 text-white rounded-full p-2">
+                                            <i class="fas fa-exclamation-triangle text-xs"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium">Payment failed</p>
+                                            <p class="text-xs text-gray-500 dark:text-gray-400">1 hour ago</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="p-3 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700 text-center">
+                                    <a href="#" class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline">View all notifications</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- User Dropdown -->
+                        <div class="relative" x-data="{ open: false }">
+                            <button @click="open = !open" class="flex items-center space-x-2 focus:outline-none">
+                                <img src="https://via.placeholder.com/40" alt="User" class="h-8 w-8 rounded-full">
+                                <span class="hidden md:inline-block">Admin</span>
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </button>
+                            <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-50">
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Profile</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Settings</a>
+                                <div class="border-t border-gray-200 dark:border-gray-700"></div>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-y-auto p-6 bg-gray-50 dark:bg-gray-900">
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 dark:text-gray-400">Total Revenue</p>
+                                <h3 class="text-2xl font-bold">Rp 12,450,000</h3>
+                                <p class="text-green-500 text-sm mt-1">+12.5% from last month</p>
+                            </div>
+                            <div class="bg-blue-100 dark:bg-blue-900 p-3 rounded-full">
+                                <i class="fas fa-wallet text-blue-500 dark:text-blue-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 dark:text-gray-400">Total Orders</p>
+                                <h3 class="text-2xl font-bold">342</h3>
+                                <p class="text-green-500 text-sm mt-1">+8.2% from last month</p>
+                            </div>
+                            <div class="bg-green-100 dark:bg-green-900 p-3 rounded-full">
+                                <i class="fas fa-shopping-cart text-green-500 dark:text-green-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 dark:text-gray-400">Active Users</p>
+                                <h3 class="text-2xl font-bold">1,245</h3>
+                                <p class="text-green-500 text-sm mt-1">+5.7% from last month</p>
+                            </div>
+                            <div class="bg-purple-100 dark:bg-purple-900 p-3 rounded-full">
+                                <i class="fas fa-users text-purple-500 dark:text-purple-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 dark:text-gray-400">UMKM Registered</p>
+                                <h3 class="text-2xl font-bold">87</h3>
+                                <p class="text-green-500 text-sm mt-1">+15.3% from last month</p>
+                            </div>
+                            <div class="bg-yellow-100 dark:bg-yellow-900 p-3 rounded-full">
+                                <i class="fas fa-store text-yellow-500 dark:text-yellow-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Charts Row -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                    <!-- Revenue Chart -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-lg font-semibold">Revenue Overview</h2>
+                            <div class="flex space-x-2">
+                                <button class="px-3 py-1 text-sm bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded">Month</button>
+                                <button class="px-3 py-1 text-sm text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">Year</button>
+                            </div>
+                        </div>
+                        <div id="revenueChart" class="h-64"></div>
+                    </div>
+                    
+                    <!-- Orders Chart -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-lg font-semibold">Order Status</h2>
+                            <div class="flex space-x-2">
+                                <button class="px-3 py-1 text-sm bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded">Week</button>
+                                <button class="px-3 py-1 text-sm text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">Month</button>
+                            </div>
+                        </div>
+                        <div id="orderStatusChart" class="h-64"></div>
+                    </div>
+                </div>
+                
+                <!-- Recent Orders -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden mb-6">
+                    <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+                        <h2 class="text-lg font-semibold">Recent Orders</h2>
+                        <a href="#" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">View all</a>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                            <thead class="bg-gray-50 dark:bg-gray-700">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Order ID</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Customer</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">UMKM</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Amount</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Date</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-200">#ORD-2023-001</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">John Doe</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Toko Maju Jaya</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Rp 450,000</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">Delivered</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">12 Jun 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <a href="#" class="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300">View</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-200">#ORD-2023-002</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Jane Smith</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Warung Sederhana</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Rp 320,000</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200">Processing</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">11 Jun 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <a href="#" class="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300">View</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-200">#ORD-2023-003</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Robert Johnson</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Kedai Kopi Mantap</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Rp 175,000</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">Shipped</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">10 Jun 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <a href="#" class="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300">View</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-200">#ORD-2023-004</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Sarah Williams</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Toko Roti Enak</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Rp 280,000</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200">Cancelled</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">9 Jun 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <a href="#" class="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300">View</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-200">#ORD-2023-005</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Michael Brown</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Toko Kue Nikmat</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Rp 520,000</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200">Pending</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">8 Jun 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <a href="#" class="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300">View</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Recent Activities -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Recent Users -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+                        <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+                            <h2 class="text-lg font-semibold">Recent Users</h2>
+                            <a href="#" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">View all</a>
+                        </div>
+                        <div class="divide-y divide-gray-200 dark:divide-gray-700">
+                            <div class="p-4 flex items-center">
+                                <img src="https://via.placeholder.com/40" alt="User" class="h-10 w-10 rounded-full">
+                                <div class="ml-4">
+                                    <p class="font-medium">John Doe</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Customer</p>
+                                </div>
+                                <div class="ml-auto text-sm text-gray-500 dark:text-gray-400">2 hours ago</div>
+                            </div>
+                            <div class="p-4 flex items-center">
+                                <img src="https://via.placeholder.com/40" alt="User" class="h-10 w-10 rounded-full">
+                                <div class="ml-4">
+                                    <p class="font-medium">Jane Smith</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">UMKM Owner</p>
+                                </div>
+                                <div class="ml-auto text-sm text-gray-500 dark:text-gray-400">5 hours ago</div>
+                            </div>
+                            <div class="p-4 flex items-center">
+                                <img src="https://via.placeholder.com/40" alt="User" class="h-10 w-10 rounded-full">
+                                <div class="ml-4">
+                                    <p class="font-medium">Robert Johnson</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Customer</p>
+                                </div>
+                                <div class="ml-auto text-sm text-gray-500 dark:text-gray-400">1 day ago</div>
+                            </div>
+                            <div class="p-4 flex items-center">
+                                <img src="https://via.placeholder.com/40" alt="User" class="h-10 w-10 rounded-full">
+                                <div class="ml-4">
+                                    <p class="font-medium">Sarah Williams</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">UMKM Owner</p>
+                                </div>
+                                <div class="ml-auto text-sm text-gray-500 dark:text-gray-400">2 days ago</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent UMKM Registrations -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+                        <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+                            <h2 class="text-lg font-semibold">Recent UMKM Registrations</h2>
+                            <a href="#" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">View all</a>
+                        </div>
+                        <div class="divide-y divide-gray-200 dark:divide-gray-700">
+                            <div class="p-4 flex items-center">
+                                <img src="https://via.placeholder.com/40" alt="UMKM" class="h-10 w-10 rounded">
+                                <div class="ml-4">
+                                    <p class="font-medium">Toko Maju Jaya</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Kuliner</p>
+                                </div>
+                                <div class="ml-auto text-sm text-gray-500 dark:text-gray-400">1 day ago</div>
+                            </div>
+                            <div class="p-4 flex items-center">
+                                <img src="https://via.placeholder.com/40" alt="UMKM" class="h-10 w-10 rounded">
+                                <div class="ml-4">
+                                    <p class="font-medium">Warung Sederhana</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Kuliner</p>
+                                </div>
+                                <div class="ml-auto text-sm text-gray-500 dark:text-gray-400">2 days ago</div>
+                            </div>
+                            <div class="p-4 flex items-center">
+                                <img src="https://via.placeholder.com/40" alt="UMKM" class="h-10 w-10 rounded">
+                                <div class="ml-4">
+                                    <p class="font-medium">Kedai Kopi Mantap</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Minuman</p>
+                                </div>
+                                <div class="ml-auto text-sm text-gray-500 dark:text-gray-400">3 days ago</div>
+                            </div>
+                            <div class="p-4 flex items-center">
+                                <img src="https://via.placeholder.com/40" alt="UMKM" class="h-10 w-10 rounded">
+                                <div class="ml-4">
+                                    <p class="font-medium">Toko Roti Enak</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Makanan</p>
+                                </div>
+                                <div class="ml-auto text-sm text-gray-500 dark:text-gray-400">4 days ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.10.5/dist/cdn.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.35.0/dist/apexcharts.min.js"></script>
+    <script>
+        // Toggle sidebar
+        document.getElementById('toggleSidebar').addEventListener('click', function() {
+            const sidebar = document.querySelector('.sidebar');
+            const content = document.querySelector('.content');
+            
+            sidebar.classList.toggle('collapsed');
+            content.classList.toggle('expanded');
+        });
+        
+        // Initialize charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Revenue Chart
+            const revenueChart = new ApexCharts(document.querySelector("#revenueChart"), {
+                series: [{
+                    name: 'Revenue',
+                    data: [3000000, 4000000, 3500000, 5000000, 4900000, 6000000, 7000000, 6900000, 6500000, 7500000, 8000000, 8500000]
+                }],
+                chart: {
+                    height: '100%',
+                    type: 'area',
+                    toolbar: {
+                        show: false
+                    },
+                    zoom: {
+                        enabled: false
+                    }
+                },
+                colors: ['#3b82f6'],
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    curve: 'smooth',
+                    width: 2
+                },
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        shadeIntensity: 1,
+                        opacityFrom: 0.7,
+                        opacityTo: 0.3,
+                        stops: [0, 90, 100]
+                    }
+                },
+                xaxis: {
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    labels: {
+                        style: {
+                            colors: '#6b7280'
+                        }
+                    }
+                },
+                yaxis: {
+                    labels: {
+                        formatter: function(value) {
+                            return 'Rp ' + (value / 1000000).toFixed(1) + 'jt';
+                        },
+                        style: {
+                            colors: '#6b7280'
+                        }
+                    }
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(value) {
+                            return 'Rp ' + value.toLocaleString('id-ID');
+                        }
+                    }
+                }
+            });
+            revenueChart.render();
+            
+            // Order Status Chart
+            const orderStatusChart = new ApexCharts(document.querySelector("#orderStatusChart"), {
+                series: [{
+                    name: 'Orders',
+                    data: [44, 55, 41, 17, 15]
+                }],
+                chart: {
+                    type: 'donut',
+                    height: '100%'
+                },
+                colors: ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'],
+                labels: ['Delivered', 'Processing', 'Shipped', 'Cancelled', 'Pending'],
+                plotOptions: {
+                    pie: {
+                        donut: {
+                            size: '65%',
+                            labels: {
+                                show: true,
+                                total: {
+                                    show: true,
+                                    label: 'Total Orders',
+                                    formatter: function(w) {
+                                        return w.globals.seriesTotals.reduce((a, b) => a + b, 0);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                legend: {
+                    position: 'bottom'
+                },
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 200
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }]
+            });
+            orderStatusChart.render();
+        });
+    </script>
+</body>
+</html>
