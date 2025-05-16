@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masjid Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .sidebar {
+            transition: all 0.3s ease;
+        }
+        .sidebar-hidden {
+            transform: translateX(-100%);
+        }
+        .futuristic-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.1));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .futuristic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .glow-on-hover {
+            transition: all 0.3s ease;
+        }
+        .glow-on-hover:hover {
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Sidebar -->
+    <div class="fixed inset-y-0 left-0 w-64 bg-gray-800 sidebar z-50" id="sidebar">
+        <div class="p-4">
+            <h1 class="text-2xl font-bold text-blue-400">Masjid CMS</h1>
+        </div>
+        <nav class="mt-4">
+            <a href="#dashboard" class="block py-2 px-4 text-gray-300 hover:bg-gray-700 hover:text-blue-400 glow-on-hover"><i class="fas fa-tachometer-alt mr-2"></i> Dashboard</a>
+            <a href="#users" class="block py-2 px-4 text-gray-300 hover:bg-gray-700 hover:text-blue-400 glow-on-hover"><i class="fas fa-users mr-2"></i> Users</a>
+            <a href="#roles" class="block py-2 px-4 text-gray-300 hover:bg-gray-700 hover:text-blue-400 glow-on-hover"><i class="fas fa-user-tag mr-2"></i> Roles</a>
+            <a href="#permissions" class="block py-2 px-4 text-gray-300 hover:bg-gray-700 hover:text-blue-400 glow-on-hover"><i class="fas fa-lock mr-2"></i> Permissions</a>
+            <a href="#masjids" class="block py-2 px-4 text-gray-300 hover:bg-gray-700 hover:text-blue-400 glow-on-hover"><i class="fas fa-mosque mr-2"></i> Masjids</a>
+            <a href="#prayer-times" class="block py-2 px-4 text-gray-300 hover:bg-gray-700 hover:text-blue-400 glow-on-hover"><i class="fas fa-clock mr-2"></i> Prayer Times</a>
+            <a href="#events" class="block py-2 px-4 text-gray-300 hover:bg-gray-700 hover:text-blue-400 glow-on-hover"><i class="fas fa-calendar-alt mr-2"></i> Events</a>
+            <a href="#sermons" class="block py-2 px-4 text-gray-300 hover:bg-gray-700 hover:text-blue-400 glow-on-hover"><i class="fas fa-book-open mr-2"></i> Sermons</a>
+            <a href="#donations" class="block py-2 px-4 text-gray-300 hover:bg-gray-700 hover:text-blue-400 glow-on-hover"><i class="fas fa-donate mr-2"></i> Donations</a>
+            <a href="#financial-reports" class="block py-2 px-4 text-gray-300 hover:bg-gray-700 hover:text-blue-400 glow-on-hover"><i class="fas fa-chart-bar mr-2"></i> Financial Reports</a>
+            <a href="#obituaries" class="block py-2 px-4 text-gray-300 hover:bg-gray-700 hover:text-blue-400 glow-on-hover"><i class="fas fa-cross mr-2"></i> Obituaries</a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="ml-64 p-6 transition-all duration-300" id="main-content">
+        <!-- Toggle Sidebar Button -->
+        <button id="toggle-sidebar" class="mb-4 p-2 bg-blue-600 rounded hover:bg-blue-700 glow-on-hover">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard">
+            <h2 class="text-3xl font-bold mb-6">Dashboard</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="futuristic-card p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold">Total Users</h3>
+                    <p class="text-2xl mt-2">1,234</p>
+                </div>
+                <div class="futuristic-card p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold">Total Masjids</h3>
+                    <p class="text-2xl mt-2">56</p>
+                </div>
+                <div class="futuristic-card p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold">Total Donations</h3>
+                    <p class="text-2xl mt-2">Rp 123M</p>
+                </div>
+                <div class="futuristic-card p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold">Upcoming Events</h3>
+                    <p class="text-2xl mt-2">12</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Users Section -->
+        <section id="users" class="mt-12">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">Users</h2>
+                <button class="px-4 py-2 bg-blue-600 rounded hover:bg-blue-700 glow-on-hover">Add User</button>
+            </div>
+            <div class="futuristic-card overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="bg-gray-700">
+                            <th class="p-4">Name</th>
+                            <th class="p-4">Email</th>
+                            <th class="p-4">Phone</th>
+                            <th class="p-4">Roles</th>
+                            <th class="p-4">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-700">
+                            <td class="p-4">John Doe</td>
+                            <td class="p-4">john@example.com</td>
+                            <td class="p-4">+628123456789</td>
+                            <td class="p-4">Admin</td>
+                            <td class="p-4">
+                                <button class="px-2 py-1 bg-blue-600 rounded mr-2 hover:bg-blue-700">Edit</button>
+                                <button class="px-2 py-1 bg-red-600 rounded hover:bg-red-700">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Masjids Section -->
+        <section id="masjids" class="mt-12">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">Masjids</h2>
+                <button class="px-4 py-2 bg-blue-600 rounded hover:bg-blue-700 glow-on-hover">Add Masjid</button>
+            </div>
+            <div class="futuristic-card overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="bg-gray-700">
+                            <th class="p-4">Name</th>
+                            <th class="p-4">City</th>
+                            <th class="p-4">Province</th>
+                            <th class="p-4">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-700">
+                            <td class="p-4">Masjid Al-Hikmah</td>
+                            <td class="p-4">Jakarta</td>
+                            <td class="p-4">DKI Jakarta</td>
+                            <td class="p-4">
+                                <button class="px-2 py-1 bg-blue-600 rounded mr-2 hover:bg-blue-700">Edit</button>
+                                <button class="px-2 py-1 bg-red-600 rounded hover:bg-red-700">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Add similar sections for Roles, Permissions, Prayer Times, Events, Sermons, Donations, Financial Reports, Obituaries -->
+    </div>
+
+    <script>
+        // Sidebar Toggle
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('main-content');
+        const toggleSidebarBtn = document.getElementById('toggle-sidebar');
+
+        toggleSidebarBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('sidebar-hidden');
+            mainContent.classList.toggle('ml-64');
+            mainContent.classList.toggle('ml-0');
+        });
+
+        // Smooth Scroll for Navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
