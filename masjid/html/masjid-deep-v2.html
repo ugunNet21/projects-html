@@ -4,14 +4,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>MasjidCMS - Admin Panel</title>
-        <link
-            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-            rel="stylesheet">
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-            rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
         <style>
             :root {
                 --primary: #3B82F6;
@@ -19,47 +14,110 @@
                 --dark: #1E293B;
                 --light: #F8FAFC;
                 --accent: #8B5CF6;
+                --text: #1F2937;
+                --text-muted: #6B7280;
+                --bg: #F1F5F9;
+                --card-bg: #FFFFFF;
+                --border: #E5E7EB;
             }
-            
+
             body {
                 font-family: 'Poppins', sans-serif;
-                background-color: #F1F5F9;
+                background-color: var(--bg);
+                color: var(--text);
             }
-            
+
             .sidebar {
                 transition: all 0.3s ease;
+                background-color: var(--card-bg);
             }
-            
+
             .card-gradient {
                 background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
             }
-            
+
             .nav-item.active {
                 background-color: rgba(59, 130, 246, 0.1);
                 border-left: 4px solid var(--primary);
             }
-            
+
             .nav-item:hover:not(.active) {
                 background-color: rgba(59, 130, 246, 0.05);
             }
-            
+
             .dashboard-card:hover {
                 transform: translateY(-5px);
                 box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             }
-            
+
+            /* Dark mode styles */
+            .dark {
+                --text: #F8FAFC;
+                --text-muted: #9CA3AF;
+                --bg: #0F172A;
+                --card-bg: #1E293B;
+                --border: #334155;
+            }
+
             .dark .sidebar {
-                background-color: #1E293B;
+                background-color: var(--card-bg);
             }
-            
+
             .dark body {
-                background-color: #0F172A;
-                color: #F8FAFC;
+                background-color: var(--bg);
+                color: var(--text);
             }
-            
-            .dark .card {
-                background-color: #1E293B;
-                border-color: #334155;
+
+            .dark .card,
+            .dark .dashboard-card,
+            .dark header,
+            .dark .bg-white {
+                background-color: var(--card-bg);
+                border-color: var(--border);
+                color: var(--text);
+            }
+
+            .dark .text-gray-500 {
+                color: var(--text-muted);
+            }
+
+            .dark .text-gray-600 {
+                color: var(--text-muted);
+            }
+
+            .dark .text-gray-700 {
+                color: var(--text);
+            }
+
+            .dark .text-gray-800 {
+                color: var(--text);
+            }
+
+            .dark .bg-gray-50 {
+                background-color: #2D3748;
+            }
+
+            .dark .border-gray-200 {
+                border-color: var(--border);
+            }
+
+            .dark .hover\:bg-gray-100:hover {
+                background-color: #2D3748;
+            }
+
+            .dark .hover\:bg-gray-50:hover {
+                background-color: #2D3748;
+            }
+
+            .dark .sidebar-overlay {
+                background-color: rgba(0, 0, 0, 0.7);
+            }
+
+            .dark .bg-blue-50,
+            .dark .bg-green-50,
+            .dark .bg-purple-50,
+            .dark .bg-yellow-50 {
+                background-color: #2D3748;
             }
 
             /* Sidebar mobile behavior */
@@ -68,17 +126,15 @@
                     transform: translateX(-100%);
                     transition: transform 0.3s ease-in-out;
                 }
-                
+
                 .sidebar.translate-x-0 {
                     transform: translateX(0);
                 }
-                
-                /* Konten utama tanpa margin saat sidebar tertutup */
+
                 .flex-1 {
                     margin-left: 0 !important;
                 }
-                
-                /* Overlay effect untuk mobile */
+
                 .sidebar-overlay {
                     position: fixed;
                     top: 0;
@@ -89,25 +145,22 @@
                     z-index: 15;
                     display: none;
                 }
-                
+
                 .sidebar.translate-x-0 + .sidebar-overlay {
                     display: block;
                 }
             }
 
-            /* Sidebar selalu terlihat di desktop */
             @media (min-width: 768px) {
                 .sidebar {
                     transform: translateX(0) !important;
                 }
-                
-                /* Konten utama dengan margin untuk sidebar */
+
                 .flex-1 {
-                    margin-left: 18rem; /* Sesuaikan dengan lebar sidebar (md:w-72 = 18rem) */
+                    margin-left: 18rem;
                 }
             }
 
-            /* Transisi untuk konten utama */
             .flex-1 {
                 transition: margin-left 0.3s ease-in-out;
             }
@@ -116,26 +169,19 @@
     <body class="bg-gray-100">
         <div class="flex h-screen overflow-hidden">
             <!-- Sidebar -->
-            <div
-                class="sidebar bg-white w-64 md:w-72 h-full fixed shadow-lg z-20 transform -translate-x-full md:translate-x-0 transition-transform duration-300">
-                <div
-                    class="p-4 flex items-center justify-between border-b border-gray-200">
+            <div class="sidebar bg-white w-64 md:w-72 h-full fixed shadow-lg z-20 transform -translate-x-full md:translate-x-0 transition-transform duration-300">
+                <div class="p-4 flex items-center justify-between border-b border-gray-200">
                     <div class="flex items-center space-x-2">
                         <i class="fas fa-mosque text-2xl text-blue-500"></i>
-                        <span
-                            class="text-xl font-bold text-gray-800">Masjid<span
-                                class="text-blue-500">CMS</span></span>
+                        <span class="text-xl font-bold text-gray-800">Masjid<span class="text-blue-500">CMS</span></span>
                     </div>
                     <button id="sidebarToggle" class="md:hidden text-gray-500">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
 
-                <div
-                    class="p-4 flex items-center space-x-3 border-b border-gray-200">
-                    <img
-                        src="https://ui-avatars.com/api/?name=Admin+User&background=3B82F6&color=fff"
-                        alt="User" class="w-10 h-10 rounded-full">
+                <div class="p-4 flex items-center space-x-3 border-b border-gray-200">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=3B82F6&color=fff" alt="User" class="w-10 h-10 rounded-full">
                     <div>
                         <p class="font-medium text-gray-800">Admin User</p>
                         <p class="text-xs text-gray-500">Super Admin</p>
@@ -144,91 +190,68 @@
 
                 <div class="p-4">
                     <div class="relative">
-                        <input type="text" placeholder="Search..."
-                            class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                        <i
-                            class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                        <input type="text" placeholder="Search..." class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
                     </div>
                 </div>
 
                 <nav class="mt-2">
                     <div class="px-2">
-                        <p
-                            class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-4">Main</p>
-                        <a href="#"
-                            class="nav-item active flex items-center px-4 py-3 text-gray-700 rounded-lg">
-                            <i
-                                class="fas fa-tachometer-alt mr-3 text-blue-500"></i>
+                        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-4">Main</p>
+                        <a href="#" class="nav-item active flex items-center px-4 py-3 text-gray-700 rounded-lg">
+                            <i class="fas fa-tachometer-alt mr-3 text-blue-500"></i>
                             <span>Dashboard</span>
                         </a>
 
-                        <p
-                            class="text-xs font-semibold text-gray-500 uppercase tracking-wider mt-4 mb-2 px-4">Management</p>
-                        <a href="#users"
-                            class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg">
+                        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mt-4 mb-2 px-4">Management</p>
+                        <a href="#users" class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg">
                             <i class="fas fa-users mr-3 text-blue-500"></i>
                             <span>Users</span>
                         </a>
-                        <a href="#roles"
-                            class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg">
-                            <i
-                                class="fas fa-user-shield mr-3 text-blue-500"></i>
+                        <a href="#roles" class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg">
+                            <i class="fas fa-user-shield mr-3 text-blue-500"></i>
                             <span>Roles & Permissions</span>
                         </a>
 
-                        <p
-                            class="text-xs font-semibold text-gray-500 uppercase tracking-wider mt-4 mb-2 px-4">Masjid</p>
-                        <a href="#masjids"
-                            class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg">
+                        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mt-4 mb-2 px-4">Masjid</p>
+                        <a href="#masjids" class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg">
                             <i class="fas fa-mosque mr-3 text-blue-500"></i>
                             <span>Masjid Profile</span>
                         </a>
-                        <a href="#prayer-times"
-                            class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg">
+                        <a href="#prayer-times" class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg">
                             <i class="fas fa-clock mr-3 text-blue-500"></i>
                             <span>Prayer Times</span>
                         </a>
-                        <a href="#events"
-                            class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg">
-                            <i
-                                class="fas fa-calendar-alt mr-3 text-blue-500"></i>
+                        <a href="#events" class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg">
+                            <i class="fas fa-calendar-alt mr-3 text-blue-500"></i>
                             <span>Events</span>
                         </a>
-                        <a href="#sermons"
-                            class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg">
+                        <a href="#sermons" class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg">
                             <i class="fas fa-microphone mr-3 text-blue-500"></i>
                             <span>Sermons</span>
                         </a>
 
-                        <p
-                            class="text-xs font-semibold text-gray-500 uppercase tracking-wider mt-4 mb-2 px-4">Financial</p>
-                        <a href="#donations"
-                            class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg">
+                        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mt-4 mb-2 px-4">Financial</p>
+                        <a href="#donations" class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg">
                             <i class="fas fa-donate mr-3 text-blue-500"></i>
                             <span>Donations</span>
                         </a>
-                        <a href="#financial-reports"
-                            class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg">
-                            <i
-                                class="fas fa-file-invoice-dollar mr-3 text-blue-500"></i>
+                        <a href="#financial-reports" class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg">
+                            <i class="fas fa-file-invoice-dollar mr-3 text-blue-500"></i>
                             <span>Financial Reports</span>
                         </a>
 
-                        <p
-                            class="text-xs font-semibold text-gray-500 uppercase tracking-wider mt-4 mb-2 px-4">Community</p>
-                        <a href="#obituaries"
-                            class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg">
+                        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mt-4 mb-2 px-4">Community</p>
+                        <a href="#obituaries" class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg">
                             <i class="fas fa-pray mr-3 text-blue-500"></i>
                             <span>Obituaries</span>
                         </a>
                     </div>
                 </nav>
 
-                <div
-                    class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200">
+                <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200">
                     <div class="flex items-center justify-between">
-                        <button id="themeToggle"
-                            class="p-2 rounded-full hover:bg-gray-100">
+                        <button id="themeToggle" class="p-2 rounded-full hover:bg-gray-100">
                             <i class="fas fa-moon text-gray-600"></i>
                         </button>
                         <a href="#" class="p-2 rounded-full hover:bg-gray-100">
@@ -247,71 +270,48 @@
                 <header class="bg-white shadow-sm sticky top-0 z-10">
                     <div class="flex items-center justify-between px-6 py-4">
                         <div class="flex items-center">
-                            <button id="mobileSidebarToggle"
-                                class="mr-4 text-gray-500 md:hidden">
+                            <button id="mobileSidebarToggle" class="mr-4 text-gray-500 md:hidden">
                                 <i class="fas fa-bars" id="mobileMenuIcon"></i>
                             </button>
-                            <h1
-                                class="text-xl font-semibold text-gray-800">Dashboard</h1>
+                            <h1 class="text-xl font-semibold text-gray-800">Dashboard</h1>
                         </div>
 
                         <div class="flex items-center space-x-4">
                             <div class="relative">
-                                <button id="notificationBtn"
-                                    class="p-2 rounded-full hover:bg-gray-100 relative">
+                                <button id="notificationBtn" class="p-2 rounded-full hover:bg-gray-100 relative">
                                     <i class="fas fa-bell text-gray-600"></i>
-                                    <span
-                                        class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"></span>
+                                    <span class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"></span>
                                 </button>
-                                <div id="notificationDropdown"
-                                    class="hidden absolute right-0 mt-2 w-72 bg-white rounded-md shadow-lg z-20">
+                                <div id="notificationDropdown" class="hidden absolute right-0 mt-2 w-72 bg-white rounded-md shadow-lg z-20">
                                     <div class="p-4 border-b border-gray-200">
                                         <p class="font-medium">Notifications</p>
                                     </div>
                                     <div class="max-h-60 overflow-y-auto">
-                                        <a href="#"
-                                            class="block px-4 py-3 hover:bg-gray-50 border-b border-gray-100">
-                                            <p class="text-sm">New donation
-                                                received</p>
-                                            <p class="text-xs text-gray-500">5
-                                                min ago</p>
+                                        <a href="#" class="block px-4 py-3 hover:bg-gray-50 border-b border-gray-100">
+                                            <p class="text-sm">New donation received</p>
+                                            <p class="text-xs text-gray-500">5 min ago</p>
                                         </a>
-                                        <a href="#"
-                                            class="block px-4 py-3 hover:bg-gray-50 border-b border-gray-100">
-                                            <p class="text-sm">New event
-                                                scheduled</p>
-                                            <p class="text-xs text-gray-500">1
-                                                hour ago</p>
+                                        <a href="#" class="block px-4 py-3 hover:bg-gray-50 border-b border-gray-100">
+                                            <p class="text-sm">New event scheduled</p>
+                                            <p class="text-xs text-gray-500">1 hour ago</p>
                                         </a>
                                     </div>
-                                    <div
-                                        class="p-2 border-t border-gray-200 text-center">
-                                        <a href="#"
-                                            class="text-sm text-blue-500">View
-                                            all</a>
+                                    <div class="p-2 border-t border-gray-200 text-center">
+                                        <a href="#" class="text-sm text-blue-500">View all</a>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="relative">
-                                <button id="profileBtn"
-                                    class="flex items-center space-x-2 focus:outline-none">
-                                    <img
-                                        src="https://ui-avatars.com/api/?name=Admin+User&background=3B82F6&color=fff"
-                                        alt="User" class="w-8 h-8 rounded-full">
-                                    <span
-                                        class="hidden md:inline text-sm font-medium">Admin</span>
-                                    <i
-                                        class="fas fa-chevron-down text-xs hidden md:inline"></i>
+                                <button id="profileBtn" class="flex items-center space-x-2 focus:outline-none">
+                                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=3B82F6&color=fff" alt="User" class="w-8 h-8 rounded-full">
+                                    <span class="hidden md:inline text-sm font-medium">Admin</span>
+                                    <i class="fas fa-chevron-down text-xs hidden md:inline"></i>
                                 </button>
-                                <div id="profileDropdown"
-                                    class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-20">
-                                    <a href="#"
-                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
-                                    <a href="#"
-                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
-                                    <a href="#"
-                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 border-t border-gray-200">Logout</a>
+                                <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-20">
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 border-t border-gray-200">Logout</a>
                                 </div>
                             </div>
                         </div>
@@ -321,80 +321,54 @@
                 <!-- Dashboard Content -->
                 <main class="p-6">
                     <!-- Stats Cards -->
-                    <div
-                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-                        <div
-                            class="dashboard-card bg-white rounded-xl shadow-sm p-6 border border-gray-100 transition-all duration-300">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                        <div class="dashboard-card bg-white rounded-xl shadow-sm p-6 border border-gray-100 transition-all duration-300">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p
-                                        class="text-sm font-medium text-gray-500">Total
-                                        Users</p>
+                                    <p class="text-sm font-medium text-gray-500">Total Users</p>
                                     <p class="text-2xl font-bold mt-1">1,254</p>
-                                    <p class="text-xs text-green-500 mt-1"><i
-                                            class="fas fa-arrow-up mr-1"></i>
-                                        12% from last month</p>
+                                    <p class="text-xs text-green-500 mt-1"><i class="fas fa-arrow-up mr-1"></i> 12% from last month</p>
                                 </div>
-                                <div
-                                    class="p-3 rounded-full bg-blue-50 text-blue-500">
+                                <div class="p-3 rounded-full bg-blue-50 text-blue-500">
                                     <i class="fas fa-users text-xl"></i>
                                 </div>
                             </div>
                         </div>
 
-                        <div
-                            class="dashboard-card bg-white rounded-xl shadow-sm p-6 border border-gray-100 transition-all duration-300">
+                        <div class="dashboard-card bg-white rounded-xl shadow-sm p-6 border border-gray-100 transition-all duration-300">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p
-                                        class="text-sm font-medium text-gray-500">Total
-                                        Donations</p>
-                                    <p
-                                        class="text-2xl font-bold mt-1">$24,780</p>
-                                    <p class="text-xs text-green-500 mt-1"><i
-                                            class="fas fa-arrow-up mr-1"></i> 8%
-                                        from last month</p>
+                                    <p class="text-sm font-medium text-gray-500">Total Donations</p>
+                                    <p class="text-2xl font-bold mt-1">$24,780</p>
+                                    <p class="text-xs text-green-500 mt-1"><i class="fas fa-arrow-up mr-1"></i> 8% from last month</p>
                                 </div>
-                                <div
-                                    class="p-3 rounded-full bg-green-50 text-green-500">
+                                <div class="p-3 rounded-full bg-green-50 text-green-500">
                                     <i class="fas fa-donate text-xl"></i>
                                 </div>
                             </div>
                         </div>
 
-                        <div
-                            class="dashboard-card bg-white rounded-xl shadow-sm p-6 border border-gray-100 transition-all duration-300">
+                        <div class="dashboard-card bg-white rounded-xl shadow-sm p-6 border border-gray-100 transition-all duration-300">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p
-                                        class="text-sm font-medium text-gray-500">Upcoming
-                                        Events</p>
+                                    <p class="text-sm font-medium text-gray-500">Upcoming Events</p>
                                     <p class="text-2xl font-bold mt-1">14</p>
-                                    <p class="text-xs text-blue-500 mt-1"><i
-                                            class="fas fa-calendar mr-1"></i> 3
-                                        this week</p>
+                                    <p class="text-xs text-blue-500 mt-1"><i class="fas fa-calendar mr-1"></i> 3 this week</p>
                                 </div>
-                                <div
-                                    class="p-3 rounded-full bg-purple-50 text-purple-500">
+                                <div class="p-3 rounded-full bg-purple-50 text-purple-500">
                                     <i class="fas fa-calendar-alt text-xl"></i>
                                 </div>
                             </div>
                         </div>
 
-                        <div
-                            class="dashboard-card bg-white rounded-xl shadow-sm p-6 border border-gray-100 transition-all duration-300">
+                        <div class="dashboard-card bg-white rounded-xl shadow-sm p-6 border border-gray-100 transition-all duration-300">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p
-                                        class="text-sm font-medium text-gray-500">Active
-                                        Sermons</p>
+                                    <p class="text-sm font-medium text-gray-500">Active Sermons</p>
                                     <p class="text-2xl font-bold mt-1">28</p>
-                                    <p class="text-xs text-yellow-500 mt-1"><i
-                                            class="fas fa-microphone mr-1"></i>
-                                        5 new this month</p>
+                                    <p class="text-xs text-yellow-500 mt-1"><i class="fas fa-microphone mr-1"></i> 5 new this month</p>
                                 </div>
-                                <div
-                                    class="p-3 rounded-full bg-yellow-50 text-yellow-500">
+                                <div class="p-3 rounded-full bg-yellow-50 text-yellow-500">
                                     <i class="fas fa-microphone text-xl"></i>
                                 </div>
                             </div>
@@ -404,98 +378,60 @@
                     <!-- Recent Activity and Quick Stats -->
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
                         <!-- Recent Donations -->
-                        <div
-                            class="lg:col-span-2 bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+                        <div class="lg:col-span-2 bg-white rounded-xl shadow-sm p-6 border border-gray-100">
                             <div class="flex items-center justify-between mb-4">
-                                <h2 class="text-lg font-semibold">Recent
-                                    Donations</h2>
-                                <a href="#" class="text-sm text-blue-500">View
-                                    all</a>
+                                <h2 class="text-lg font-semibold">Recent Donations</h2>
+                                <a href="#" class="text-sm text-blue-500">View all</a>
                             </div>
                             <div class="overflow-x-auto">
-                                <table
-                                    class="min-w-full divide-y divide-gray-200">
+                                <table class="min-w-full divide-y divide-gray-200">
                                     <thead class="bg-gray-50">
                                         <tr>
-                                            <th
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Donor</th>
-                                            <th
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
-                                            <th
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
-                                            <th
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                            <th
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Donor</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
                                         </tr>
                                     </thead>
-                                    <tbody
-                                        class="bg-white divide-y divide-gray-200">
+                                    <tbody class="bg-white divide-y divide-gray-200">
                                         <tr>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="flex items-center">
-                                                    <div
-                                                        class="flex-shrink-0 h-10 w-10">
-                                                        <img
-                                                            class="h-10 w-10 rounded-full"
-                                                            src="https://ui-avatars.com/api/?name=John+Doe&background=10B981&color=fff"
-                                                            alt>
+                                                    <div class="flex-shrink-0 h-10 w-10">
+                                                        <img class="h-10 w-10 rounded-full" src="https://ui-avatars.com/api/?name=John+Doe&background=10B981&color=fff" alt="">
                                                     </div>
                                                     <div class="ml-4">
-                                                        <div
-                                                            class="text-sm font-medium text-gray-900">John
-                                                            Doe</div>
-                                                        <div
-                                                            class="text-sm text-gray-500">john@example.com</div>
+                                                        <div class="text-sm font-medium text-gray-900">John Doe</div>
+                                                        <div class="text-sm text-gray-500">john@example.com</div>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">$500.00</td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Zakat</td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap">
-                                                <span
-                                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Confirmed</span>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">$500.00</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Zakat</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Confirmed</span>
                                             </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2
-                                                hours ago</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2 hours ago</td>
                                         </tr>
                                         <tr>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="flex items-center">
-                                                    <div
-                                                        class="flex-shrink-0 h-10 w-10">
-                                                        <img
-                                                            class="h-10 w-10 rounded-full"
-                                                            src="https://ui-avatars.com/api/?name=Jane+Smith&background=8B5CF6&color=fff"
-                                                            alt>
+                                                    <div class="flex-shrink-0 h-10 w-10">
+                                                        <img class="h-10 w-10 rounded-full" src="https://ui-avatars.com/api/?name=Jane+Smith&background=8B5CF6&color=fff" alt="">
                                                     </div>
                                                     <div class="ml-4">
-                                                        <div
-                                                            class="text-sm font-medium text-gray-900">Jane
-                                                            Smith</div>
-                                                        <div
-                                                            class="text-sm text-gray-500">jane@example.com</div>
+                                                        <div class="text-sm font-medium text-gray-900">Jane Smith</div>
+                                                        <div class="text-sm text-gray-500">jane@example.com</div>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">$200.00</td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Infaq</td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap">
-                                                <span
-                                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending</span>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">$200.00</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Infaq</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending</span>
                                             </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">1
-                                                day ago</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">1 day ago</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -503,64 +439,40 @@
                         </div>
 
                         <!-- Upcoming Events -->
-                        <div
-                            class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+                        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
                             <div class="flex items-center justify-between mb-4">
-                                <h2 class="text-lg font-semibold">Upcoming
-                                    Events</h2>
-                                <a href="#" class="text-sm text-blue-500">View
-                                    all</a>
+                                <h2 class="text-lg font-semibold">Upcoming Events</h2>
+                                <a href="#" class="text-sm text-blue-500">View all</a>
                             </div>
                             <div class="space-y-4">
-                                <div
-                                    class="flex items-start p-3 rounded-lg hover:bg-gray-50">
-                                    <div
-                                        class="flex-shrink-0 bg-blue-100 text-blue-600 p-2 rounded-lg">
+                                <div class="flex items-start p-3 rounded-lg hover:bg-gray-50">
+                                    <div class="flex-shrink-0 bg-blue-100 text-blue-600 p-2 rounded-lg">
                                         <i class="fas fa-quran"></i>
                                     </div>
                                     <div class="ml-3">
-                                        <p class="text-sm font-medium">Quran
-                                            Recitation</p>
-                                        <p
-                                            class="text-xs text-gray-500">Tomorrow,
-                                            8:00 PM</p>
-                                        <p
-                                            class="text-xs mt-1 text-gray-500">Main
-                                            Hall</p>
+                                        <p class="text-sm font-medium">Quran Recitation</p>
+                                        <p class="text-xs text-gray-500">Tomorrow, 8:00 PM</p>
+                                        <p class="text-xs mt-1 text-gray-500">Main Hall</p>
                                     </div>
                                 </div>
-                                <div
-                                    class="flex items-start p-3 rounded-lg hover:bg-gray-50">
-                                    <div
-                                        class="flex-shrink-0 bg-green-100 text-green-600 p-2 rounded-lg">
-                                        <i
-                                            class="fas fa-chalkboard-teacher"></i>
+                                <div class="flex items-start p-3 rounded-lg hover:bg-gray-50">
+                                    <div class="flex-shrink-0 bg-green-100 text-green-600 p-2 rounded-lg">
+                                        <i class="fas fa-chalkboard-teacher"></i>
                                     </div>
                                     <div class="ml-3">
-                                        <p class="text-sm font-medium">Islamic
-                                            Finance Class</p>
-                                        <p class="text-xs text-gray-500">Friday,
-                                            6:00 PM</p>
-                                        <p
-                                            class="text-xs mt-1 text-gray-500">Conference
-                                            Room</p>
+                                        <p class="text-sm font-medium">Islamic Finance Class</p>
+                                        <p class="text-xs text-gray-500">Friday, 6:00 PM</p>
+                                        <p class="text-xs mt-1 text-gray-500">Conference Room</p>
                                     </div>
                                 </div>
-                                <div
-                                    class="flex items-start p-3 rounded-lg hover:bg-gray-50">
-                                    <div
-                                        class="flex-shrink-0 bg-purple-100 text-purple-600 p-2 rounded-lg">
+                                <div class="flex items-start p-3 rounded-lg hover:bg-gray-50">
+                                    <div class="flex-shrink-0 bg-purple-100 text-purple-600 p-2 rounded-lg">
                                         <i class="fas fa-utensils"></i>
                                     </div>
                                     <div class="ml-3">
-                                        <p class="text-sm font-medium">Community
-                                            Iftar</p>
-                                        <p
-                                            class="text-xs text-gray-500">Saturday,
-                                            6:30 PM</p>
-                                        <p
-                                            class="text-xs mt-1 text-gray-500">Dining
-                                            Area</p>
+                                        <p class="text-sm font-medium">Community Iftar</p>
+                                        <p class="text-xs text-gray-500">Saturday, 6:30 PM</p>
+                                        <p class="text-xs mt-1 text-gray-500">Dining Area</p>
                                     </div>
                                 </div>
                             </div>
@@ -570,151 +482,103 @@
                     <!-- Prayer Times and Recent Sermons -->
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         <!-- Today's Prayer Times -->
-                        <div
-                            class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+                        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
                             <div class="flex items-center justify-between mb-4">
-                                <h2 class="text-lg font-semibold">Today's Prayer
-                                    Times</h2>
-                                <div class="text-sm text-blue-500">May 16,
-                                    2023</div>
+                                <h2 class="text-lg font-semibold">Today's Prayer Times</h2>
+                                <div class="text-sm text-blue-500">May 16, 2025</div>
                             </div>
                             <div class="space-y-3">
-                                <div
-                                    class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                                     <div class="flex items-center">
-                                        <i
-                                            class="fas fa-sun text-yellow-500 mr-3"></i>
+                                        <i class="fas fa-sun text-yellow-500 mr-3"></i>
                                         <span>Subuh</span>
                                     </div>
                                     <span class="font-medium">5:15 AM</span>
                                 </div>
-                                <div
-                                    class="flex justify-between items-center p-3 rounded-lg">
+                                <div class="flex justify-between items-center p-3 rounded-lg">
                                     <div class="flex items-center">
-                                        <i
-                                            class="fas fa-sun text-orange-500 mr-3"></i>
+                                        <i class="fas fa-sun text-orange-500 mr-3"></i>
                                         <span>Dzuhur</span>
                                     </div>
                                     <span class="font-medium">12:30 PM</span>
                                 </div>
-                                <div
-                                    class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                                     <div class="flex items-center">
-                                        <i
-                                            class="fas fa-sun text-red-500 mr-3"></i>
+                                        <i class="fas fa-sun text-red-500 mr-3"></i>
                                         <span>Ashar</span>
                                     </div>
                                     <span class="font-medium">3:45 PM</span>
                                 </div>
-                                <div
-                                    class="flex justify-between items-center p-3 rounded-lg">
+                                <div class="flex justify-between items-center p-3 rounded-lg">
                                     <div class="flex items-center">
-                                        <i
-                                            class="fas fa-moon text-purple-500 mr-3"></i>
+                                        <i class="fas fa-moon text-purple-500 mr-3"></i>
                                         <span>Maghrib</span>
                                     </div>
                                     <span class="font-medium">6:20 PM</span>
                                 </div>
-                                <div
-                                    class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                                     <div class="flex items-center">
-                                        <i
-                                            class="fas fa-moon text-indigo-500 mr-3"></i>
+                                        <i class="fas fa-moon text-indigo-500 mr-3"></i>
                                         <span>Isya</span>
                                     </div>
                                     <span class="font-medium">7:45 PM</span>
                                 </div>
                             </div>
-                            <button
-                                class="mt-4 w-full py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition duration-200">
-                                <i class="fas fa-edit mr-2"></i> Edit Prayer
-                                Times
+                            <button class="mt-4 w-full py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition duration-200">
+                                <i class="fas fa-edit mr-2"></i> Edit Prayer Times
                             </button>
                         </div>
 
                         <!-- Recent Sermons -->
-                        <div
-                            class="lg:col-span-2 bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+                        <div class="lg:col-span-2 bg-white rounded-xl shadow-sm p-6 border border-gray-100">
                             <div class="flex items-center justify-between mb-4">
-                                <h2 class="text-lg font-semibold">Recent
-                                    Sermons</h2>
-                                <a href="#" class="text-sm text-blue-500">View
-                                    all</a>
+                                <h2 class="text-lg font-semibold">Recent Sermons</h2>
+                                <a href="#" class="text-sm text-blue-500">View all</a>
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div
-                                    class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition duration-200">
+                                <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition duration-200">
                                     <div class="h-40 bg-gray-200 relative">
-                                        <img
-                                            src="https://source.unsplash.com/random/400x300/?islamic"
-                                            alt="Sermon"
-                                            class="w-full h-full object-cover">
-                                        <div
-                                            class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3">
-                                            <span class="text-xs text-white">May
-                                                14, 2023</span>
+                                        <img src="https://source.unsplash.com/random/400x300/?islamic" alt="Sermon" class="w-full h-full object-cover">
+                                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3">
+                                            <span class="text-xs text-white">May 14, 2025</span>
                                         </div>
                                     </div>
                                     <div class="p-4">
-                                        <h3 class="font-medium mb-1">The
-                                            Importance of Sadaqah</h3>
-                                        <p
-                                            class="text-sm text-gray-600 mb-2">Ustadz
-                                            Ahmad Ali</p>
-                                        <div
-                                            class="flex justify-between items-center">
+                                        <h3 class="font-medium mb-1">The Importance of Sadaqah</h3>
+                                        <p class="text-sm text-gray-600 mb-2">Ustadz Ahmad Ali</p>
+                                        <div class="flex justify-between items-center">
                                             <div class="flex space-x-2">
-                                                <button
-                                                    class="text-blue-500 hover:text-blue-700">
+                                                <button class="text-blue-500 hover:text-blue-700">
                                                     <i class="fas fa-play"></i>
                                                 </button>
-                                                <button
-                                                    class="text-green-500 hover:text-green-700">
-                                                    <i
-                                                        class="fas fa-headphones"></i>
+                                                <button class="text-green-500 hover:text-green-700">
+                                                    <i class="fas fa-headphones"></i>
                                                 </button>
                                             </div>
-                                            <button
-                                                class="text-sm text-blue-500 hover:underline">View
-                                                Notes</button>
+                                            <button class="text-sm text-blue-500 hover:underline">View Notes</button>
                                         </div>
                                     </div>
                                 </div>
-                                <div
-                                    class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition duration-200">
+                                <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition duration-200">
                                     <div class="h-40 bg-gray-200 relative">
-                                        <img
-                                            src="https://source.unsplash.com/random/400x300/?mosque"
-                                            alt="Sermon"
-                                            class="w-full h-full object-cover">
-                                        <div
-                                            class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3">
-                                            <span class="text-xs text-white">May
-                                                7, 2023</span>
+                                        <img src="https://source.unsplash.com/random/400x300/?mosque" alt="Sermon" class="w-full h-full object-cover">
+                                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3">
+                                            <span class="text-xs text-white">May 7, 2025</span>
                                         </div>
                                     </div>
                                     <div class="p-4">
-                                        <h3 class="font-medium mb-1">Patience in
-                                            Difficult Times</h3>
-                                        <p
-                                            class="text-sm text-gray-600 mb-2">Ustadzah
-                                            Fatima Zahra</p>
-                                        <div
-                                            class="flex justify-between items-center">
+                                        <h3 class="font-medium mb-1">Patience in Difficult Times</h3>
+                                        <p class="text-sm text-gray-600 mb-2">Ustadzah Fatima Zahra</p>
+                                        <div class="flex justify-between items-center">
                                             <div class="flex space-x-2">
-                                                <button
-                                                    class="text-blue-500 hover:text-blue-700">
+                                                <button class="text-blue-500 hover:text-blue-700">
                                                     <i class="fas fa-play"></i>
                                                 </button>
-                                                <button
-                                                    class="text-green-500 hover:text-green-700">
-                                                    <i
-                                                        class="fas fa-headphones"></i>
+                                                <button class="text-green-500 hover:text-green-700">
+                                                    <i class="fas fa-headphones"></i>
                                                 </button>
                                             </div>
-                                            <button
-                                                class="text-sm text-blue-500 hover:underline">View
-                                                Notes</button>
+                                            <button class="text-sm text-blue-500 hover:underline">View Notes</button>
                                         </div>
                                     </div>
                                 </div>
@@ -725,123 +589,138 @@
             </div>
         </div>
         <script>
-                // Mobile sidebar toggle
-                document.getElementById('mobileSidebarToggle').addEventListener('click', function() {
-                    const sidebar = document.querySelector('.sidebar');
-                    const mainContent = document.querySelector('.flex-1');
-                    const icon = document.getElementById('mobileMenuIcon');
-                    
-                    // Toggle sidebar
-                    sidebar.classList.toggle('-translate-x-full');
-                    sidebar.classList.toggle('translate-x-0');
-                    
-                    // Toggle icon
-                    if (sidebar.classList.contains('translate-x-0')) {
-                        icon.classList.replace('fa-bars', 'fa-times');
-                        mainContent.classList.add('ml-64'); // Geser konten ke kanan saat sidebar terbuka
-                    } else {
-                        icon.classList.replace('fa-times', 'fa-bars');
-                        mainContent.classList.remove('ml-64'); // Kembalikan konten ke posisi awal saat sidebar tertutup
-                    }
-                });
+            // Initialize theme based on localStorage or system preference
+            (function initializeTheme() {
+                const savedTheme = localStorage.getItem('theme');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const themeToggleIcon = document.querySelector('#themeToggle i');
 
-                // Sidebar toggle di dalam sidebar (tombol close)
-                document.getElementById('sidebarToggle').addEventListener('click', function() {
-                    const sidebar = document.querySelector('.sidebar');
-                    const mainContent = document.querySelector('.flex-1');
-                    const icon = document.getElementById('mobileMenuIcon');
-                    
+                if (savedTheme) {
+                    document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+                    themeToggleIcon.classList.toggle('fa-moon', savedTheme === 'light');
+                    themeToggleIcon.classList.toggle('fa-sun', savedTheme === 'dark');
+                } else if (prefersDark) {
+                    document.documentElement.classList.add('dark');
+                    themeToggleIcon.classList.remove('fa-moon');
+                    themeToggleIcon.classList.add('fa-sun');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.documentElement.classList.add('light');
+                    themeToggleIcon.classList.remove('fa-sun');
+                    themeToggleIcon.classList.add('fa-moon');
+                    localStorage.setItem('theme', 'light');
+                }
+            })();
+
+            // Theme toggle
+            document.getElementById('themeToggle').addEventListener('click', function() {
+                const isDark = document.documentElement.classList.toggle('dark');
+                const icon = this.querySelector('i');
+                icon.classList.toggle('fa-moon', !isDark);
+                icon.classList.toggle('fa-sun', isDark);
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            });
+
+            // Mobile sidebar toggle
+            document.getElementById('mobileSidebarToggle').addEventListener('click', function() {
+                const sidebar = document.querySelector('.sidebar');
+                const mainContent = document.querySelector('.flex-1');
+                const icon = document.getElementById('mobileMenuIcon');
+
+                sidebar.classList.toggle('-translate-x-full');
+                sidebar.classList.toggle('translate-x-0');
+
+                if (sidebar.classList.contains('translate-x-0')) {
+                    icon.classList.replace('fa-bars', 'fa-times');
+                    mainContent.classList.add('ml-64');
+                } else {
+                    icon.classList.replace('fa-times', 'fa-bars');
+                    mainContent.classList.remove('ml-64');
+                }
+            });
+
+            // Sidebar toggle di dalam sidebar (tombol close)
+            document.getElementById('sidebarToggle').addEventListener('click', function() {
+                const sidebar = document.querySelector('.sidebar');
+                const mainContent = document.querySelector('.flex-1');
+                const icon = document.getElementById('mobileMenuIcon');
+
+                sidebar.classList.add('-translate-x-full');
+                sidebar.classList.remove('translate-x-0');
+                icon.classList.replace('fa-times', 'fa-bars');
+                mainContent.classList.remove('ml-64');
+            });
+
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener('click', function(event) {
+                const sidebar = document.querySelector('.sidebar');
+                const mainContent = document.querySelector('.flex-1');
+                const mobileToggle = document.getElementById('mobileSidebarToggle');
+                const icon = document.getElementById('mobileMenuIcon');
+
+                if (window.innerWidth < 768 &&
+                    !sidebar.contains(event.target) &&
+                    event.target !== mobileToggle &&
+                    !mobileToggle.contains(event.target) &&
+                    sidebar.classList.contains('translate-x-0')) {
+
                     sidebar.classList.add('-translate-x-full');
                     sidebar.classList.remove('translate-x-0');
                     icon.classList.replace('fa-times', 'fa-bars');
                     mainContent.classList.remove('ml-64');
-                });
+                }
+            });
 
-                // Close sidebar when clicking outside on mobile
-                document.addEventListener('click', function(event) {
-                    const sidebar = document.querySelector('.sidebar');
-                    const mainContent = document.querySelector('.flex-1');
-                    const mobileToggle = document.getElementById('mobileSidebarToggle');
-                    const icon = document.getElementById('mobileMenuIcon');
-                    
-                    if (window.innerWidth < 768 && 
-                        !sidebar.contains(event.target) && 
-                        event.target !== mobileToggle && 
-                        !mobileToggle.contains(event.target) &&
-                        sidebar.classList.contains('translate-x-0')) {
-                        
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                const sidebar = document.querySelector('.sidebar');
+                const mainContent = document.querySelector('.flex-1');
+                const icon = document.getElementById('mobileMenuIcon');
+
+                if (window.innerWidth >= 768) {
+                    sidebar.classList.remove('-translate-x-full');
+                    sidebar.classList.add('translate-x-0');
+                    icon.classList.replace('fa-times', 'fa-bars');
+                    mainContent.classList.add('ml-64', 'md:ml-72');
+                } else {
+                    if (!sidebar.classList.contains('-translate-x-full')) {
                         sidebar.classList.add('-translate-x-full');
                         sidebar.classList.remove('translate-x-0');
                         icon.classList.replace('fa-times', 'fa-bars');
-                        mainContent.classList.remove('ml-64');
+                        mainContent.classList.remove('ml-64', 'md:ml-72');
                     }
-                });
+                }
+            });
 
-                // Handle window resize
-                window.addEventListener('resize', function() {
-                    const sidebar = document.querySelector('.sidebar');
-                    const mainContent = document.querySelector('.flex-1');
-                    const icon = document.getElementById('mobileMenuIcon');
-                    
-                    if (window.innerWidth >= 768) {
-                        // Desktop view - sidebar selalu terbuka
-                        sidebar.classList.remove('-translate-x-full');
-                        sidebar.classList.add('translate-x-0');
-                        icon.classList.replace('fa-times', 'fa-bars');
-                        mainContent.classList.add('ml-64', 'md:ml-72');
-                    } else {
-                        // Mobile view - sidebar tertutup secara default
-                        if (!sidebar.classList.contains('-translate-x-full')) {
-                            sidebar.classList.add('-translate-x-full');
-                            sidebar.classList.remove('translate-x-0');
-                            icon.classList.replace('fa-times', 'fa-bars');
-                            mainContent.classList.remove('ml-64', 'md:ml-72');
-                        }
-                    }
-                });
-                
-                // Theme toggle
-                document.getElementById('themeToggle').addEventListener('click', function() {
-                    document.documentElement.classList.toggle('dark');
-                    const icon = this.querySelector('i');
-                    if (document.documentElement.classList.contains('dark')) {
-                        icon.classList.remove('fa-moon');
-                        icon.classList.add('fa-sun');
-                    } else {
-                        icon.classList.remove('fa-sun');
-                        icon.classList.add('fa-moon');
-                    }
-                });
-                
-                // Notification dropdown
-                document.getElementById('notificationBtn').addEventListener('click', function() {
-                    document.getElementById('notificationDropdown').classList.toggle('hidden');
-                    document.getElementById('profileDropdown').classList.add('hidden');
-                });
-                
-                // Profile dropdown
-                document.getElementById('profileBtn').addEventListener('click', function() {
-                    document.getElementById('profileDropdown').classList.toggle('hidden');
+            // Notification dropdown
+            document.getElementById('notificationBtn').addEventListener('click', function() {
+                document.getElementById('notificationDropdown').classList.toggle('hidden');
+                document.getElementById('profileDropdown').classList.add('hidden');
+            });
+
+            // Profile dropdown
+            document.getElementById('profileBtn').addEventListener('click', function() {
+                document.getElementById('profileDropdown').classList.toggle('hidden');
+                document.getElementById('notificationDropdown').classList.add('hidden');
+            });
+
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('#notificationBtn')) {
                     document.getElementById('notificationDropdown').classList.add('hidden');
+                }
+                if (!event.target.closest('#profileBtn')) {
+                    document.getElementById('profileDropdown').classList.add('hidden');
+                }
+            });
+
+            // Active nav item
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
                 });
-                
-                // Close dropdowns when clicking outside
-                document.addEventListener('click', function(event) {
-                    if (!event.target.closest('#notificationBtn')) {
-                        document.getElementById('notificationDropdown').classList.add('hidden');
-                    }
-                    if (!event.target.closest('#profileBtn')) {
-                        document.getElementById('profileDropdown').classList.add('hidden');
-                    }
-                });
-                
-                // Active nav item
-                document.querySelectorAll('.nav-item').forEach(item => {
-                    item.addEventListener('click', function() {
-                        document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-                        this.classList.add('active');
-                    });
-                });
+            });
         </script>
     </body>
 </html>
