@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        .sidebar {
+            transition: transform 0.3s ease-in-out;
+        }
+        .sidebar-hidden {
+            transform: translateX(-100%);
+        }
+        .card {
+            background: linear-gradient(145deg, #1e293b, #2d3748);
+            border: 1px solid #4b5563;
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .glow {
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+        .table-row:hover {
+            background-color: #374151;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Sidebar -->
+    <div class="fixed inset-y-0 left-0 w-64 bg-gray-900 sidebar z-50 lg:translate-x-0" id="sidebar">
+        <div class="flex items-center justify-between p-4 border-b border-gray-700">
+            <h1 class="text-2xl font-bold text-blue-400">Healthcare Admin</h1>
+            <button class="lg:hidden text-white" onclick="toggleSidebar()">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <nav class="mt-4">
+            <ul class="space-y-2">
+                <li><a href="#dashboard" class="block px-4 py-2 text-blue-300 hover:bg-gray-800">Dashboard</a></li>
+                <li><a href="#users" class="block px-4 py-2 text-blue-300 hover:bg-gray-800">Users</a></li>
+                <li><a href="#staff" class="block px-4 py-2 text-blue-300 hover:bg-gray-800">Staff</a></li>
+                <li><a href="#patients" class="block px-4 py-2 text-blue-300 hover:bg-gray-800">Patients</a></li>
+                <li><a href="#registrations" class="block px-4 py-2 text-blue-300 hover:bg-gray-800">Registrations</a></li>
+                <li><a href="#medical-records" class="block px-4 py-2 text-blue-300 hover:bg-gray-800">Medical Records</a></li>
+                <li><a href="#inventory" class="block px-4 py-2 text-blue-300 hover:bg-gray-800">Inventory</a></li>
+                <li><a href="#financials" class="block px-4 py-2 text-blue-300 hover:bg-gray-800">Financials</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="lg:ml-64 p-6">
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-6">
+            <button class="lg:hidden text-white" onclick="toggleSidebar()">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+            <div class="flex items-center space-x-4">
+                <input type="text" placeholder="Search..." class="p-2 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div class="relative">
+                    <button class="flex items-center space-x-2 text-white">
+                        <img src="https://via.placeholder.com/40" class="w-10 h-10 rounded-full" alt="User">
+                        <span>Admin</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="mb-10">
+            <h2 class="text-3xl font-semibold text-blue-400 mb-4">Dashboard</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="card p-6 rounded-lg glow">
+                    <h3 class="text-lg font-medium">Total Users</h3>
+                    <p class="text-3xl font-bold text-blue-300">1,234</p>
+                </div>
+                <div class="card p-6 rounded-lg glow">
+                    <h3 class="text-lg font-medium">Active Staff</h3>
+                    <p class="text-3xl font-bold text-blue-300">56</p>
+                </div>
+                <div class="card p-6 rounded-lg glow">
+                    <h3 class="text-lg font-medium">Registered Patients</h3>
+                    <p class="text-3xl font-bold text-blue-300">3,456</p>
+                </div>
+                <div class="card p-6 rounded-lg glow">
+                    <h3 class="text-lg font-medium">Pending Registrations</h3>
+                    <p class="text-3xl font-bold text-blue-300">89</p>
+                </div>
+            </div>
+            <div class="mt-6 card p-6 rounded-lg">
+                <h3 class="text-lg font-medium mb-4">Registration Trends</h3>
+                <canvas id="registrationChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Users Section -->
+        <section id="users" class="mb-10">
+            <h2 class="text-3xl font-semibold text-blue-400 mb-4">Users</h2>
+            <div class="card p-6 rounded-lg">
+                <div class="flex justify-between mb-4">
+                    <h3 class="text-lg font-medium">User Management</h3>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Add User</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="text-gray-400">
+                                <th class="p-3">Name</th>
+                                <th class="p-3">Email</th>
+                                <th class="p-3">Role</th>
+                                <th class="p-3">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-row">
+                                <td class="p-3">John Doe</td>
+                                <td class="p-3">john@example.com</td>
+                                <td class="p-3">Admin</td>
+                                <td class="p-3">
+                                    <button class="text-blue-400 hover:underline">Edit</button>
+                                    <button class="text-red-400 hover:underline ml-2">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Staff Section -->
+        <section id="staff" class="mb-10">
+            <h2 class="text-3xl font-semibold text-blue-400 mb-4">Staff</h2>
+            <div class="card p-6 rounded-lg">
+                <div class="flex justify-between mb-4">
+                    <h3 class="text-lg font-medium">Staff Management</h3>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Add Staff</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="text-gray-400">
+                                <th class="p-3">Name</th>
+                                <th class="p-3">NIP</th>
+                                <th class="p-3">Position</th>
+                                <th class="p-3">Status</th>
+                                <th class="p-3">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-row">
+                                <td class="p-3">Dr. Jane Smith</td>
+                                <td class="p-3">123456789</td>
+                                <td class="p-3">Doctor</td>
+                                <td class="p-3"><span class="text-green-400">Active</span></td>
+                                <td class="p-3">
+                                    <button class="text-blue-400 hover:underline">Edit</button>
+                                    <button class="text-red-400 hover:underline ml-2">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Patients Section -->
+        <section id="patients" class="mb-10">
+            <h2 class="text-3xl font-semibold text-blue-400 mb-4">Patients</h2>
+            <div class="card p-6 rounded-lg">
+                <div class="flex justify-between mb-4">
+                    <h3 class="text-lg font-medium">Patient Management</h3>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Add Patient</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="text-gray-400">
+                                <th class="p-3">Name</th>
+                                <th class="p-3">NIK</th>
+                                <th class="p-3">Gender</th>
+                                <th class="p-3">Phone</th>
+                                <th class="p-3">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-row">
+                                <td class="p-3">Alice Johnson</td>
+                                <td class="p-3">987654321</td>
+                                <td class="p-3">Female</td>
+                                <td class="p-3">+1234567890</td>
+                                <td class="p-3">
+                                    <button class="text-blue-400 hover:underline">Edit</button>
+                                    <button class="text-red-400 hover:underline ml-2">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Registrations Section -->
+        <section id="registrations" class="mb-10">
+            <h2 class="text-3xl font-semibold text-blue-400 mb-4">Registrations</h2>
+            <div class="card Cancellation p-6 rounded-lg">
+                <div class="flex justify-between mb-4">
+                    <h3 class="text-lg font-medium">Registration Queue</h3>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Add Registration</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="text-gray-400">
+                                <th class="p-3">Registration No</th>
+                                <th class="p-3">Patient</th>
+                                <th class="p-3">Service</th>
+                                <th class="p-3">Status</th>
+                                <th class="p-3">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-row">
+                                <td class="p-3">REG123</td>
+                                <td class="p-3">Alice Johnson</td>
+                                <td class="p-3">General Checkup</td>
+                                <td class="p-3"><span class="text-yellow-400">Waiting</span></td>
+                                <td class="p-3">
+                                    <button class="text-blue-400 hover:underline">Edit</button>
+                                    <button class="text-red-400 hover:underline ml-2">Cancel</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Medical Records Section -->
+        <section id="medical-records" class="mb-10">
+            <h2 class="text-3xl font-semibold text-blue-400 mb-4">Medical Records</h2>
+            <div class="card p-6 rounded-lg">
+                <div class="flex justify-between mb-4">
+                    <h3 class="text-lg font-medium">Medical Records</h3>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Add Record</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="text-gray-400">
+                                <th class="p-3">Patient</th>
+                                <th class="p-3">Staff</th>
+                                <th class="p-3">Diagnosis</th>
+                                <th class="p-3">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-row">
+                                <td class="p-3">Alice Johnson</td>
+                                <td class="p-3">Dr. Jane Smith</td>
+                                <td class="p-3">Flu</td>
+                                <td class="p-3">
+                                    <button class="text-blue-400 hover:underline">View</button>
+                                    <button class="text-red-400 hover:underline ml-2">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Inventory Section -->
+        <section id="inventory" class="mb-10">
+            <h2 class="text-3xl font-semibold text-blue-400 mb-4">Inventory</h2>
+            <div class="card p-6 rounded-lg">
+                <div class="flex justify-between mb-4">
+                    <h3 class="text-lg font-medium">Inventory Management</h3>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Add Item</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="text-gray-400">
+                                <th class="p-3">Item</th>
+                                <th class="p-3">Code</th>
+                                <th class="p-3">Stock</th>
+                                <th class="p-3">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-row">
+                                <td class="p-3">Paracetamol</td>
+                                <td class="p-3">MED123</td>
+                                <td class="p-3">500</td>
+                                <td class="p-3">
+                                    <button class="text-blue-400 hover:underline">Edit</button>
+                                    <button class="text-red-400 hover:underline ml-2">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Financials Section -->
+        <section id="financials" class="mb-10">
+            <h2 class="text-3xl font-semibold text-blue-400 mb-4">Financials</h2>
+            <div class="card p-6 rounded-lg">
+                <div class="flex justify-between mb-4">
+                    <h3 class="text-lg font-medium">Payments</h3>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Add Payment</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="text-gray-400">
+                                <th class="p-3">Registration</th>
+                                <th class="p-3">Amount</th>
+                                <th class="p-3">Payment Type</th>
+                                <th class="p-3">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-row">
+                                <td class="p-3">REG123</td>
+                                <td class="p-3">$50.00</td>
+                                <td class="p-3">Cash</td>
+                                <td class="p-3">
+                                    <button class="text-blue-400 hover:underline">View</button>
+                                    <button class="text-red-400 hover:underline ml-2">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Sidebar toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('sidebar-hidden');
+        }
+
+        // Chart.js for Registration Trends
+        const ctx = document.getElementById('registrationChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Registrations',
+                    data: [120, 190, 300, 250, 400, 350],
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                    fill: true,
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { borderColor: '#4b5563' },
+                        ticks: { color: '#e2e8f0' }
+                    },
+                    x: {
+                        grid: { borderColor: '#4b5563' },
+                        ticks: { color: '#e2e8f0' }
+                    }
+                },
+                plugins: {
+                    legend: { labels: { color: '#e2e8f0' } }
+                }
+            }
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

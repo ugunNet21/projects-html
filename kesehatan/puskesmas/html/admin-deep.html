@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCare - Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #10b981;
+            --dark: #1e293b;
+            --darker: #0f172a;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
+        .dark body {
+            background-color: #0f172a;
+        }
+        .glass-effect {
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            background-color: rgba(255, 255, 255, 0.75);
+        }
+        .dark .glass-effect {
+            background-color: rgba(15, 23, 42, 0.75);
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
+        }
+        .neumorphic {
+            border-radius: 16px;
+            background: #e0e5ec;
+            box-shadow:  8px 8px 16px #b8bcc2, 
+                         -8px -8px 16px #ffffff;
+        }
+        .dark .neumorphic {
+            background: #1e293b;
+            box-shadow:  8px 8px 16px #0f172a, 
+                        -8px -8px 16px #334155;
+        }
+    </style>
+</head>
+<body class="dark:bg-slate-900 transition-colors duration-300">
+    <!-- Main Container -->
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="hidden lg:flex lg:flex-shrink-0">
+            <div class="flex flex-col w-64 border-r border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-800">
+                <div class="flex items-center h-16 flex-shrink-0 px-4 gradient-bg">
+                    <div class="flex items-center">
+                        <i class="fas fa-heartbeat text-white text-2xl mr-2"></i>
+                        <h1 class="text-white font-bold text-xl">MediCare</h1>
+                    </div>
+                </div>
+                <div class="h-0 flex-1 flex flex-col overflow-y-auto">
+                    <!-- Navigation -->
+                    <nav class="flex-1 px-2 py-4 space-y-1">
+                        <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-white bg-blue-600 dark:bg-blue-700 group">
+                            <i class="fas fa-tachometer-alt mr-3"></i>
+                            Dashboard
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 group">
+                            <i class="fas fa-users mr-3"></i>
+                            Patients
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 group">
+                            <i class="fas fa-user-md mr-3"></i>
+                            Staff
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 group">
+                            <i class="fas fa-clipboard-list mr-3"></i>
+                            Appointments
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 group">
+                            <i class="fas fa-file-medical mr-3"></i>
+                            Medical Records
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 group">
+                            <i class="fas fa-pills mr-3"></i>
+                            Pharmacy
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 group">
+                            <i class="fas fa-flask mr-3"></i>
+                            Laboratory
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 group">
+                            <i class="fas fa-baby mr-3"></i>
+                            Maternal Care
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 group">
+                            <i class="fas fa-boxes mr-3"></i>
+                            Inventory
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 group">
+                            <i class="fas fa-chart-line mr-3"></i>
+                            Reports
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 group">
+                            <i class="fas fa-cog mr-3"></i>
+                            Settings
+                        </a>
+                    </nav>
+                </div>
+                <div class="p-4 border-t border-gray-200 dark:border-slate-700">
+                    <div class="flex items-center">
+                        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                        <div class="ml-3">
+                            <p class="text-sm font-medium text-gray-700 dark:text-gray-200">Dr. John Doe</p>
+                            <p class="text-xs font-medium text-gray-500 dark:text-gray-400">Administrator</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-auto focus:outline-none">
+            <!-- Mobile Top Navigation -->
+            <div class="lg:hidden">
+                <div class="flex items-center justify-between px-4 py-3 bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-slate-700">
+                    <div class="flex items-center">
+                        <button id="mobile-menu-button" class="text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 focus:outline-none">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                        <div class="flex items-center ml-4">
+                            <i class="fas fa-heartbeat text-blue-600 dark:text-blue-400 text-xl mr-2"></i>
+                            <h1 class="text-lg font-bold text-gray-800 dark:text-white">MediCare</h1>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button class="text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 focus:outline-none">
+                            <i class="fas fa-search text-xl"></i>
+                        </button>
+                        <button id="dark-mode-toggle" class="text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 focus:outline-none">
+                            <i class="fas fa-moon text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Sidebar (Hidden by default) -->
+            <div id="mobile-sidebar" class="hidden fixed inset-0 z-40 lg:hidden">
+                <div class="fixed inset-0 bg-gray-600 bg-opacity-75" aria-hidden="true"></div>
+                <div class="fixed inset-y-0 left-0 flex max-w-xs w-full">
+                    <div class="relative flex-1 flex flex-col w-64 bg-white dark:bg-slate-800">
+                        <div class="absolute top-0 right-0 -mr-14 p-1">
+                            <button id="mobile-menu-close" class="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600">
+                                <i class="fas fa-times text-white text-xl"></i>
+                            </button>
+                        </div>
+                        <div class="flex items-center h-16 flex-shrink-0 px-4 gradient-bg">
+                            <div class="flex items-center">
+                                <i class="fas fa-heartbeat text-white text-2xl mr-2"></i>
+                                <h1 class="text-white font-bold text-xl">MediCare</h1>
+                            </div>
+                        </div>
+                        <div class="h-0 flex-1 flex flex-col overflow-y-auto">
+                            <nav class="flex-1 px-2 py-4 space-y-1">
+                                <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-white bg-blue-600 dark:bg-blue-700 group">
+                                    <i class="fas fa-tachometer-alt mr-3"></i>
+                                    Dashboard
+                                </a>
+                                <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 group">
+                                    <i class="fas fa-users mr-3"></i>
+                                    Patients
+                                </a>
+                                <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 group">
+                                    <i class="fas fa-user-md mr-3"></i>
+                                    Staff
+                                </a>
+                                <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 group">
+                                    <i class="fas fa-clipboard-list mr-3"></i>
+                                    Appointments
+                                </a>
+                                <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 group">
+                                    <i class="fas fa-file-medical mr-3"></i>
+                                    Medical Records
+                                </a>
+                                <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 group">
+                                    <i class="fas fa-pills mr-3"></i>
+                                    Pharmacy
+                                </a>
+                                <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 group">
+                                    <i class="fas fa-flask mr-3"></i>
+                                    Laboratory
+                                </a>
+                                <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 group">
+                                    <i class="fas fa-baby mr-3"></i>
+                                    Maternal Care
+                                </a>
+                                <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 group">
+                                    <i class="fas fa-boxes mr-3"></i>
+                                    Inventory
+                                </a>
+                                <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 group">
+                                    <i class="fas fa-chart-line mr-3"></i>
+                                    Reports
+                                </a>
+                                <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 group">
+                                    <i class="fas fa-cog mr-3"></i>
+                                    Settings
+                                </a>
+                            </nav>
+                        </div>
+                        <div class="p-4 border-t border-gray-200 dark:border-slate-700">
+                            <div class="flex items-center">
+                                <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-700 dark:text-gray-200">Dr. John Doe</p>
+                                    <p class="text-xs font-medium text-gray-500 dark:text-gray-400">Administrator</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="p-4 md:p-6">
+                <!-- Header -->
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Dashboard Overview</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Welcome back, Dr. John Doe</p>
+                    </div>
+                    <div class="mt-4 md:mt-0 flex items-center space-x-3">
+                        <div class="relative">
+                            <input type="text" placeholder="Search..." class="pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full md:w-64">
+                            <i class="fas fa-search absolute left-3 top-3 text-gray-400 dark:text-gray-500"></i>
+                        </div>
+                        <button id="dark-mode-toggle" class="p-2 rounded-lg bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700">
+                            <i class="fas fa-moon dark:hidden"></i>
+                            <i class="fas fa-sun hidden dark:block"></i>
+                        </button>
+                        <button class="p-2 rounded-lg bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 relative">
+                            <i class="fas fa-bell"></i>
+                            <span class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                    <div class="neumorphic p-6 rounded-xl">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 dark:text-gray-400 text-sm font-medium">Today's Appointments</p>
+                                <h3 class="text-2xl font-bold text-gray-800 dark:text-white mt-1">24</h3>
+                                <p class="text-green-500 text-xs font-medium mt-2">
+                                    <i class="fas fa-arrow-up mr-1"></i> 12% from yesterday
+                                </p>
+                            </div>
+                            <div class="p-3 rounded-lg bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300">
+                                <i class="fas fa-calendar-check text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="neumorphic p-6 rounded-xl">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 dark:text-gray-400 text-sm font-medium">Patients Registered</p>
+                                <h3 class="text-2xl font-bold text-gray-800 dark:text-white mt-1">1,248</h3>
+                                <p class="text-green-500 text-xs font-medium mt-2">
+                                    <i class="fas fa-arrow-up mr-1"></i> 5% from last month
+                                </p>
+                            </div>
+                            <div class="p-3 rounded-lg bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-300">
+                                <i class="fas fa-user-injured text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="neumorphic p-6 rounded-xl">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 dark:text-gray-400 text-sm font-medium">Pending Lab Tests</p>
+                                <h3 class="text-2xl font-bold text-gray-800 dark:text-white mt-1">8</h3>
+                                <p class="text-red-500 text-xs font-medium mt-2">
+                                    <i class="fas fa-arrow-down mr-1"></i> 2 from yesterday
+                                </p>
+                            </div>
+                            <div class="p-3 rounded-lg bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-300">
+                                <i class="fas fa-flask text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="neumorphic p-6 rounded-xl">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 dark:text-gray-400 text-sm font-medium">Today's Revenue</p>
+                                <h3 class="text-2xl font-bold text-gray-800 dark:text-white mt-1">$3,845</h3>
+                                <p class="text-green-500 text-xs font-medium mt-2">
+                                    <i class="fas fa-arrow-up mr-1"></i> 8% from yesterday
+                                </p>
+                            </div>
+                            <div class="p-3 rounded-lg bg-yellow-100 dark:bg-yellow-900 text-yellow-600 dark:text-yellow-300">
+                                <i class="fas fa-dollar-sign text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                    <!-- Appointments Card -->
+                    <div class="lg:col-span-2 neumorphic p-6 rounded-xl">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Today's Appointments</h3>
+                            <a href="#" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">View All</a>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200 dark:divide-slate-700">
+                                <thead>
+                                    <tr>
+                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Patient</th>
+                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Time</th>
+                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Service</th>
+                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white dark:bg-slate-800 divide-y divide-gray-200 dark:divide-slate-700">
+                                    <tr>
+                                        <td class="px-4 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900 dark:text-white">Jane Cooper</div>
+                                                    <div class="text-sm text-gray-500 dark:text-gray-400">#MR-0012</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900 dark:text-white">09:30 AM</div>
+                                        </td>
+                                        <td class="px-4 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900 dark:text-white">General Checkup</div>
+                                        </td>
+                                        <td class="px-4 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">Completed</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900 dark:text-white">John Smith</div>
+                                                    <div class="text-sm text-gray-500 dark:text-gray-400">#MR-0013</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900 dark:text-white">10:15 AM</div>
+                                        </td>
+                                        <td class="px-4 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900 dark:text-white">Dental Consultation</div>
+                                        </td>
+                                        <td class="px-4 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200">In Progress</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1520785643438-5bf77931f493?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900 dark:text-white">Robert Johnson</div>
+                                                    <div class="text-sm text-gray-500 dark:text-gray-400">#MR-0014</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900 dark:text-white">11:00 AM</div>
+                                        </td>
+                                        <td class="px-4 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900 dark:text-white">Lab Test</div>
+                                        </td>
+                                        <td class="px-4 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">Waiting</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900 dark:text-white">Michael Brown</div>
+                                                    <div class="text-sm text-gray-500 dark:text-gray-400">#MR-0015</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900 dark:text-white">02:30 PM</div>
+                                        </td>
+                                        <td class="px-4 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900 dark:text-white">Prenatal Checkup</div>
+                                        </td>
+                                        <td class="px-4 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">Waiting</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Recent Patients Card -->
+                    <div class="neumorphic p-6 rounded-xl">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Recent Patients</h3>
+                            <a href="#" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">View All</a>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-200">
+                                <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900 dark:text-white">Jane Cooper</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Female, 32 years</p>
+                                </div>
+                                <div class="ml-auto">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">Active</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-200">
+                                <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900 dark:text-white">John Smith</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Male, 45 years</p>
+                                </div>
+                                <div class="ml-auto">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">Active</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-200">
+                                <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1520785643438-5bf77931f493?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900 dark:text-white">Robert Johnson</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Male, 28 years</p>
+                                </div>
+                                <div class="ml-auto">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">Active</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-200">
+                                <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900 dark:text-white">Michael Brown</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Male, 35 years</p>
+                                </div>
+                                <div class="ml-auto">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">Active</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-200">
+                                <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900 dark:text-white">Sarah Wilson</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Female, 29 years</p>
+                                </div>
+                                <div class="ml-auto">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">Active</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts and Additional Info -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Patient Visits Chart -->
+                    <div class="lg:col-span-2 neumorphic p-6 rounded-xl">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Patient Visits - Last 7 Days</h3>
+                            <div class="flex items-center space-x-2">
+                                <button class="px-3 py-1 text-xs rounded-lg bg-blue-600 dark:bg-blue-700 text-white">Week</button>
+                                <button class="px-3 py-1 text-xs rounded-lg bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-gray-700 dark:text-gray-300">Month</button>
+                                <button class="px-3 py-1 text-xs rounded-lg bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-gray-700 dark:text-gray-300">Year</button>
+                            </div>
+                        </div>
+                        <div class="h-64">
+                            <!-- Chart placeholder - would be replaced with actual chart library like Chart.js -->
+                            <div class="flex items-center justify-center h-full bg-gray-100 dark:bg-slate-700 rounded-lg">
+                                <p class="text-gray-500 dark:text-gray-400">Patient visits chart visualization</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="neumorphic p-6 rounded-xl">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">Quick Actions</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <a href="#" class="p-4 rounded-lg bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors duration-200 flex flex-col items-center justify-center">
+                                <i class="fas fa-user-plus text-2xl mb-2"></i>
+                                <span class="text-sm font-medium">New Patient</span>
+                            </a>
+                            <a href="#" class="p-4 rounded-lg bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 hover:bg-green-200 dark:hover:bg-green-800 transition-colors duration-200 flex flex-col items-center justify-center">
+                                <i class="fas fa-calendar-plus text-2xl mb-2"></i>
+                                <span class="text-sm font-medium">New Appointment</span>
+                            </a>
+                            <a href="#" class="p-4 rounded-lg bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 hover:bg-purple-200 dark:hover:bg-purple-800 transition-colors duration-200 flex flex-col items-center justify-center">
+                                <i class="fas fa-file-medical text-2xl mb-2"></i>
+                                <span class="text-sm font-medium">New Record</span>
+                            </a>
+                            <a href="#" class="p-4 rounded-lg bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 hover:bg-yellow-200 dark:hover:bg-yellow-800 transition-colors duration-200 flex flex-col items-center justify-center">
+                                <i class="fas fa-pills text-2xl mb-2"></i>
+                                <span class="text-sm font-medium">New Prescription</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileSidebar = document.getElementById('mobile-sidebar');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileSidebar.classList.remove('hidden');
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileSidebar.classList.add('hidden');
+        });
+
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const html = document.documentElement;
+
+        darkModeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.setItem('darkMode', html.classList.contains('dark'));
+        });
+
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'true') {
+            html.classList.add('dark');
+        } else if (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            html.classList.add('dark');
+        }
+    </script>
+</body>
+</html>
